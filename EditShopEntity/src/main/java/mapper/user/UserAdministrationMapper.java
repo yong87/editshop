@@ -10,6 +10,7 @@ public interface UserAdministrationMapper {
 
 	
 	public String getPasswordById(String id);
+	public int getStatusById(String id);
 	public void changeAuthority(Map<String, Object> param);
 	public void checkLastVisitTime(String id);
 	public void addVisitCount(String id);

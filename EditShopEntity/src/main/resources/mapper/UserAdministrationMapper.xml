@@ -10,6 +10,11 @@
 		select user_pwd from user_tb
 		where user_id = #{id};
 	</select>
+	
+	<select id="getStatusById" resultType="int" parameterType="String">
+		select user_status from user_detail_tb
+		where user_id =#{id};	
+	</select>
 
 	<update id="changeAuthority" parameterType="java.util.Map">
 		UPDATE
