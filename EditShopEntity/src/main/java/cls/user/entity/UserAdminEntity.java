@@ -15,16 +15,19 @@ import vo.UserInfo;
 
 public class UserAdminEntity implements intfc.user.entity.UserAdminEntity {
 
-	public String getPasswordById(String id) {
+	public Map<String, Object> getPasswordById(String id) {
+		
+		Map<String, Object> returnMap = new HashMap<String, Object>();
+		
 		SqlSession sqlsession = ShopSqlSessionFactory.getInstance()
 				.getSqlSession();
-		String password;
 
 		try {
 			UserAdministrationMapper userAdministrationMapper = sqlsession
 					.getMapper(UserAdministrationMapper.class);
-			password = userAdministrationMapper.getPasswordById(id);
-
+			returnMap.put("password", userAdministrationMapper.getPasswordById(id));
+			returnMap.put("status", getStatusById(id, sqlsession));
+			
 			sqlsession.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -32,7 +35,26 @@ public class UserAdminEntity implements intfc.user.entity.UserAdminEntity {
 		} finally {
 			sqlsession.close();
 		}
-		return password;
+		return returnMap;
+	}
+	
+	private int getStatusById(String id, SqlSession sqlsession) {
+
+		int status = 0;
+		try {
+			UserAdministrationMapper userAdministrationMapper = sqlsession
+					.getMapper(UserAdministrationMapper.class);
+				
+			status = userAdministrationMapper.getStatusById(id);
+			
+			sqlsession.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		} finally {
+			sqlsession.close();
+		}
+		return status;
 	}
 
 	public boolean changeAuthority(String id, int authority) {

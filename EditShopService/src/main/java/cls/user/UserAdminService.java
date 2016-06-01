@@ -3,15 +3,15 @@ package cls.user;
 import intfc.user.entity.UserAddEntity;
 import intfc.user.entity.UserAdminEntity;
 
-import java.sql.Time;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import com.sun.jmx.snmp.Timestamp;
+import java.util.Map;
 
 import vo.User;
 import centification.Centification;
+
+import com.sun.jmx.snmp.Timestamp;
+
 import emailing.EmailService;
 
 public class UserAdminService implements intfc.user.UserAdminService {
@@ -20,17 +20,19 @@ public class UserAdminService implements intfc.user.UserAdminService {
 	UserAddEntity userAdd = new cls.user.entity.UserAddEntity();
 
 	// 0530/1434 complete test
-	public String Login(String id, String password) {
+	public Map<String, Object> Login(String id, String password) {
 
-		String encrypted = userAd.getPasswordById(id);
+		Map<String, Object> map = userAd.getPasswordById(id);
 
+		String encrypted = map.get("password").toString();
+		
 		if (!encrypted.equals(password.trim())) {
 		}
 
 		userAd.checkLastVisitTime(id);
 		userAd.addVisitCount(id);
 
-		return userAd.returnLanguage(id);
+		return map;
 	}
 
 	// 0530/1437 complete test
@@ -64,15 +66,9 @@ public class UserAdminService implements intfc.user.UserAdminService {
 		return true;
 	}
 
-	/**
-	 * content HTML 수정해주세요
-	 * @param centificationKey
-	 * @param id
-	 * @return
-	 * @throws ParseException
-	 */
 	private String geratedMailContent(String centificationKey, String id)
 			throws ParseException {
+		//TODO content HTML 수정해주세요
 		// Date input = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초")
 		// .parse(new Timestamp(new Date().getTime()).toString());
 

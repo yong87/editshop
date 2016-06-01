@@ -8,7 +8,7 @@ import vo.UserInfo;
 
 public interface UserAdminEntity {
 
-	public String getPasswordById(String id);
+	public Map<String, Object> getPasswordById(String id);
 
 	public boolean changeAuthority(String id, int authority);
 
