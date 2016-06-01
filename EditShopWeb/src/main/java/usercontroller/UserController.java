@@ -1,13 +1,11 @@
 package usercontroller;
 
-import intfc.user.UserAdminService;
-
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import vo.User;
@@ -15,8 +13,8 @@ import vo.User;
 @Controller
 public class UserController {
 	
-	@Autowired
-	private UserAdminService service;
+	/*@Autowired
+	private UserAdminService service;*/
 	
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
 	public String login(User user, HttpSession session){
@@ -26,16 +24,22 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="join.do", method=RequestMethod.POST)
-	public String signUp(User user){
+	public String signUp(User user,@RequestParam String email){
+		System.out.println("called");
+		System.out.println(user.getId());
+		System.out.println(user.getPassword());
+		System.out.println(email);
 		
-		service.addUser(user);
+		//service.addUser(user);
 		
 		return "sendEmail";
 	}
 	
 	@RequestMapping(value="existuserid.do")
 	@ResponseBody
-	public boolean existId(String id){
+	public boolean existId(@RequestParam String id){
+		System.out.println("id : "+id);
+		
 		
 		return false;
 	}
@@ -44,7 +48,7 @@ public class UserController {
 	@ResponseBody
 	public boolean existEmail(String email){
 		
-		return false;
+		return true;
 	}
 	
 	
