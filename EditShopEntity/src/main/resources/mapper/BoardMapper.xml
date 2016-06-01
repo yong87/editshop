@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.board.BoardMapper">
+	
+	<insert id="addBoard" parameterType="board">
+		INSERT INTO `editshop`.`board_tb` 
+		(`bt_uid`, `bt_title`, `bt_content`, `bt_writetime`, `bt_file`, `bt_flag`, `bt_status`)
+		VALUES 
+		(#{id}, #{title}, #{content}, now(), #{file}, #{flag}, 61);
+	</insert>
+
+	<update id="modifyBoard" parameterType="board">
+		UPDATE `editshop`.`board_tb` 
+		SET `bt_title`=#{title}, `bt_content`=#{content}, `bt_file`=#{file}
+		WHERE `bt_seq`=#{seq}
+	</update>
+
+	<update id="deleteBoard" parameterType="board">
+		UPDATE `editshop`.`board_tb` 
+		SET `bt_status`='0' 
+		WHERE `bt_seq`=#{seq};
+	</update>
+
+
+<resultMap id="boardMap" type="vo.Board">
+		<id property="seq" column="bt_seq" />
+		<id property="id" column="bt_uid" />
+		<id property="title" column="bt_title" />
+		<result property="content" column="bt_content" />
+		<result property="writetime" column="bt_writetime" />
+		<result property="file" column="bt_file" />
+		<result property="flag" column="bt_flag" />
+	</resultMap>
+	
+	<select id="searchBoard" parameterType="String" resultMap="boardMap">
+		select bt_seq, bt_title, bt_uid, bt_content, bt_writetime, bt_file, bt_flag from board_tb
+		where bt_status = '61'
+		and bt_content = ;
+	</select>
+
+
+</mapper>
