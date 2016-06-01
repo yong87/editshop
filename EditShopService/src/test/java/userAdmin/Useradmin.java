@@ -39,7 +39,7 @@ public class Useradmin {
 		User user = new User();
 		user.setId("test3");
 		user.setPassword("0000");
-		System.out.println(uas.addUser(user));
+		System.out.println(uas.addDetailUser(user));
 	}
 	
 	@Test
