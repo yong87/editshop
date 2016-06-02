@@ -1,4 +1,4 @@
-package intfc.user;
+package intfc.user.service;
 
 import java.text.ParseException;
 import java.util.Map;

@@ -14,7 +14,7 @@ import com.sun.jmx.snmp.Timestamp;
 
 import emailing.EmailService;
 
-public class UserAdminService implements intfc.user.UserAdminService {
+public class UserAdminService implements intfc.user.service.UserAdminService {
 
 	UserAdminEntity userAd = new cls.user.entity.UserAdminEntity();
 	UserAddEntity userAdd = new cls.user.entity.UserAddEntity();

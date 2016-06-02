@@ -12,6 +12,7 @@
 		<typeAlias type="vo.Seller" alias="seller" />
 		<typeAlias type="vo.SellerLang" alias="sellerLang" />
 		<typeAlias type="vo.Board" alias="board" />
+		<typeAlias type="vo.Comment" alias="comment" />
 	</typeAliases>
 
 	<environments default="development">
@@ -33,5 +34,6 @@
 		<mapper resource="mapper/UserLogMapper.xml" />
 		<mapper resource="mapper/UserAdministrationMapper.xml" />
 		<mapper resource="mapper/BoardMapper.xml" />
+		<mapper resource="mapper/CommentMapper.xml" />
 	</mappers>
 </configuration>
