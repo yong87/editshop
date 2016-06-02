@@ -1,7 +1,6 @@
 package vo;
 
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Map;
 
 public class Product {
@@ -23,7 +22,7 @@ public class Product {
 	private double commission;
 	private String imagepath;
 	private int status;
-	private List<Map<String, ProductLang>> languageList;
+	private Map<String, ProductLang> languageList;
 
 	private String name;
 	private String content;
@@ -100,10 +99,10 @@ public class Product {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public List<Map<String, ProductLang>> getLanguageList() {
+	public Map<String, ProductLang> getLanguageList() {
 		return languageList;
 	}
-	public void setLanguageList(List<Map<String, ProductLang>> languageList) {
+	public void setLanguageList(Map<String, ProductLang> languageList) {
 		this.languageList = languageList;
 	}
 	

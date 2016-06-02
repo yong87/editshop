@@ -30,9 +30,9 @@ var checkId = function(){
 		}
 		,success : function(exist){
 			if(!exist){
-				alert("이미 사용 중인 아이디입니다.");
+				existId("사용할수 없는 아이디 입니다.");
 			}
-			alert("사용할수 있는 아이디입니다.");
+			existId("사용할수 있는 아이디입니다.");
 		}
 		,error : function(){
 			alert("test")
@@ -41,7 +41,9 @@ var checkId = function(){
 }
 
 
-var existid = function(){
+var existId = function(info){
+	alert(info);
+	$("#idcheckbtn").append("div"+info+"</div>");
 }
 </script>
 </html>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,20 +9,22 @@
 </head>
 <body>
 
-product
-<c:forEach var="product" items="${products }">
-${product.productId }
-${product.sellerId }
-${product.maxQuantity }
-${product.sellCnt }
-${product.option }
-${product.commission }
-${product.imagePath }
-${product.status }
-${product.name }
-${product.content }
+product<br>
+<c:forEach var="product" items="${productList }">
+<a href="/EditShopWeb/productDetail.do?productId=${product.productId }">${product.productId }</a><br>
+${product.sellerId }<br>
+${product.maxQuantity }<br>
+${product.sellcnt }<br>
+${product.option }<br>
+${product.commission }<br>
+<img src="${product.imagepath }" onclick="detailView('${product.productId}')"><br>
+${product.status }<br>
+${product.name }<br>
+${product.content }<br>
+${product.languageList.kor.name }<br>
+${product.languageList.chn.address }<br>
 
+<br>
 </c:forEach>
-
 </body>
 </html>
