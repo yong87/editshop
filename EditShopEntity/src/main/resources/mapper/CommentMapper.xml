@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.comment.CommentMapper">
+	<insert id="addComment" parameterType="comment">
+		INSERT INTO `editshop`.`comment_tb` 
+		(`cot_uid`, `cot_board_seq`, `cot_content`, `cot_writetime`, `cot_ref`, `cot_step`, `cot_level`, `cot_status`) 
+		VALUES 
+		(#{id}, #{boardSeq}, #{content}, now(), (select max(cot_ref)+1 as cot_ref from comment_tb as ct), '1', '1', '61');
+	</insert>
+	
+
+	<update id="modyfiComment" parameterType="comment">
+		UPDATE `editshop`.`comment_tb` 
+		SET `cot_content`=#{content} 
+		WHERE `cot_seq`=#{commentSeq};
+	</update>
+	
+	<update id="deleteComment" parameterType="int">
+		UPDATE `editshop`.`comment_tb` 
+		SET `cot_status`='0' 
+		WHERE `cot_seq`=#{commentSeq};
+		
+	</update>
+
+
+
+	<resultMap id="commentMap" type="vo.Comment">
+		<id property="commentSeq" column="cot_seq" />
+		<id property="id" column="cot_uid" />
+		<result property="boardSeq" column="cot_board_seq" />
+		<result property="content" column="cot_content" />
+		<result property="writeTime" column="cot_writetime" />
+		<result property="ref" column="cot_ref" />
+		<result property="step" column="cot_step" />
+		<result property="level" column="cot_level" />
+		<result property="status" column="cot_status" />
+	</resultMap>
+	
+		
+	<select id="searchComment" parameterType="String" resultType="comment" resultMap="commentMap">
+		select * from comment_tb
+		where cot_content like CONCAT("%"#{content}"%")
+		and cot_status = 61;
+	</select>
+	
+	<select id="searchCommentBySeq" parameterType="int" resultType="comment" resultMap="commentMap">
+        select `cot_seq`, `cot_uid`, `cot_board_seq`, `cot_content`, `cot_writetime`, `cot_ref`, `cot_step`, `cot_level`, `cot_status` from comment_tb
+        where cot_ref = (select cot_ref from comment_tb as ct where cot_seq = #{commentSeq})
+        order by cot_level;
+	</select>
+	
+	<update id="changeLevel" parameterType="comment">
+		UPDATE `editshop`.`comment_tb` 
+		SET  `cot_level` = #{level}
+		WHERE `cot_seq` = #{commentSeq};
+	</update>
+
+	<insert id="addReComment" parameterType="comment">
+		INSERT INTO `editshop`.`comment_tb` 
+		(`cot_uid`, `cot_board_seq`, `cot_content`, `cot_writetime`, `cot_ref`, `cot_step`, `cot_level`, `cot_status`) 
+		VALUES 
+		(#{id}, #{boardSeq}, #{content}, now(), #{ref}, #{step}, #{level}, '61');
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+</mapper>
