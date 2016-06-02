@@ -84,4 +84,8 @@ public class UserAdminService implements intfc.user.UserAdminService {
 	public boolean addDetailUser(User user) {
 		return userAdd.addDetailUser(user.getUserDetail());
 	}
+	
+	public boolean existUser(String id){
+		return userAdd.overlap(id);
+	}
 }

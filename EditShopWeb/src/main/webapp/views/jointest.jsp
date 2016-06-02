@@ -28,7 +28,12 @@ var checkId = function(){
 		,data : {
 			id : $("#id").val()
 		}
-		,success : function(exist)
+		,success : function(exist){
+			if(!exist){
+				alert("이미 사용 중인 아이디입니다.");
+			}
+			alert("사용할수 있는 아이디입니다.");
+		}
 		,error : function(){
 			alert("test")
 		}
