@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mapper.review.ReviewMapper">
+
+  <update id="reviewDelete" parameterType="String">
+  update review_tb set ret_status = 0 where ret_ordernumber = #{orderNumber};
+  </update>
+  
+  <update id="reviewRevise" parameterType="map">
+  update review_tb set ret_content = #{content} where ret_ordernumber = (select ot_ordernumber from order_tb where ot_user_id = #{userId})
+  </update>
+  
+  <update id="reviewLike" parameterType="String">
+  update review_tb set ret_like = ret_like+1 where ret_ordernumber = #{orderNumber};
+  </update>
+  
+  <update id="reviewHate" parameterType="String">
+  update review_tb set ret_hate = ret_hate+1 where ret_ordernumber = #{orderNumber};
+  </update>
+</mapper>

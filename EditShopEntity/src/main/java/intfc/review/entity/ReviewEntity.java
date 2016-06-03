@@ -1,11 +1,12 @@
-package intfc.review;
+package intfc.review.entity;
 
 import java.util.List;
 
 import vo.ReviewVo;
 
-public interface ReviewService {
-	public boolean reviewAdd(ReviewVo reviewVo);
+public interface ReviewEntity {
+	
+public boolean reviewAdd(ReviewVo reviewVo);
 	
 	public boolean reviewDelete(String orderNumber);
 	
@@ -20,6 +21,4 @@ public interface ReviewService {
 	public List<ReviewVo> reviewView();
 	
 	public List<ReviewVo> reviewBestView();
-	
-	
 }
