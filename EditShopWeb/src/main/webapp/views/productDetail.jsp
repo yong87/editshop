@@ -14,8 +14,7 @@
 	<br> ${product.option }
 	<br> ${product.commission }
 	<br>
-	<img src="${product.imagepath }"
-		onclick="detailView('${product.productId}')">
+	<img src="${product.imagepath }" onclick="detailView('${product.productId}')">
 	<br> ${product.status }
 	<br> ${product.name }
 	<br> ${product.content }
@@ -23,18 +22,34 @@
 	<br> ${product.languageList.kor.address }
 	<br>
 
+	<select id="productCnt">
+		<option value="select">select</option>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+	</select>
 	<input type="button" value="addBucket"
 		onclick="addBucket('${product.productId}')" id="bucketbtn">
+	<br>
+	<br>${review.content }
+	<br>${review.hate }
+	<br>${review.like }
+	<br>${review.ordernumber }
+	<br>${review.point }
+	
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script type="text/javascript">
 		var addBucket = function(items) {
-			
+			var cnt = $("#productCnt").val();
 			$.ajax({
 				url : '/EditShopWeb/addBucket.do',
 				type : 'get',
 				data : {
-					productId : items
+					productId : items,
+					productCnt : cnt 
 				},
 				success : function(ask) {
 					changeBtn(ask);

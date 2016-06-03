@@ -28,7 +28,6 @@
 		<a href="/EditShopWeb/logout.do"><button>logout</button></a>
 	</c:if>
 
-
 	product
 	<br>
 	<c:forEach var="product" items="${productList }">
@@ -51,5 +50,25 @@ ${product.languageList.chn.address }<br>
 
 		<br>
 	</c:forEach>
+	<c:forEach var="review" items="${reviews }">
+	${review.content }<br>
+	${review.hate }<br>
+	${review.like }<br>
+	${review.ordernumber }<br>
+	${review.point }<br>
+		<br>
+	</c:forEach>
+
+	<form action="/EditShopWeb/searchProduct.do" method="get">
+		<select id="searchType" name="searchType">
+			<option value="all">select</option>
+			<option value="productName">Product Name</option>
+			<option value="productType">Product Type</option>
+			<option value="salesName">Sales Name</option>
+		</select> <input type="text" placeholder="search" name="search">
+		<input type="submit" value="Search">
+	</form>
+
+
 </body>
 </html>
