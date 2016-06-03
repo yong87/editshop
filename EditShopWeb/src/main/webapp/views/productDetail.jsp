@@ -29,21 +29,27 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script type="text/javascript">
 		var addBucket = function(items) {
-			console.log(items);
-
+			
 			$.ajax({
 				url : '/EditShopWeb/addBucket.do',
 				type : 'get',
 				data : {
 					productId : items
 				},
-				succcess : function(ask) {
-					console.log(ask);
+				success : function(ask) {
+					changeBtn(ask);
 				},
 				error : function() {
 					alert("fail");
 				}
 			});
+		}
+		
+		var changeBtn = function(ask){
+			if(!ask){
+				$("#bucketbtn").val("추가하지 못하였습니다.");
+			}
+			$("#bucketbtn").val("추가하였습니다.");
 		}
 	</script>
 </body>

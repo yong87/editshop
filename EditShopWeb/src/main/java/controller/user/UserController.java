@@ -30,6 +30,8 @@ public class UserController {
 		//leng확인
 		//session저장
 		//redirect product-main
+		session.setAttribute("user", user);
+		
 		try{
 			response.sendRedirect("/EditShopWeb/main.do");			
 		}catch(Exception e){
@@ -76,10 +78,14 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value="logout.do")
-	public String logoutUser(HttpSession session){
+	public void logoutUser(HttpSession session, HttpServletResponse response){
 		
 		session.invalidate();
-		return "";
+		try{
+			response.sendRedirect("/EditShopWeb/main.do");			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	
