@@ -21,6 +21,10 @@ import vo.User;
 @Controller
 public class ProductController {
 
+	/**
+	 * UserMainPage
+	 * @return mnv(Product, Review, Community)
+	 */
 	@RequestMapping(value="main.do")
 	public ModelAndView mainPage(){
 		
@@ -232,6 +236,10 @@ public class ProductController {
 		return bestreviews;
 	}
 	
+	/**
+	 * testmethod
+	 * @return
+	 */
 	public ReviewVo review(){
 		
 		ReviewVo review1 = new ReviewVo();
