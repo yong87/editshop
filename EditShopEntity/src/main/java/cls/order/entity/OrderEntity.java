@@ -9,7 +9,22 @@ import vo.Order;
 
 public class OrderEntity implements intfc.order.entity.OrderEntity{
 
-	
+	public boolean addProductOrder(Order order){
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			sqlSession.commit();
+			sqlSession.close();
+		}
+		
+		return false;
+	}
 	
 	
 	

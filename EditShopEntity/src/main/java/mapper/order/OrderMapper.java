@@ -5,8 +5,7 @@ import vo.Order;
 public interface OrderMapper {
 
 
-	
-	
+	public boolean addProductOrder(Order order);
 	
 	
 	// --------------------------------------- 
