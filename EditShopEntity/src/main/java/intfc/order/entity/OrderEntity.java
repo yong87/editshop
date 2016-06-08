@@ -2,14 +2,18 @@ package intfc.order.entity;
 
 import java.util.Map;
 
+import vo.Delivery;
 import vo.Order;
+import vo.OrderInfo;
 
 
 public interface OrderEntity {
 
-
-	
-	
+	public boolean newOrderProduct(Order order);
+	public boolean newOrderTime(OrderInfo order);
+	public boolean addDeliveryInfo(Delivery delivery);
+	public boolean modifyDeliveryInfo(Delivery delivery);
+	public boolean orderPaymentTime(OrderInfo order);
 	
 	
 	// --------------------------------------- 
