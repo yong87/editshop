@@ -5,6 +5,7 @@ import mapper.order.OrderMapper;
 import org.apache.ibatis.session.SqlSession;
 
 import session.ShopSqlSessionFactory;
+import vo.Order;
 
 public class OrderEntity implements intfc.order.entity.OrderEntity{
 
@@ -41,7 +42,7 @@ public class OrderEntity implements intfc.order.entity.OrderEntity{
 	}
 
 	@Override
-	public vo.Order getOrder(int ordernumber) {
+	public Order getOrder(int ordernumber) {
 		SqlSession sqlsession = ShopSqlSessionFactory.getInstance()
 				.getSqlSession();
 
@@ -65,7 +66,7 @@ public class OrderEntity implements intfc.order.entity.OrderEntity{
 	}
 
 	@Override
-	public boolean newExchangeOrder(vo.Order order) {
+	public boolean newExchangeOrder(Order order) {
 
 		SqlSession sqlsession = ShopSqlSessionFactory.getInstance()
 				.getSqlSession();
