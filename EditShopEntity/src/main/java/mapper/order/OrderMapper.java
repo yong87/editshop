@@ -21,8 +21,9 @@ public interface OrderMapper {
 	
 	// ---------------------------------------
 	
+	public boolean cancelOrder(String ordernumber);
 	
-	
+	public boolean  returnOrder(String ordernumber);
 	
 	
 }

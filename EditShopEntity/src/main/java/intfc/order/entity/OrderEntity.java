@@ -21,8 +21,9 @@ public interface OrderEntity {
 	
 	
 	// ---------------------------------------
+	public boolean cancelOrder(String ordernumber);
 	
-	
+	public boolean returnOrder(String ordernumber);
 	
 	
 }

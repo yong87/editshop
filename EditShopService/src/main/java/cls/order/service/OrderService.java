@@ -1,5 +1,6 @@
 package cls.order.service;
 
+import cls.order.entity.OrderEntity;
 import vo.Order;
 
 public class OrderService {
@@ -29,8 +30,14 @@ public class OrderService {
 	
 	
 	// ---------------------------------------
-	
-	
+		public boolean cancelOrder(String ordernumber){
+			OrderEntity orderEntity = new OrderEntity();
+			return orderEntity.cancelOrder(ordernumber);
+		}
+		public boolean returnOrder(String ordernumber){
+			OrderEntity orderEntity = new OrderEntity();
+			return orderEntity.returnOrder(ordernumber);
+		}
 	
 	
 }

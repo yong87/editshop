@@ -93,8 +93,47 @@ public class OrderEntity implements intfc.order.entity.OrderEntity{
 	
 	// ---------------------------------------
 	
+	@Override
+	public boolean cancelOrder(String ordernumber) {
+		SqlSession sqlsession = ShopSqlSessionFactory.getInstance()
+				.getSqlSession();
+
+		try {
+			OrderMapper orderMapper = sqlsession
+					.getMapper(OrderMapper.class);
+
+			orderMapper.cancelOrder(ordernumber);
+			
+			sqlsession.commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			sqlsession.close();
+		}
+		return true;
+	}
 	
-	
-	
+	public boolean returnOrder(String ordernumber){
+		SqlSession sqlsession = ShopSqlSessionFactory.getInstance()
+				.getSqlSession();
+
+		try {
+			OrderMapper orderMapper = sqlsession
+					.getMapper(OrderMapper.class);
+
+			orderMapper.returnOrder(ordernumber);
+			
+			sqlsession.commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			sqlsession.close();
+		}
+		return true;
+	}
 	
 }
