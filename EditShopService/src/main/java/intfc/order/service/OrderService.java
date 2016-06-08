@@ -1,11 +1,10 @@
-package mapper.order;
+package intfc.order.service;
 
 import vo.Order;
 
-public interface OrderMapper {
+public interface OrderService {
 
 
-	
 	
 	
 	
@@ -20,7 +19,6 @@ public interface OrderMapper {
 	
 	
 	// ---------------------------------------
-	
 	
 	
 	

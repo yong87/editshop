@@ -18,7 +18,7 @@ public class OrderEntity implements intfc.order.entity.OrderEntity{
 	
 	// make by hyun
 	@Override
-	public boolean exchange(int ordernumber) {
+	public boolean exchange(String ordernumber) {
 
 		SqlSession sqlsession = ShopSqlSessionFactory.getInstance()
 				.getSqlSession();
@@ -42,7 +42,7 @@ public class OrderEntity implements intfc.order.entity.OrderEntity{
 	}
 
 	@Override
-	public Order getOrder(int ordernumber) {
+	public Order getOrder(String ordernumber) {
 		SqlSession sqlsession = ShopSqlSessionFactory.getInstance()
 				.getSqlSession();
 

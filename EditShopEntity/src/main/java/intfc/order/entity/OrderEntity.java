@@ -14,8 +14,8 @@ public interface OrderEntity {
 	
 	// make by hyun
 	
-	public boolean exchange(int ordernumber);
-	public Order getOrder(int ordernumber);
+	public boolean exchange(String ordernumber);
+	public Order getOrder(String ordernumber);
 	public boolean newExchangeOrder(Order order);
 	
 	

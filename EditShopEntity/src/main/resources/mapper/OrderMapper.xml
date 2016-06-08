@@ -8,10 +8,28 @@
 
 	<!-- -->
 
+	<resultMap id="orderMap" type="vo.Order">
+		<id property="ordernumber" column="ot_ordernumber" />
+		<result property="userid" column="ot_user_id" />
+		<result property="sellerid" column="ot_seller_id" />
+		<result property="productid" column="ot_productid" />
+		<result property="productOption" column="ot_pt_option" />
+		<result property="status" column="ot_status" />
+	</resultMap>
+	
+	<insert id="newExchangeOrder" parameterType="order">
+		INSERT INTO `editshop`.`order_tb` 
+		(`ot_ordernumber`, `ot_user_id`, `ot_seller_id`, `ot_productid`, `ot_pt_option`, `ot_status`) 
+		VALUES 
+		(#{ordernumber}, #{userid}, #{sellerid}, #{productid}, #{productOption}, 1);
+		
+	</insert>
 
+	<select id="getOrder" parameterType="String" resultType="order" resultMap="orderMap">
 
-
-
+		select `ot_ordernumber`, `ot_user_id`, `ot_seller_id`, `ot_productid`, `ot_pt_option`, `ot_status` from order_tb
+		where ot_ordernumber = #{ordernumber};
+	</select>
 
 
 
