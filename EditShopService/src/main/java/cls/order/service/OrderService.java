@@ -2,6 +2,8 @@ package cls.order.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import vo.Order;
 import intfc.order.entity.OrderEntity;
@@ -18,6 +20,7 @@ public class OrderService implements intfc.order.service.OrderService{
 	// --------------------------------------- 
 	
 	// make by hyun
+	// 0608 complete test
 	@Override
 	public boolean addExchange(String ordernumber) {
 /**
@@ -28,38 +31,46 @@ public class OrderService implements intfc.order.service.OrderService{
  */
 		
 		Order beforeOrder = orderEntity.getOrder(ordernumber);
+		Order newOrder = beforeOrder;
+		newOrder.setOrdernumber(generatorOrdernumber(beforeOrder.getProductid()));
 		
+		if(!orderEntity.newExchangeOrder(newOrder)) return false;
 		
+
+		Map<String, String> param = new HashMap<String, String>();
 		
+		param.put("original", ordernumber);
+		param.put("chaser", newOrder.getOrdernumber());
 		
+		if(!addExchangeLog(param)) return false;
 		
-		return false;
+		return true;
 	}
 	
-	public String generatorOrdernumber(String productId){
+	private String generatorOrdernumber(String productId){
 		
 		StringBuffer sb = new StringBuffer();
 		sb.append(new SimpleDateFormat("yyyyMMdd").format(new Date())); //20160608
 		sb.append(String.format("%04d", Integer.parseInt(productId))); // 0001
 		
-		System.out.println("main " +sb.toString());	//201606080001
 		
 		//201606080002
 		String offend = orderEntity.getLastOrdernumber(sb.toString()); 
-		System.out.println(offend); //201606080002
 		
 		int temp =0;
 		
 		if(!(offend == null)) {
-			System.out.println("13");
 			temp = Integer.parseInt(offend.substring(offend.length()-4, offend.length()));
 		}
-		System.out.println("temp : " +temp);
 		sb.append(String.format("%04d", ++temp)); //0003
-		
+
 		
 		return sb.toString(); //2016060800010003
 		
+	}
+	
+	private boolean addExchangeLog(Map<String, String> param) {
+		return orderEntity.addExchangeLog(param);
 	}
 	
 	

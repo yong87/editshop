@@ -10,6 +10,6 @@ public class OrderTest {
 	
 	@Test
 	public void getTest(){
-		System.out.println(oe.getOrder("1"));
+		System.out.println(oe.getOrder("2016060800010001"));
 	}
 }

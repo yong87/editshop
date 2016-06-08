@@ -32,10 +32,20 @@
 	</select>
 
 	<select id="getLastOrdernumber" resultType="String" parameterType="String">
-		select max(`ot_ordernumber`) as max from order_tb
+		select max(`ot_ordernumber`) as result from order_tb
 		where ot_ordernumber like CONCAT(#{offend}"%");
 		
 	</select>
+	
+	<insert id="addExchangeLog" parameterType="Map">
+	
+	INSERT INTO `editshop`.`exchange_tb` 
+	(`et_ordernumber`, `et_chaser`, `et_exchangetime`, `et_status`) 
+	VALUES 
+	(#{original}, #{chaser}, now(), '1');
+	
+	
+	</insert>
 
 
 	<!-- -->

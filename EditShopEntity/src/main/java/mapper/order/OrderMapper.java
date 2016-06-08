@@ -1,5 +1,7 @@
 package mapper.order;
 
+import java.util.Map;
+
 import vo.Order;
 
 public interface OrderMapper {
@@ -19,7 +21,7 @@ public interface OrderMapper {
 		
 		
 		public String getLastOrdernumber(String offend);
-	
+		public boolean addExchangeLog(Map<String, String> param);
 	
 	// ---------------------------------------
 	

@@ -1,5 +1,7 @@
 package cls.order.entity;
 
+import java.util.Map;
+
 import mapper.order.OrderMapper;
 
 import org.apache.ibatis.session.SqlSession;
@@ -99,7 +101,7 @@ public class OrderEntity implements intfc.order.entity.OrderEntity{
 			OrderMapper orderMapper = sqlsession
 					.getMapper(OrderMapper.class);
 
-			orderMapper.getLastOrdernumber(offend);
+			returnStr = orderMapper.getLastOrdernumber(offend);
 			
 			sqlsession.commit();
 
@@ -112,6 +114,30 @@ public class OrderEntity implements intfc.order.entity.OrderEntity{
 		return returnStr;
 		
 	}
+
+	@Override
+	public boolean addExchangeLog(Map<String, String> param) {
+		SqlSession sqlsession = ShopSqlSessionFactory.getInstance()
+				.getSqlSession();
+		
+		try {
+			OrderMapper orderMapper = sqlsession
+					.getMapper(OrderMapper.class);
+
+			orderMapper.addExchangeLog(param);
+			
+			sqlsession.commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			sqlsession.close();
+		}
+		return true;
+	}
+
+	
 	
 	
 	

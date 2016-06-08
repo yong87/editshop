@@ -22,10 +22,15 @@ public class orderTest {
 	
 	@Test
 	public void generator() {
-		System.out.println(os.generatorOrdernumber("1"));
+//		System.out.println(os.generatorOrdernumber("2"));
 		
 //		System.out.println(String.format("%04d", 13));
 		
+	}
+	
+	@Test
+	public void newEx() {
+		System.out.println(os.addExchange("2016060800010002"));
 	}
 	
 	
