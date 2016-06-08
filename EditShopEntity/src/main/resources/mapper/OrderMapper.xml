@@ -31,7 +31,11 @@
 		where ot_ordernumber = #{ordernumber};
 	</select>
 
-
+	<select id="getLastOrdernumber" resultType="String" parameterType="String">
+		select max(`ot_ordernumber`) as max from order_tb
+		where ot_ordernumber like CONCAT(#{offend}"%");
+		
+	</select>
 
 
 	<!-- -->
