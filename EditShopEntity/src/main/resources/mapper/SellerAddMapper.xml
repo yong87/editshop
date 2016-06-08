@@ -3,7 +3,7 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mapper.user.SellerAddMapper">
+<mapper namespace="mapper.seller.SellerAddMapper">
 
 	<insert id="addSeller" parameterType="seller">
 		INSERT INTO
@@ -21,21 +21,21 @@
 		VALUES
 		(#{id});
 	</insert>
-	<insert id="addDefalutSellerInKor" parameterType="String">
+	<insert id="addDefalutSellerInJpn" parameterType="String">
 		INSERT INTO
 		`editshop`.`seller_jp_tb`
 		(`se_uid`)
 		VALUES
 		(#{id});
 	</insert>
-	<insert id="addDefalutSellerInKor" parameterType="String">
+	<insert id="addDefalutSellerInChn" parameterType="String">
 		INSERT INTO
 		`editshop`.`seller_cn_tb`
 		(`se_uid`)
 		VALUES
 		(#{id});
 	</insert>
-	<insert id="addDefalutSellerInKor" parameterType="String">
+	<insert id="addDefalutSellerInEng" parameterType="String">
 		INSERT INTO
 		`editshop`.`seller_en_tb`
 		(`se_uid`)
@@ -62,9 +62,5 @@
 		SET `se_name`=#{name}, `se_address`=#{address}
 		WHERE `se_uid`=#{id};
 	</update>
-
-
-
-
 
 </mapper>

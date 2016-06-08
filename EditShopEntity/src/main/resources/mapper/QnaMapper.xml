@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.qna.QnaMapper">
+	
+	
+	<insert id="addQNA" parameterType="qna">
+		INSERT INTO `editshop`.`qna_tb` 
+		(`qna_uid`, `qna_productid`, `qna_title`, `qna_content`, `qna_writetime`, `qna_file`, `qna_flag`, `qna_status`) 
+		VALUES 
+		(#{id}, #{productId}, #{title}, #{content}, now(), #{file}, #{flag}, 1);
+	</insert>
+
+	<update id="modifyQNA" parameterType="qna">
+		UPDATE `editshop`.`qna_tb` 
+		SET `qna_content`= #{content} 
+		WHERE `qna_seq`=#{seq} ;
+	</update>
+	
+	<update id="deleteQNA" parameterType="int">
+		UPDATE `editshop`.`qna_tb` 
+		SET `qna_status`='0' 
+		WHERE `qna_seq`=#{seq};
+	</update>
+	
+
+
+</mapper>

@@ -13,6 +13,10 @@
 		<typeAlias type="vo.SellerLang" alias="sellerLang" />
 		<typeAlias type="vo.Board" alias="board" />
 		<typeAlias type="vo.Comment" alias="comment" />
+		<typeAlias type="vo.Seller" alias="seller" />
+		<typeAlias type="vo.SellerLang" alias="sellerLang" />
+		<typeAlias type="vo.QNA" alias="qna" />
+		<typeAlias type="vo.QNAComment" alias="qnaComment" />
 	</typeAliases>
 
 	<environments default="development">
@@ -36,5 +40,8 @@
 		<mapper resource="mapper/BoardMapper.xml" />
 		<mapper resource="mapper/CommentMapper.xml" />
 		<mapper resource="mapper/ReviewMapper.xml"/>
+		<mapper resource="mapper/SellerAddMapper.xml"/>
+		<mapper resource="mapper/QnaMapper.xml"/>
+		<mapper resource="mapper/QnaCommentMapper.xml"/>
 	</mappers>
 </configuration>

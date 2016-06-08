@@ -5,6 +5,7 @@ public class SellerLang {
 	private String id;
 	private String name;
 	private String address;
+	
 	public String getName() {
 		return name;
 	}
@@ -23,6 +24,10 @@ public class SellerLang {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+	@Override
+	public String toString() {
+		return "SellerLang [id=" + id + ", name=" + name + ", address="
+				+ address + "]";
+	}
 	
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.qna.QnaCommentMapper">
+
+	<insert id="addQNAComment" parameterType="qnaComment">
+		INSERT INTO `editshop`.`qna_comment_tb`
+		(`qna_seq`,`qna_uid`, `qna_content`,`qna_writetime`, `qna_ref`, `qna_step`, `qna_level`, `qna_status`) 
+		VALUES 
+		(#{seq}, #{id}, #{content}, now(), (select max(qna_ref)+1 as qna_ref from qna_comment_tb as qct), '1', '1', 61);
+	</insert>
+	
+
+	
+	
+	
+</mapper>

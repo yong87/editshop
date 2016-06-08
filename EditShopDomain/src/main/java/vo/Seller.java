@@ -6,13 +6,6 @@ import java.util.Map;
 
 public class Seller {
 
-	/**
-	 * test
-	 * 이것은 판매자인데 내가 패버리고싶다
-	 * 깁미 원달러 
-	 * 
-	 * wha dhffkrkqhk 
-	 */
 	private String id;
 	private String licensenumber;
 	private String telephone;
@@ -21,14 +14,7 @@ public class Seller {
 	private Timestamp lastvisittime;
 	private int parcelcode;
 	
-	/**
-	 * sellerLang
-	 * List안에는 각 언어별로 map형태로 들어감
-	 * map의 키 값은 언어명으로 설정
-	 * map의 values값은 sellerLang 객체로 설정
-	 */
-	
-	private List<Map<String, SellerLang>> languageList;
+	private Map<String, SellerLang> languageList;
 
 	public String getId() {
 		return id;
@@ -86,14 +72,14 @@ public class Seller {
 		this.parcelcode = parcelcode;
 	}
 
-	public List<Map<String, SellerLang>> getLanguageList() {
+	public Map<String, SellerLang> getLanguageList() {
 		return languageList;
 	}
 
-	public void setLanguageList(List<Map<String, SellerLang>> languageList) {
+	public void setLanguageList(Map<String, SellerLang> languageList) {
 		this.languageList = languageList;
 	}
-	
+
 	
 	
 	
