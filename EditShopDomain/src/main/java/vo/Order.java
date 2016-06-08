@@ -8,6 +8,7 @@ public class Order {
 	private String productid;
 	private String productOption;
 	private int status;
+	private int amount;
 	
 	private OrderInfo oderInfo;
 	private Delivery delivery;

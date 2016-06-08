@@ -18,6 +18,7 @@ public interface OrderEntity {
 	public Order getOrder(String ordernumber);
 	public boolean newExchangeOrder(Order order);
 	
+	public String getLastOrdernumber(String offend);
 	
 	
 	// ---------------------------------------

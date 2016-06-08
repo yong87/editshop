@@ -103,6 +103,30 @@ public class OrderEntity implements intfc.order.entity.OrderEntity{
 		return true;
 		
 	}
+
+	@Override
+	public String getLastOrdernumber(String offend) {
+		SqlSession sqlsession = ShopSqlSessionFactory.getInstance()
+				.getSqlSession();
+		String returnStr = null;
+		
+		try {
+			OrderMapper orderMapper = sqlsession
+					.getMapper(OrderMapper.class);
+
+			orderMapper.getLastOrdernumber(offend);
+			
+			sqlsession.commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			sqlsession.close();
+		}
+		return returnStr;
+		
+	}
 	
 	
 	
