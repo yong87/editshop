@@ -1,11 +1,11 @@
 package cls.review.entity;
 
+import intfc.review.entity.ReviewEntityInter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import mapper.comment.CommentMapper;
 import mapper.review.ReviewMapper;
 
 import org.apache.ibatis.session.SqlSession;
@@ -15,7 +15,7 @@ import vo.ReviewVo;
 
 
 
-public class ReviewEntity implements intfc.review.entity.ReviewEntity {
+public class ReviewEntity implements ReviewEntityInter {
 
 	
 	public boolean reviewAdd(ReviewVo reviewVo) {

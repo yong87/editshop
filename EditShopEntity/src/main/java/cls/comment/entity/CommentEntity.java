@@ -1,5 +1,7 @@
 package cls.comment.entity;
 
+import intfc.comment.entity.CommentEntityInter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import session.ShopSqlSessionFactory;
 import vo.Comment;
 
-public class CommentEntity implements intfc.comment.entity.CommentEntityInter {
+public class CommentEntity implements CommentEntityInter {
 
 	@Override
 	public boolean addComment(Comment comment) {

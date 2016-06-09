@@ -4,7 +4,7 @@ import java.util.List;
 
 import vo.ReviewVo;
 
-public interface ReviewEntity {
+public interface ReviewEntityInter {
 	
 public boolean reviewAdd(ReviewVo reviewVo);
 	

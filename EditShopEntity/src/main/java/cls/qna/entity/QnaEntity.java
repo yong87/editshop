@@ -1,5 +1,6 @@
 package cls.qna.entity;
 
+import intfc.qna.entity.QnaEntityInter;
 import mapper.qna.QnaMapper;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import session.ShopSqlSessionFactory;
 import vo.QNA;
 
-public class QnaEntity implements intfc.qna.entity.QnaEntityInter{
+public class QnaEntity implements QnaEntityInter{
 
 	@Override
 	public boolean addQNA(QNA qna) {

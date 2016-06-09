@@ -1,5 +1,6 @@
 package cls.seller.entity;
 
+import intfc.seller.entity.SellerAddEntityInter;
 import mapper.seller.SellerAddMapper;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,7 +11,7 @@ import vo.SellerLang;
 
 
 
-public class SellerAddEntity implements intfc.seller.entity.SellerAddEntityInter{
+public class SellerAddEntity implements SellerAddEntityInter{
 
 	public boolean addSeller(Seller seller) {
 		

@@ -1,5 +1,6 @@
 package cls.qna.entity;
 
+import intfc.qna.entity.QnaCommentEntityInter;
 import mapper.qna.QnaCommentMapper;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import session.ShopSqlSessionFactory;
 import vo.QNAComment;
 
-public class QnaCommentEntity implements intfc.qna.entity.QnaCommentEntityInter{
+public class QnaCommentEntity implements QnaCommentEntityInter{
 
 	@Override
 	public boolean addQNAComment(QNAComment qnacomment) {
