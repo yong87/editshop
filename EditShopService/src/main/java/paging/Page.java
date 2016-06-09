@@ -129,4 +129,16 @@ public class Page {
 		this.user = map.get("user");
 
 	}
+
+	@Override
+	public String toString() {
+		return "Page [board=" + board + ", comment=" + comment + ", notice="
+				+ notice + ", product=" + product + ", qnaComment="
+				+ qnaComment + ", qna=" + qna + ", review=" + review
+				+ ", seller=" + seller + ", simpleProduct=" + simpleProduct
+				+ ", user=" + user + ", itemPerPage=" + itemPerPage + ", page="
+				+ page + ", totalItemCount=" + totalItemCount + "]";
+	}
+	
+	
 }
