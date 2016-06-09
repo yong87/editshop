@@ -1,5 +1,7 @@
 package cls.user.entity;
 
+import intfc.user.entity.UserAddEntityInter;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +14,7 @@ import session.ShopSqlSessionFactory;
 import vo.UserDetail;
 
 @Repository
-public class UserAddEntity implements intfc.user.entity.UserAddEntity {
+public class UserAddEntity implements UserAddEntityInter {
 
 	//
 	public boolean addDefalutUser(String id, String pwd) {

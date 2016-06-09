@@ -2,12 +2,12 @@ package cls.board.service;
 
 import java.util.List;
 
-import intfc.board.entity.BoardEntity;
+import intfc.board.entity.BoardEntityInter;
 import vo.Board;
 
 public class BoardService implements intfc.board.service.BoardService {
 
-	BoardEntity boardEntity = new cls.board.entity.BoardEntity();
+	BoardEntityInter boardEntity = new cls.board.entity.BoardEntity();
 
 	
 	@Override

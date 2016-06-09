@@ -2,13 +2,13 @@ package cls.seller.service;
 
 import java.util.Map;
 
-import intfc.seller.entity.SellerAddEntity;
+import intfc.seller.entity.SellerAddEntityInter;
 import vo.Seller;
 import vo.SellerLang;
 
 public class SellerAddService {
 
-	SellerAddEntity sellerAddEntity = new cls.seller.entity.SellerAddEntity();
+	SellerAddEntityInter sellerAddEntity = new cls.seller.entity.SellerAddEntity();
 	
 	public boolean addSeller(Seller seller) {
 		return sellerAddEntity.addSeller(seller);

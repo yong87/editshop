@@ -2,7 +2,7 @@ package intfc.qna.entity;
 
 import vo.QNA;
 
-public interface QnaEntity {
+public interface QnaEntityInter {
 
 	public boolean addQNA(QNA qna);
 	public boolean modifyQNA(QNA qna);

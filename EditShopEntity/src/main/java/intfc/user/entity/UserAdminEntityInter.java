@@ -6,7 +6,7 @@ import java.util.Map;
 import vo.UserDetail;
 import vo.UserInfo;
 
-public interface UserAdminEntity {
+public interface UserAdminEntityInter {
 
 	public Map<String, Object> getPasswordById(String id);
 

@@ -10,7 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import session.ShopSqlSessionFactory;
 import vo.Comment;
 
-public class CommentEntity implements intfc.comment.entity.CommentEntity {
+public class CommentEntity implements intfc.comment.entity.CommentEntityInter {
 
 	@Override
 	public boolean addComment(Comment comment) {

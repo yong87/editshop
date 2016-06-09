@@ -1,6 +1,6 @@
 package cls.comment.service;
 
-import intfc.comment.entity.CommentEntity;
+import intfc.comment.entity.CommentEntityInter;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import vo.Comment;
 
 public class CommentService implements intfc.comment.service.CommentService {
 
-	CommentEntity commentEntity = new cls.comment.entity.CommentEntity();
+	CommentEntityInter commentEntity = new cls.comment.entity.CommentEntity();
 	
 	
 	@Override

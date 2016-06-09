@@ -9,7 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import session.ShopSqlSessionFactory;
 import vo.Order;
 
-public class OrderEntity implements intfc.order.entity.OrderEntity{
+public class OrderEntity implements intfc.order.entity.OrderEntityInter{
 
 	public boolean addProductOrder(Order order){
 		

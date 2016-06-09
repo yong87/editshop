@@ -4,7 +4,7 @@ import java.util.List;
 
 import vo.Board;
 
-public interface BoardEntity {
+public interface BoardEntityInter {
 
 	public boolean addBoard(Board board);
 	public boolean modifyBoard(Board board);

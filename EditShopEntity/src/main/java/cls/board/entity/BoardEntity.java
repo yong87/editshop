@@ -1,5 +1,7 @@
 package cls.board.entity;
 
+import intfc.board.entity.BoardEntityInter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import session.ShopSqlSessionFactory;
 import vo.Board;
 
-public class BoardEntity implements intfc.board.entity.BoardEntity {
+public class BoardEntity implements BoardEntityInter {
 
 	@Override
 	public boolean addBoard(Board board) {

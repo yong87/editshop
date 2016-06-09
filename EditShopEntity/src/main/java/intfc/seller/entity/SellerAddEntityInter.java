@@ -3,7 +3,7 @@ package intfc.seller.entity;
 import vo.Seller;
 import vo.SellerLang;
 
-public interface SellerAddEntity {
+public interface SellerAddEntityInter {
 
 	public boolean addSeller(Seller seller);
 	

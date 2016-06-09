@@ -5,7 +5,7 @@ import java.util.Map;
 import vo.Order;
 
 
-public interface OrderEntity {
+public interface OrderEntityInter {
 
 
 	

@@ -1,5 +1,6 @@
 package cls.user.entity;
 
+import intfc.user.entity.UserModifyEntityInter;
 import mapper.user.UserModifyMapper;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import session.ShopSqlSessionFactory;
 import vo.User;
 
-public class UserModifyEntity implements intfc.user.entity.UserModifyEntity{
+public class UserModifyEntity implements UserModifyEntityInter{
 
 	public boolean modifyUser(User user) {
 		

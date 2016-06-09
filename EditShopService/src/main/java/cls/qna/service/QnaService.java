@@ -1,12 +1,12 @@
 package cls.qna.service;
 
-import intfc.qna.entity.QnaEntity;
+import intfc.qna.entity.QnaEntityInter;
 import vo.QNA;
 
 public class QnaService implements intfc.qna.service.QnaService{
 
 	
-	QnaEntity qnaEntity = new cls.qna.entity.QnaEntity();
+	QnaEntityInter qnaEntity = new cls.qna.entity.QnaEntity();
 	
 	@Override
 	public boolean addQNA(QNA qna) {

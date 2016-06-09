@@ -1,5 +1,7 @@
 package cls.user.entity;
 
+import intfc.user.entity.UserAdminEntityInter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +15,7 @@ import session.ShopSqlSessionFactory;
 import vo.UserDetail;
 import vo.UserInfo;
 
-public class UserAdminEntity implements intfc.user.entity.UserAdminEntity {
+public class UserAdminEntity implements UserAdminEntityInter {
 
 	public Map<String, Object> getPasswordById(String id) {
 		

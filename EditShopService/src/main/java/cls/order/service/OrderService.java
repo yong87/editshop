@@ -6,11 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import vo.Order;
-import intfc.order.entity.OrderEntity;
+import intfc.order.entity.OrderEntityInter;
 
 
 public class OrderService implements intfc.order.service.OrderService{
-	OrderEntity orderEntity = new cls.order.entity.OrderEntity();
+	OrderEntityInter orderEntity = new cls.order.entity.OrderEntity();
 
 	
 

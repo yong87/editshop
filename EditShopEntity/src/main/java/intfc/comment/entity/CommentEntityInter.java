@@ -4,7 +4,7 @@ import java.util.List;
 
 import vo.Comment;
 
-public interface CommentEntity {
+public interface CommentEntityInter {
 	public boolean addComment(Comment comment);
 	public boolean modyfiComment(Comment comment);
 	public boolean deleteComment(int commentSeq);

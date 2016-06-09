@@ -1,7 +1,7 @@
 package cls.user;
 
-import intfc.user.entity.UserAddEntity;
-import intfc.user.entity.UserAdminEntity;
+import intfc.user.entity.UserAddEntityInter;
+import intfc.user.entity.UserAdminEntityInter;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -16,8 +16,8 @@ import emailing.EmailService;
 
 public class UserAdminService implements intfc.user.service.UserAdminService {
 
-	UserAdminEntity userAd = new cls.user.entity.UserAdminEntity();
-	UserAddEntity userAdd = new cls.user.entity.UserAddEntity();
+	UserAdminEntityInter userAd = new cls.user.entity.UserAdminEntity();
+	UserAddEntityInter userAdd = new cls.user.entity.UserAddEntity();
 
 	// 0530/1434 complete test
 	public Map<String, Object> Login(String id, String password) {

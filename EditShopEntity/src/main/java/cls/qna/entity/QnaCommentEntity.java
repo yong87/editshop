@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import session.ShopSqlSessionFactory;
 import vo.QNAComment;
 
-public class QnaCommentEntity implements intfc.qna.entity.QnaCommentEntity{
+public class QnaCommentEntity implements intfc.qna.entity.QnaCommentEntityInter{
 
 	@Override
 	public boolean addQNAComment(QNAComment qnacomment) {

@@ -1,6 +1,6 @@
 package intfc.user.entity;
 
-public interface UserLogEntity {
+public interface UserLogEntityInter {
 
 	public boolean modifyLog(String id);
 }

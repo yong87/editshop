@@ -10,7 +10,7 @@ import vo.SellerLang;
 
 
 
-public class SellerAddEntity implements intfc.seller.entity.SellerAddEntity{
+public class SellerAddEntity implements intfc.seller.entity.SellerAddEntityInter{
 
 	public boolean addSeller(Seller seller) {
 		
