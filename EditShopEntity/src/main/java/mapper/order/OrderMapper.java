@@ -13,7 +13,21 @@ public interface OrderMapper {
 	public boolean modifyDeliveryInfo(Delivery delivery);
 	public boolean orderPaymentTime(String ordernumber);
 	
-	
+	/**
+	 * Status 관련 method
+	 */
+	public boolean buyconfirmStatus(String ordernumber);
+	public boolean beforePaymentStatus(String ordernumber);
+	public boolean afterPaymentStatus(String ordernumber);
+	public boolean beforeInsertAddress(String ordernumber);
+	public boolean checkOrderbySeller(String ordernumber);
+	public boolean readyProductbySeller(String ordernumber);
+	public boolean startDelivery(String ordernumber);
+	public boolean sendDelivery(String ordernumber);
+	public boolean completeDelivery(String ordernumber);
+	public boolean exchangeStatus(String ordernumber);
+	public boolean cancelOrderStatus(String ordernumber);
+	public boolean refundStatus(String ordernumber);
 	
 	// --------------------------------------- 
 	

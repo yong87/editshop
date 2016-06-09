@@ -101,14 +101,14 @@ public class CommentEntity implements CommentEntityInter {
 	}
 
 	@Override
-	public List<Comment> searchCommentBySeq(Map<String, Object> param) {
+	public List<Comment> searchCommentBySeq(int commentSeq) {
 		SqlSession sqlsession = ShopSqlSessionFactory.getInstance()
 				.getSqlSession();
 		List<Comment> list = new ArrayList<Comment>();
 		try {
 			CommentMapper commentMapper = sqlsession
 					.getMapper(CommentMapper.class);
-			list = commentMapper.searchCommentBySeq(param);
+			list = commentMapper.searchCommentBySeq(commentSeq);
 			sqlsession.commit();
 
 		} catch (Exception e) {

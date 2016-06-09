@@ -1,6 +1,7 @@
 package shop.cls.board.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,8 +40,8 @@ public class BoardService implements BoardServiceInter {
 
 
 	@Override
-	public List<Board> searchBoard(String title) {
-		return boardEntity.searchBoard(title);
+	public List<Board> searchBoard(Map<String, Object> param) {
+		return boardEntity.searchBoard(param);
 	}
 
 }

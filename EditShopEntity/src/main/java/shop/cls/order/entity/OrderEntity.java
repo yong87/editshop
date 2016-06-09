@@ -125,7 +125,259 @@ public class OrderEntity implements OrderEntityInter{
 		return isCreate;
 	}
 	
+	/**
+	 * 구매 확정
+	 */
+	@Override
+	public boolean buyconfirmStatus(String ordernumber){
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCreate;
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.buyconfirmStatus(ordernumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isCreate;
+	}
 	
+	/**
+	 * 결제 전 : 50
+	 */
+	public boolean beforePaymentStatus(String ordernumber){
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCreate;
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.beforePaymentStatus(ordernumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isCreate;
+	}
+	
+	/**
+	 * 결재후 : 51
+	 */
+	public boolean afterPaymentStatus(String ordernumber){
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCreate;
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.afterPaymentStatus(ordernumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isCreate;
+	}
+	
+	/**
+	 * 배송정보 미입력시 52
+	 */
+	public boolean beforeInsertAddress(String ordernumber){
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCreate;
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.beforeInsertAddress(ordernumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isCreate;
+	}
+	
+	/**
+	 * 물품 확인시 : 53
+	 */
+	public boolean checkOrderbySeller(String ordernumber){
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCreate;
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.checkOrderbySeller(ordernumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isCreate;
+	}
+	
+	/**
+	 * 배송물품 준비 : 54
+	 */
+	public boolean readyProductbySeller(String ordernumber){
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCreate;
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.readyProductbySeller(ordernumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isCreate;
+	}
+	
+	/**
+	 * 배송 시작시 : 55
+	 */
+	public boolean startDelivery(String ordernumber){
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCreate;
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.startDelivery(ordernumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isCreate;
+	}
+	
+	/**
+	 * 배송중시 Status : 56
+	 */
+	public boolean sendDelivery(String ordernumber){
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCreate;
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.sendDelivery(ordernumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isCreate;
+	}
+	
+	/**
+	 * 배송완료시 Status : 57
+	 */
+	public boolean completeDelivery(String ordernumber){
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCreate;
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.completeDelivery(ordernumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isCreate;
+	}
+	
+	/**
+	 * 교환시 Status : 58
+	 */
+	public boolean exchangeStatus(String ordernumber){
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCreate;
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.exchangeStatus(ordernumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isCreate;
+	}
+	
+	/**
+	 * 취소시 status 59
+	 */
+	public boolean cancelOrderStatus(String ordernumber){
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCreate;
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.cancelOrderStatus(ordernumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isCreate;
+	}
+	
+	/**
+	 * 환불시 Status : 60
+	 */
+	public boolean refundStatus(String ordernumber){
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCreate;
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.refundStatus(ordernumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isCreate;
+	}
 	
 	// --------------------------------------- 
 	

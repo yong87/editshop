@@ -11,7 +11,7 @@ public interface CommentEntityInter {
 	public boolean deleteComment(int commentSeq);
 	public List<Comment> searchComment(Map<String, Object> param);
 	
-	public List<Comment> searchCommentBySeq(Map<String, Object> param);
+	public List<Comment> searchCommentBySeq(int commentSeq);
 	public boolean changeLevel(Comment comment);
 	public boolean addReComment(Comment comment);
 }

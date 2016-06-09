@@ -51,6 +51,8 @@
 	WHERE `oit_ordernumber`=#{ordernumber};
 	</update>
 	
+	
+	
 	<!-- -->
 
 	<resultMap id="orderMap" type="vo.Order">
