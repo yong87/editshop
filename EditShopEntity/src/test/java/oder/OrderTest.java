@@ -12,4 +12,13 @@ public class OrderTest {
 	public void getTest(){
 		System.out.println(oe.getOrder("2016060800010001"));
 	}
+	
+	@Test
+	public void cancelTest(){
+		System.out.println(oe.cancelOrder("2016060800010001"));
+	}
+	@Test
+	public void returnTest(){
+		System.out.println(oe.returnOrder("2016060800010001"));
+	}
 }

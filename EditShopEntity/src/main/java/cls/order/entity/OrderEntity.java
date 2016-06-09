@@ -7,27 +7,123 @@ import mapper.order.OrderMapper;
 import org.apache.ibatis.session.SqlSession;
 
 import session.ShopSqlSessionFactory;
+import vo.Delivery;
 import vo.Order;
+import vo.OrderInfo;
 
 public class OrderEntity implements intfc.order.entity.OrderEntityInter{
 
-	public boolean addProductOrder(Order order){
+	
+	/**
+	 * 주문 생성
+	 */
+	public boolean newOrderProduct(Order order){
 		
 		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		
+		boolean isCreate;
 		try{
 			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.newOrderProduct(order);
 			
+			sqlSession.commit();
 		}catch(Exception e){
 			e.printStackTrace();
+			return false;
 		}finally{
-			sqlSession.commit();
 			sqlSession.close();
 		}
 		
-		return false;
+		return isCreate;
 	}
 	
+	/**
+	 * 주문생성후 time찍는 method
+	 */
+	public boolean newOrderTime(OrderInfo order){
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCreate;
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.newOrderTime(order);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isCreate;
+	}
+	
+	/**
+	 * 주문생성후 주문정보 입력  method
+	 */
+	public boolean addDeliveryInfo(Delivery delivery){
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCreate;
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.addDeliveryInfo(delivery);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isCreate;
+	}
+	
+	/**
+	 * 주문정보 수정하는 method
+	 */
+	public boolean modifyDeliveryInfo(Delivery delivery){
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCreate;
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.modifyDeliveryInfo(delivery);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isCreate;
+		
+	}
+	
+	/**
+	 * 결제후 결제 시간을 찍는 method
+	 */
+	public boolean orderPaymentTime(OrderInfo order){
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCreate;
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.orderPaymentTime(order);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isCreate;
+	}
 	
 	
 	
@@ -158,8 +254,47 @@ public class OrderEntity implements intfc.order.entity.OrderEntityInter{
 	
 	// ---------------------------------------
 	
+	@Override
+	public boolean cancelOrder(String ordernumber) {
+		SqlSession sqlsession = ShopSqlSessionFactory.getInstance()
+				.getSqlSession();
+
+		try {
+			OrderMapper orderMapper = sqlsession
+					.getMapper(OrderMapper.class);
+
+			orderMapper.cancelOrder(ordernumber);
+			
+			sqlsession.commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			sqlsession.close();
+		}
+		return true;
+	}
 	
-	
-	
+	public boolean returnOrder(String ordernumber){
+		SqlSession sqlsession = ShopSqlSessionFactory.getInstance()
+				.getSqlSession();
+
+		try {
+			OrderMapper orderMapper = sqlsession
+					.getMapper(OrderMapper.class);
+
+			orderMapper.returnOrder(ordernumber);
+			
+			sqlsession.commit();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			sqlsession.close();
+		}
+		return true;
+	}
 	
 }

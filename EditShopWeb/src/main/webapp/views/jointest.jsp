@@ -10,17 +10,19 @@
 
 <form action="/EditShopWeb/join.do" method="post">
 	id : <input type="text" name="id" id="id"><input type="button" onclick="checkId()" id="idcheckbtn" value="check"><br>
-	pw : <input type="password" name="password"><br>
-	re-pw : <input type="password"><br>
+	pw : <input type="password" name="password" id="password"><br>
+	re-pw : <input type="password" id="password"><br>
 	email : <input type="email" name="email"><input type="button" onclick="checkEmail()"><br>
 	<input type=submit value="회원가입">
 </form>
+<input type="text" id="keyTest">
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> 
 <script type="text/javascript">
 $(document).ready(function(){
-	
+		
 });
+
 var checkId = function(){
 	$.ajax({
 		url : "/EditShopWeb/existuserid.do"
@@ -45,5 +47,7 @@ var existId = function(info){
 	alert(info);
 	$("#idcheckbtn").append("div"+info+"</div>");
 }
+
+
 </script>
 </html>

@@ -1,12 +1,16 @@
 package cls.order.service;
 
+
+import intfc.order.entity.OrderEntityInter;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import vo.Order;
-import intfc.order.entity.OrderEntityInter;
+import cls.order.entity.OrderEntity;
+
 
 
 public class OrderService implements intfc.order.service.OrderService{
@@ -17,7 +21,7 @@ public class OrderService implements intfc.order.service.OrderService{
 	
 	
 	
-	// --------------------------------------- 
+	// ---------------------------------------// 
 	
 	// make by hyun
 	// 0608 complete test
@@ -76,8 +80,14 @@ public class OrderService implements intfc.order.service.OrderService{
 	
 	
 	// ---------------------------------------
-	
-	
+		public boolean cancelOrder(String ordernumber){
+			OrderEntity orderEntity = new OrderEntity();
+			return orderEntity.cancelOrder(ordernumber);
+		}
+		public boolean returnOrder(String ordernumber){
+			OrderEntity orderEntity = new OrderEntity();
+			return orderEntity.returnOrder(ordernumber);
+		}
 	
 	
 }

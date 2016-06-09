@@ -49,8 +49,12 @@
 
 
 	<!-- -->
-
-
-
+	<update id="cancelOrder" parameterType="String">
+	update order_tb set ot_status = 0 where ot_ordernumber = #{ordernumber};
+	</update>
+	<!-- 반품시 status 8로 번경 -->
+	<update id="returnOrder" parameterType="String">
+	update order_tb set ot_status = 8 where ot_ordernumber = #{ordernumber};
+	</update>
 
 </mapper>

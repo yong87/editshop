@@ -1,4 +1,4 @@
-package mapper.order;
+package intfc.order.entity;
 
 import java.util.Map;
 
@@ -6,7 +6,8 @@ import vo.Delivery;
 import vo.Order;
 import vo.OrderInfo;
 
-public interface OrderMapper {
+
+public interface OrderEntity {
 
 	public boolean newOrderProduct(Order order);
 	public boolean newOrderTime(OrderInfo order);
@@ -15,24 +16,21 @@ public interface OrderMapper {
 	public boolean orderPaymentTime(OrderInfo order);
 	
 	
-	
 	// --------------------------------------- 
 	
 	// make by hyun
 	
-		public boolean exchange(String ordernumber);
-		public Order getOrder(String ordernumber);
-		public boolean newExchangeOrder(Order order);
-		
-		
-		public String getLastOrdernumber(String offend);
-		public boolean addExchangeLog(Map<String, String> param);
+	public boolean exchange(String ordernumber);
+	public Order getOrder(String ordernumber);
+	public boolean newExchangeOrder(Order order);
+	
+	public String getLastOrdernumber(String offend);
+	public boolean addExchangeLog(Map<String, String> param);
 	
 	// ---------------------------------------
-	
 	public boolean cancelOrder(String ordernumber);
 	
-	public boolean  returnOrder(String ordernumber);
+	public boolean returnOrder(String ordernumber);
 	
 	
 }

@@ -17,8 +17,9 @@ public interface OrderService {
 	
 	
 	// ---------------------------------------
-	
-	
+		public boolean cancelOrder(String ordernumber);
+		
+		public boolean returnOrder(String ordernumber);
 	
 	
 }
