@@ -2,8 +2,8 @@ package comment;
 
 import org.junit.Test;
 
+import shop.cls.comment.entity.CommentEntity;
 import vo.Comment;
-import cls.comment.entity.CommentEntity;
 
 public class commentTest {
 

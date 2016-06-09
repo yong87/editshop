@@ -2,9 +2,9 @@ package seller;
 
 import org.junit.Test;
 
+import shop.cls.seller.entity.SellerAddEntity;
 import vo.Seller;
 import vo.SellerLang;
-import cls.seller.entity.SellerAddEntity;
 
 public class SellerAdd {
 

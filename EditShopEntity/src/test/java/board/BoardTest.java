@@ -2,8 +2,8 @@ package board;
 
 import org.junit.Test;
 
+import shop.cls.board.entity.BoardEntity;
 import vo.Board;
-import cls.board.entity.BoardEntity;
 
 public class BoardTest {
 

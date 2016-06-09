@@ -2,7 +2,7 @@ package userAd;
 
 import org.junit.Test;
 
-import cls.user.entity.UserAdminEntity;
+import shop.cls.user.entity.UserAdminEntity;
 
 public class userAd {
 

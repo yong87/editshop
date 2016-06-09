@@ -2,8 +2,8 @@ package qna;
 
 import org.junit.Test;
 
-import cls.qna.entity.QnaCommentEntity;
-import cls.qna.entity.QnaEntity;
+import shop.cls.qna.entity.QnaCommentEntity;
+import shop.cls.qna.entity.QnaEntity;
 import vo.QNA;
 import vo.QNAComment;
 

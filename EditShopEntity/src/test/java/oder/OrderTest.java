@@ -2,7 +2,7 @@ package oder;
 
 import org.junit.Test;
 
-import cls.order.entity.OrderEntity;
+import shop.cls.order.entity.OrderEntity;
 
 public class OrderTest {
 
