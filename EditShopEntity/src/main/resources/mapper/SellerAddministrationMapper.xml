@@ -15,9 +15,11 @@
 		<result property="parcelcode" column="se_parcelcode" />
 	</resultMap>
 	
-	<select id="getAllSeller" resultType="seller" resultMap="sellerMap">
+	<select id="getAllSeller" resultType="seller" resultMap="sellerMap" parameterType="java.util.Map">
 		select se_uid, se_licensenumber, se_telephone, se_status, se_jointime, se_lastvisittime, se_parcelcode 
-		from seller_tb;
+		from seller_tb
+		where se_status = 21
+        ORDER BY se_jointime desc LIMIT #{start}, #{end};
 	</select>
 	
 	<select id="getSellerById" resultType="seller" resultMap="sellerMap">
@@ -26,13 +28,63 @@
 		where se_uid =#{id};
 	</select>
 	
-	
-	
 	<resultMap id="sellerLangMap" type="vo.SellerLang">
 		<id property="id" column="se_uid" />
 		<result property="name" column="se_name" />
 		<result property="address" column="se_address" />
 	</resultMap>
+	
+	<select id="getSellerKRByStoreName" parameterType="java.util.Map" resultType="sellerLang" resultMap="sellerLangMap">
+		select skt.se_uid, skt.se_name, skt.se_address from seller_kr_tb as skt
+		join seller_tb as st on skt.se_uid = st.se_uid
+		where se_name like CONCAT("%"#{name}"%")
+		ORDER BY st.se_jointime desc LIMIT #{start}, #{end};  
+	</select>
+	<select id="getSellerJPByStoreName" parameterType="java.util.Map" resultType="sellerLang" resultMap="sellerLangMap">
+		select skt.se_uid, skt.se_name, skt.se_address from seller_jp_tb as skt
+		join seller_tb as st on skt.se_uid = st.se_uid
+		where se_name like CONCAT("%"#{name}"%")
+		ORDER BY st.se_jointime desc LIMIT #{start}, #{end};  
+	</select>
+	<select id="getSellerENByStoreName" parameterType="java.util.Map" resultType="sellerLang" resultMap="sellerLangMap">
+		select skt.se_uid, skt.se_name, skt.se_address from seller_en_tb as skt
+		join seller_tb as st on skt.se_uid = st.se_uid
+		where se_name like CONCAT("%"#{name}"%")
+		ORDER BY st.se_jointime desc LIMIT #{start}, #{end};  
+	</select>
+	<select id="getSellerCHByStoreName" parameterType="java.util.Map" resultType="sellerLang" resultMap="sellerLangMap">
+		select skt.se_uid, skt.se_name, skt.se_address from seller_cn_tb as skt
+		join seller_tb as st on skt.se_uid = st.se_uid
+		where se_name like CONCAT("%"#{name}"%")
+		ORDER BY st.se_jointime desc LIMIT #{start}, #{end};  
+	</select>
+	
+	
+	<select id="getSellerKRByAddress" parameterType="java.util.Map" resultType="sellerLang" resultMap="sellerLangMap">
+		select skt.se_uid, skt.se_name, skt.se_address from seller_kr_tb as skt
+		join seller_tb as st on skt.se_uid = st.se_uid
+		where se_address like CONCAT("%"#{address}"%")
+		ORDER BY st.se_jointime desc LIMIT #{start}, #{end};  
+	</select>
+	<select id="getSellerJPByAddress" parameterType="java.util.Map" resultType="sellerLang" resultMap="sellerLangMap">
+		select skt.se_uid, skt.se_name, skt.se_address from seller_jp_tb as skt
+		join seller_tb as st on skt.se_uid = st.se_uid
+		where se_address like CONCAT("%"#{address}"%")
+		ORDER BY st.se_jointime desc LIMIT #{start}, #{end};  
+	</select>
+	<select id="getSellerENByAddress" parameterType="java.util.Map" resultType="sellerLang" resultMap="sellerLangMap">
+		select skt.se_uid, skt.se_name, skt.se_address from seller_en_tb as skt
+		join seller_tb as st on skt.se_uid = st.se_uid
+		where se_address like CONCAT("%"#{address}"%")
+		ORDER BY st.se_jointime desc LIMIT #{start}, #{end};  
+	</select>
+	<select id="getSellerCHByAddress" parameterType="java.util.Map" resultType="sellerLang" resultMap="sellerLangMap">
+		select skt.se_uid, skt.se_name, skt.se_address from seller_cn_tb as skt
+		join seller_tb as st on skt.se_uid = st.se_uid
+		where se_address like CONCAT("%"#{address}"%")
+		ORDER BY st.se_jointime desc LIMIT #{start}, #{end};  
+	</select>
+	
 	
 	<select id="getSellerLangKrById" resultType="sellerLang" resultMap="sellerMap">
 		select se_uid, se_name, se_address 
@@ -51,6 +103,12 @@
 		from seller_cn_tb;
 	</select>
 	
+	
+	<select id="getSellerByStatus" resultType="sellerLang" resultMap="sellerMap" parameterType="java.util.Map">
+		select * from seller_tb
+		where se_status = 21
+		ORDER BY se_jointime desc LIMIT #{start}, #{end};
+	</select>
 	
 
 </mapper>

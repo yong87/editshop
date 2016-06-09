@@ -63,6 +63,7 @@
 	<select id="getAllUserDetail" resultType="userDetail" resultMap="userDetailMap" parameterType="java.util.Map">
 		select user_id, user_name, user_email, user_address, user_phone, user_jointime, user_status, user_age, user_language, user_nickname 
 		from user_detail_tb
+		where user_status = 11
 		ORDER BY user_jointime desc LIMIT #{start}, #{end};
 	</select>
 	<select id="getNomalUserDetail" resultType="userDetail" resultMap="userDetailMap" parameterType="java.util.Map">
@@ -99,7 +100,18 @@
 	<select id="getUserDetailById" resultType="userDetail" resultMap="userDetailMap" parameterType="String">
 		select user_id, user_name, user_email, user_address, user_phone, user_jointime, user_status, user_age, user_language, user_nickname 
 		from user_detail_tb
-		where user_id = #{id};
+		where user_id like CONCAT("%"#{id}"%");
+	</select>
+	<select id="getUserDetailByEmail" resultType="userDetail" resultMap="userDetailMap" parameterType="String">
+		select user_id, user_name, user_email, user_address, user_phone, user_jointime, user_status, user_age, user_language, user_nickname 
+		from user_detail_tb
+		where user_email like CONCAT("%"#{email}"%");
+	</select>
+	<select id="getUserDetailByStatus" resultType="userDetail" resultMap="userDetailMap" parameterType="java.util.Map">
+		select user_id, user_name, user_email, user_address, user_phone, user_jointime, user_status, user_age, user_language, user_nickname 
+		from user_detail_tb
+		where user_status = #{status}
+		ORDER BY user_jointime desc LIMIT #{start}, #{end};
 	</select>
 	
 	
