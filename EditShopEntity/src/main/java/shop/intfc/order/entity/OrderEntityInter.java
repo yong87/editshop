@@ -4,17 +4,16 @@ import java.util.Map;
 
 import vo.Delivery;
 import vo.Order;
-import vo.OrderInfo;
 
 
 public interface OrderEntityInter {
 
 
 	public boolean newOrderProduct(Order order);
-	public boolean newOrderTime(OrderInfo order);
+	public boolean newOrderTime(String ordernumber);
 	public boolean addDeliveryInfo(Delivery delivery);
 	public boolean modifyDeliveryInfo(Delivery delivery);
-	public boolean orderPaymentTime(OrderInfo order);
+	public boolean orderPaymentTime(String ordernumber);
 	
 	
 	// --------------------------------------- 

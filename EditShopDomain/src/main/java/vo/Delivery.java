@@ -6,7 +6,7 @@ public class Delivery {
 	private String ordernumber;
 	private String name;
 	private String address;
-	private String photo;
+	private String phone;
 	private String memo;
 	private int status;
 	private String invoice;
@@ -29,11 +29,11 @@ public class Delivery {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getPhoto() {
-		return photo;
+	public String getPhone() {
+		return phone;
 	}
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	public String getMemo() {
 		return memo;

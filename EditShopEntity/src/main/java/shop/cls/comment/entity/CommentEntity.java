@@ -2,6 +2,7 @@ package shop.cls.comment.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import mapper.comment.CommentMapper;
 
@@ -79,14 +80,14 @@ public class CommentEntity implements CommentEntityInter {
 	}
 
 	@Override
-	public List<Comment> searchComment(String content) {
+	public List<Comment> searchComment(Map<String, Object> param) {
 		SqlSession sqlsession = ShopSqlSessionFactory.getInstance()
 				.getSqlSession();
 		List<Comment> list = new ArrayList<Comment>();
 		try {
 			CommentMapper commentMapper = sqlsession
 					.getMapper(CommentMapper.class);
-			list = commentMapper.searchComment(content);
+			list = commentMapper.searchComment(param);
 			sqlsession.commit();
 
 		} catch (Exception e) {
@@ -100,14 +101,14 @@ public class CommentEntity implements CommentEntityInter {
 	}
 
 	@Override
-	public List<Comment> searchCommentBySeq(int commentSeq) {
+	public List<Comment> searchCommentBySeq(Map<String, Object> param) {
 		SqlSession sqlsession = ShopSqlSessionFactory.getInstance()
 				.getSqlSession();
 		List<Comment> list = new ArrayList<Comment>();
 		try {
 			CommentMapper commentMapper = sqlsession
 					.getMapper(CommentMapper.class);
-			list = commentMapper.searchCommentBySeq(commentSeq);
+			list = commentMapper.searchCommentBySeq(param);
 			sqlsession.commit();
 
 		} catch (Exception e) {

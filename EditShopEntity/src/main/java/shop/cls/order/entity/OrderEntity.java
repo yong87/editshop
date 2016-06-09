@@ -10,7 +10,6 @@ import session.ShopSqlSessionFactory;
 import shop.intfc.order.entity.OrderEntityInter;
 import vo.Delivery;
 import vo.Order;
-import vo.OrderInfo;
 
 public class OrderEntity implements OrderEntityInter{
 
@@ -40,13 +39,13 @@ public class OrderEntity implements OrderEntityInter{
 	/**
 	 * 주문생성후 time찍는 method
 	 */
-	public boolean newOrderTime(OrderInfo order){
+	public boolean newOrderTime(String ordernumber){
 		
 		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
 		boolean isCreate;
 		try{
 			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
-			isCreate = orderMapper.newOrderTime(order);
+			isCreate = orderMapper.newOrderTime(ordernumber);
 			
 			sqlSession.commit();
 		}catch(Exception e){
@@ -107,13 +106,13 @@ public class OrderEntity implements OrderEntityInter{
 	/**
 	 * 결제후 결제 시간을 찍는 method
 	 */
-	public boolean orderPaymentTime(OrderInfo order){
+	public boolean orderPaymentTime(String ordernumber){
 		
 		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
 		boolean isCreate;
 		try{
 			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
-			isCreate = orderMapper.orderPaymentTime(order);
+			isCreate = orderMapper.orderPaymentTime(ordernumber);
 			
 			sqlSession.commit();
 		}catch(Exception e){
