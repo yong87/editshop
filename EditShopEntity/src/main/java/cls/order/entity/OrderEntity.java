@@ -1,5 +1,7 @@
 package cls.order.entity;
 
+import intfc.order.entity.OrderEntityInter;
+
 import java.util.Map;
 
 import mapper.order.OrderMapper;
@@ -11,7 +13,7 @@ import vo.Delivery;
 import vo.Order;
 import vo.OrderInfo;
 
-public class OrderEntity implements intfc.order.entity.OrderEntityInter{
+public class OrderEntity implements OrderEntityInter{
 
 	
 	/**
