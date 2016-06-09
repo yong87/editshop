@@ -6,11 +6,13 @@ import java.util.List;
 import mapper.board.BoardMapper;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import session.ShopSqlSessionFactory;
 import shop.intfc.board.entity.BoardEntityInter;
 import vo.Board;
 
+@Repository
 public class BoardEntity implements BoardEntityInter {
 
 	@Override
