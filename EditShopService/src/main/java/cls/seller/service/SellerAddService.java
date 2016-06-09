@@ -2,13 +2,18 @@ package cls.seller.service;
 
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import intfc.seller.entity.SellerAddEntityInter;
 import vo.Seller;
 import vo.SellerLang;
 
-public class SellerAddService {
+@Service
+public class SellerAddService implements SellerAddEntityInter{
 
-	SellerAddEntityInter sellerAddEntity = new cls.seller.entity.SellerAddEntity();
+	@Autowired
+	SellerAddEntityInter sellerAddEntity;
 	
 	public boolean addSeller(Seller seller) {
 		return sellerAddEntity.addSeller(seller);
@@ -38,5 +43,29 @@ public class SellerAddService {
 		}
 		
 		return true;
+	}
+
+	@Override
+	public boolean updateKr(SellerLang sellerLang) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateEn(SellerLang sellerLang) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateCn(SellerLang sellerLang) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateJp(SellerLang sellerLang) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

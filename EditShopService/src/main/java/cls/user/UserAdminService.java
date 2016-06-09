@@ -2,10 +2,14 @@ package cls.user;
 
 import intfc.user.entity.UserAddEntityInter;
 import intfc.user.entity.UserAdminEntityInter;
+import intfc.user.service.UserAdminServiceInter;
 
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import vo.User;
 import centification.Centification;
@@ -14,10 +18,13 @@ import com.sun.jmx.snmp.Timestamp;
 
 import emailing.EmailService;
 
-public class UserAdminService implements intfc.user.service.UserAdminServiceInter {
+@Service
+public class UserAdminService implements UserAdminServiceInter {
 
-	UserAdminEntityInter userAd = new cls.user.entity.UserAdminEntity();
-	UserAddEntityInter userAdd = new cls.user.entity.UserAddEntity();
+	@Autowired
+	UserAdminEntityInter userAd;
+	@Autowired
+	UserAddEntityInter userAdd;
 
 	// 0530/1434 complete test
 	public Map<String, Object> Login(String id, String password) {

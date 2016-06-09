@@ -1,14 +1,21 @@
 package cls.review;
 
+import intfc.review.ReviewServiceInter;
+
 import java.util.List;
 
-import cls.review.entity.ReviewEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import vo.ReviewVo;
+import cls.review.entity.ReviewEntity;
 
 
-
-public class ReviewService implements intfc.review.ReviewServiceInter {
-	ReviewEntity review = new ReviewEntity();
+@Service
+public class ReviewService implements ReviewServiceInter {
+	
+	@Autowired
+	ReviewEntity review;
 
 	public boolean reviewAdd(ReviewVo reviewVo) {
 		boolean bool = review.reviewAdd(reviewVo);

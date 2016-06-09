@@ -2,19 +2,25 @@ package cls.order.service;
 
 
 import intfc.order.entity.OrderEntityInter;
+import intfc.order.service.OrderServiceInter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import vo.Order;
 import cls.order.entity.OrderEntity;
 
 
-
-public class OrderService implements intfc.order.service.OrderServiceInter{
-	OrderEntityInter orderEntity = new cls.order.entity.OrderEntity();
+@Service
+public class OrderService implements OrderServiceInter{
+	
+	@Autowired
+	OrderEntityInter orderEntity;
 
 	
 

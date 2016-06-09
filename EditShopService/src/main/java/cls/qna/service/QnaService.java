@@ -1,12 +1,18 @@
 package cls.qna.service;
 
 import intfc.qna.entity.QnaEntityInter;
+import intfc.qna.service.QnaServiceInter;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import vo.QNA;
 
-public class QnaService implements intfc.qna.service.QnaServiceInter{
+@Service
+public class QnaService implements QnaServiceInter{
 
-	
-	QnaEntityInter qnaEntity = new cls.qna.entity.QnaEntity();
+	@Autowired
+	QnaEntityInter qnaEntity;
 	
 	@Override
 	public boolean addQNA(QNA qna) {

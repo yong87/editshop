@@ -1,14 +1,21 @@
 package cls.comment.service;
 
 import intfc.comment.entity.CommentEntityInter;
+import intfc.comment.service.CommentServiceInter;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import vo.Comment;
+import cls.comment.entity.CommentEntity;
 
-public class CommentService implements intfc.comment.service.CommentServiceInter {
+@Service
+public class CommentService implements CommentServiceInter {
 
-	CommentEntityInter commentEntity = new cls.comment.entity.CommentEntity();
+	@Autowired
+	CommentEntityInter commentEntity;
 	
 	
 	@Override

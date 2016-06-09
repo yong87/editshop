@@ -7,7 +7,9 @@ import java.io.IOException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DeliverySheetService {
 	public void DelivertSheetRead() {
 		File file = new File("/Users/qwe/Documents/TEST.xlsx");

@@ -1,13 +1,20 @@
 package cls.board.service;
 
+import intfc.board.entity.BoardEntityInter;
+import intfc.board.service.BoardServiceInter;
+
 import java.util.List;
 
-import intfc.board.entity.BoardEntityInter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import vo.Board;
 
-public class BoardService implements intfc.board.service.BoardServiceInter {
+@Service
+public class BoardService implements BoardServiceInter {
 
-	BoardEntityInter boardEntity = new cls.board.entity.BoardEntity();
+	@Autowired
+	BoardEntityInter boardEntity;
 
 	
 	@Override
