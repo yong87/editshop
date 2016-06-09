@@ -47,11 +47,9 @@
 		ORDER BY st.se_jointime desc LIMIT #{start}, #{end};
 	</select>
 	
-	<select id="searchCommentBySeq" parameterType="int" resultType="comment" resultMap="commentMap">
+	<select id="searchCommentBySeq" parameterType="int" resultMap="commentMap">
         select `cot_seq`, `cot_uid`, `cot_board_seq`, `cot_content`, `cot_writetime`, `cot_ref`, `cot_step`, `cot_level`, `cot_status` from comment_tb
         where cot_ref = (select cot_ref from comment_tb as ct where cot_seq = #{commentSeq})
-        order by cot_level
-        ORDER BY st.se_jointime desc LIMIT #{start}, #{end};
 	</select>
 	
 	<update id="changeLevel" parameterType="comment">

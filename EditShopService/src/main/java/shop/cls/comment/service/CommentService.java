@@ -1,6 +1,7 @@
 package shop.cls.comment.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,8 +41,8 @@ public class CommentService implements CommentServiceInter {
 
 	@Override
 	//0602 complete test
-	public List<Comment> searchComment(String content) {
-		return commentEntity.searchComment(content);
+	public List<Comment> searchComment(Map<String, Object> param) {
+		return commentEntity.searchComment(param);
 	}
 
 

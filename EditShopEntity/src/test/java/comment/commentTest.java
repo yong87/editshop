@@ -11,7 +11,7 @@ public class commentTest {
 	
 	@Test
 	public void searchidTest() {
-		System.out.println(ce.searchCommentBySeq(31));
+		
 	}
 	
 	@Test

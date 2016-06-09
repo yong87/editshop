@@ -4,8 +4,55 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mapper.order.OrderMapper">
+	
+	<insert id="newOrderProduct" parameterType="order">
+		INSERT INTO `editshop`.`order_tb` (
+		`ot_ordernumber`
+		,`ot_user_id`
+		,`ot_seller_id`
+		,`ot_productid`
+		,`ot_pt_option`
+		,`ot_status`
+		,`ot_amount`) VALUES (
+		#{ordernumber}, #{userid}, #{sellerid}, #{productid}, #{productOption}, 50, #{amount});
+	</insert>
+	
+	<insert id="newOrderTime" parameterType="String">
+	INSERT INTO `editshop`.`order_info_tb` (
+	`oit_ordernumber`
+	,`oit_buytime`
+	) VALUES (
+	#{ordernumber}
+	,now());
+	</insert>
 
-
+	<insert id="addDeliveryInfo" parameterType="Delivery">
+	INSERT INTO `editshop`.`delivery_info_tb` (
+	`dit_ordernumber`
+	,`dit_name`
+	,`dit_address`
+	,`dit_phone`
+	,`dit_memo`
+	,`dit_status`
+	) VALUES (
+	#{ordernumber}, #{name}, #{address}, #{phone}, #{memo}, 62);
+	</insert>
+	
+	<update id="modifyDeliveryInfo" parameterType="Delivery">
+	UPDATE `editshop`.`delivery_info_tb` 
+	SET `dit_invoice`=#{invoice}
+		 ,`dit_parcelcode`=#{parcelCode} 
+	WHERE `dit_ordernumber`=#{ordernumber};
+	</update>
+	
+	<update id="orderPaymentTime" parameterType="String">
+	UPDATE `editshop`.`order_info_tb` 
+	SET `oit_paymenttime`=now() 
+	WHERE `oit_ordernumber`=#{ordernumber};
+	</update>
+	
+	
+	
 	<!-- -->
 
 	<resultMap id="orderMap" type="vo.Order">
@@ -15,6 +62,7 @@
 		<result property="productid" column="ot_productid" />
 		<result property="productOption" column="ot_pt_option" />
 		<result property="status" column="ot_status" />
+		<result property="amount" column="ot_amount"/>
 	</resultMap>
 	
 	<insert id="newExchangeOrder" parameterType="order">

@@ -2,6 +2,7 @@ package shop.cls.board.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import mapper.board.BoardMapper;
 
@@ -79,7 +80,7 @@ public class BoardEntity implements BoardEntityInter {
 	}
 
 	@Override
-	public List<Board> searchBoard(String title) {
+	public List<Board> searchBoard(Map<String, Object> param) {
 		
 		List<Board> list = new ArrayList<Board>();
 		
@@ -88,7 +89,7 @@ public class BoardEntity implements BoardEntityInter {
 
 		try {
 			BoardMapper boardMapper = sqlsession.getMapper(BoardMapper.class);
-			list = boardMapper.searchBoard(title);
+			list = boardMapper.searchBoard(param);
 			
 			sqlsession.commit();
 		} catch (Exception e) {
