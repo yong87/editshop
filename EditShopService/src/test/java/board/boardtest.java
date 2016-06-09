@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import cls.board.service.BoardService;
 import vo.Board;
 
 public class boardtest {
