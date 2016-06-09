@@ -35,10 +35,11 @@
 		<result property="flag" column="bt_flag" />
 	</resultMap>
 	
-	<select id="searchBoard" parameterType="String" resultMap="boardMap">
+	<select id="searchBoard" parameterType="java.util.Map" resultMap="boardMap">
 		select bt_seq, bt_title, bt_uid, bt_content, bt_writetime, bt_file, bt_flag from board_tb
 		where bt_status = '61'
-		and bt_content like CONCAT("%"#{title}"%");
+		and bt_content like CONCAT("%"#{title}"%")
+		ORDER BY st.se_jointime desc LIMIT #{start}, #{end};
 	</select>
 
 

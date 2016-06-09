@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.page.PageMapper">
+
+	<select id="getAllUserCount" resultType="int">
+		select count(user_id) from user_detail_tb where user_status = 11;
+	</select>
+	
+	<select id="getAllBoardCount" resultType="int">
+		select count(bt_seq) from board_tb where bt_status=61;
+	</select>
+	
+	<select id="getAllCommentCount" resultType="int">
+		select count(cot_seq) from comment_tb where cot_status=61;
+	</select>
+	
+	
+	<select id="getAllNoticeCount" resultType="int">
+		select count(nt_seq) from notice_tb where nt_status=61;  
+	</select>
+	
+	
+	<select id="getAllSimpleProductCount" resultType="int">
+		select count(ps_productid) from product_simple_tb where ps_status=1;  
+	</select>
+	
+	
+	<select id="getAllProductCount" resultType="int">
+		select count(pt_productid) from product_tb where pt_status=1;    
+	</select>
+	
+	<select id="getAllQNACommentCount" resultType="int">
+		select count(qna_sequence) from qna_comment_tb where qna_status=61;    
+	</select>
+	
+	
+	<select id="getAllQNACount" resultType="int">
+		select count(qna_seq) from qna_tb where qna_status=1;      
+	</select>
+	
+	<select id="getAllReviewCount" resultType="int">
+		select count(ret_writetime) from review_tb where ret_status=1;        
+	</select>
+	
+	<select id="getAllSellerCount" resultType="int">
+		select count(se_uid) from seller_tb where se_status=21;        
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+
+</mapper>

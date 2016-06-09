@@ -3,7 +3,11 @@
 <mapper namespace="mapper.review.ReviewMapper">
 
   <update id="reviewDelete" parameterType="String">
-  update review_tb set ret_status = 0 where ret_ordernumber = #{orderNumber};
+  update review_tb 
+  set ret_status = 0 
+  where ret_ordernumber = #{orderNumber}
+  
+  
   </update>
   
   <update id="reviewRevise" parameterType="map">
