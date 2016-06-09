@@ -13,7 +13,7 @@ import cls.order.entity.OrderEntity;
 
 
 
-public class OrderService implements intfc.order.service.OrderService{
+public class OrderService implements intfc.order.service.OrderServiceInter{
 	OrderEntityInter orderEntity = new cls.order.entity.OrderEntity();
 
 	

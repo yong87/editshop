@@ -4,7 +4,7 @@ import java.util.List;
 
 import vo.ReviewVo;
 
-public interface ReviewService {
+public interface ReviewServiceInter {
 	public boolean reviewAdd(ReviewVo reviewVo);
 	
 	public boolean reviewDelete(String orderNumber);

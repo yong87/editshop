@@ -3,7 +3,7 @@ package cls.qna.service;
 import intfc.qna.entity.QnaEntityInter;
 import vo.QNA;
 
-public class QnaService implements intfc.qna.service.QnaService{
+public class QnaService implements intfc.qna.service.QnaServiceInter{
 
 	
 	QnaEntityInter qnaEntity = new cls.qna.entity.QnaEntity();

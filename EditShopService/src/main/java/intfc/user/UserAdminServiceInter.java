@@ -5,7 +5,7 @@ import java.util.Map;
 
 import vo.User;
 
-public interface UserAdminService {
+public interface UserAdminServiceInter {
 
 	
 	public Map<String, Object> Login(String id, String password);

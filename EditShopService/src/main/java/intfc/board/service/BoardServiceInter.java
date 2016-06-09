@@ -4,7 +4,7 @@ import java.util.List;
 
 import vo.Board;
 
-public interface BoardService {
+public interface BoardServiceInter {
 
 	public boolean addBoard(Board board);
 	public boolean modyfiBoard(Board board);

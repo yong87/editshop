@@ -1,7 +1,7 @@
 package intfc.order.service;
 
 
-public interface OrderService {
+public interface OrderServiceInter {
 
 
 	

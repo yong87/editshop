@@ -2,7 +2,7 @@ package intfc.qna.service;
 
 import vo.QNA;
 
-public interface QnaService {
+public interface QnaServiceInter {
 
 	public boolean addQNA(QNA qna);
 	public boolean modifyQNA(QNA qna);

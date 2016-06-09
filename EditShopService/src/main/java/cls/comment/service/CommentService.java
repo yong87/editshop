@@ -6,7 +6,7 @@ import java.util.List;
 
 import vo.Comment;
 
-public class CommentService implements intfc.comment.service.CommentService {
+public class CommentService implements intfc.comment.service.CommentServiceInter {
 
 	CommentEntityInter commentEntity = new cls.comment.entity.CommentEntity();
 	

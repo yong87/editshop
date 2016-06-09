@@ -7,7 +7,7 @@ import vo.ReviewVo;
 
 
 
-public class ReviewService implements intfc.review.ReviewService {
+public class ReviewService implements intfc.review.ReviewServiceInter {
 	ReviewEntity review = new ReviewEntity();
 
 	public boolean reviewAdd(ReviewVo reviewVo) {

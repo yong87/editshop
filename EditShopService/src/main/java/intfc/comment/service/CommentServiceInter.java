@@ -4,7 +4,7 @@ import java.util.List;
 
 import vo.Comment;
 
-public interface CommentService {
+public interface CommentServiceInter {
 
 	public boolean addComment(Comment comment);
 	public boolean modyfiComment(Comment comment);
