@@ -21,7 +21,22 @@ public class OrderService implements OrderServiceInter{
 	@Autowired
 	OrderEntityInter orderEntity;
 
-	
+	public String newOrderProduct(Order order){
+		
+		String ordernumber = generatorOrdernumber(order.getProductid());
+		
+		order.setOrdernumber(ordernumber);
+		
+		boolean isOrder = orderEntity.newOrderProduct(order);
+		if(!isOrder){
+			return "주문이 되지 않았습니다.";
+		}
+		
+		orderEntity.newOrderTime(ordernumber);
+		orderEntity.beforePaymentStatus(ordernumber);
+		
+		return ordernumber;
+	}
 
 	
 	

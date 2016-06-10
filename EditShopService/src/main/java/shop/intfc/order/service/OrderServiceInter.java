@@ -1,9 +1,12 @@
 package shop.intfc.order.service;
 
+import vo.Order;
+
 
 public interface OrderServiceInter {
 
-
+		public String newOrderProduct(Order order);
+		
 	
 	
 	
