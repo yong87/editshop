@@ -8,12 +8,14 @@ import java.util.Map;
 import mapper.user.UserAdministrationMapper;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import session.ShopSqlSessionFactory;
 import shop.intfc.user.entity.UserAdminEntityInter;
 import vo.UserDetail;
 import vo.UserInfo;
 
+@Repository
 public class UserAdminEntity implements UserAdminEntityInter {
 
 	public Map<String, Object> getPasswordById(String id) {

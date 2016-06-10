@@ -5,15 +5,16 @@ import java.util.Map;
 import mapper.order.OrderMapper;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import session.ShopSqlSessionFactory;
 import shop.intfc.order.entity.OrderEntityInter;
 import vo.Delivery;
 import vo.Order;
 
+@Repository
 public class OrderEntity implements OrderEntityInter{
 
-	
 	/**
 	 * 주문 생성
 	 */

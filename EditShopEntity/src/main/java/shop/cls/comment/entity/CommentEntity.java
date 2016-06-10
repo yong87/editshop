@@ -7,11 +7,13 @@ import java.util.Map;
 import mapper.comment.CommentMapper;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import session.ShopSqlSessionFactory;
 import shop.intfc.comment.entity.CommentEntityInter;
 import vo.Comment;
 
+@Repository
 public class CommentEntity implements CommentEntityInter {
 
 	@Override

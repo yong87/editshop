@@ -3,11 +3,13 @@ package shop.cls.qna.entity;
 import mapper.qna.QnaMapper;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import session.ShopSqlSessionFactory;
 import shop.intfc.qna.entity.QnaEntityInter;
 import vo.QNA;
 
+@Repository
 public class QnaEntity implements QnaEntityInter{
 
 	@Override

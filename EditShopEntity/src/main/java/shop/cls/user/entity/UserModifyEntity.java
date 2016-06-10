@@ -3,11 +3,13 @@ package shop.cls.user.entity;
 import mapper.user.UserModifyMapper;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import session.ShopSqlSessionFactory;
 import shop.intfc.user.entity.UserModifyEntityInter;
 import vo.User;
 
+@Repository
 public class UserModifyEntity implements UserModifyEntityInter{
 
 	public boolean modifyUser(User user) {

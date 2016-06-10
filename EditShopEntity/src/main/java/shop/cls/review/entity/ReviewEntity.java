@@ -8,13 +8,13 @@ import java.util.Map;
 import mapper.review.ReviewMapper;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import session.ShopSqlSessionFactory;
 import shop.intfc.review.entity.ReviewEntityInter;
 import vo.ReviewVo;
 
-
-
+@Repository
 public class ReviewEntity implements ReviewEntityInter {
 
 	

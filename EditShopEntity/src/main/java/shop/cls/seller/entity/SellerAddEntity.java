@@ -3,14 +3,14 @@ package shop.cls.seller.entity;
 import mapper.seller.SellerAddMapper;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import session.ShopSqlSessionFactory;
 import shop.intfc.seller.entity.SellerAddEntityInter;
 import vo.Seller;
 import vo.SellerLang;
 
-
-
+@Repository
 public class SellerAddEntity implements SellerAddEntityInter{
 
 	public boolean addSeller(Seller seller) {

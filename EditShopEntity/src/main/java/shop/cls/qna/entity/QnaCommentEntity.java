@@ -3,11 +3,13 @@ package shop.cls.qna.entity;
 import mapper.qna.QnaCommentMapper;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import session.ShopSqlSessionFactory;
 import shop.intfc.qna.entity.QnaCommentEntityInter;
 import vo.QNAComment;
 
+@Repository
 public class QnaCommentEntity implements QnaCommentEntityInter{
 
 	@Override
