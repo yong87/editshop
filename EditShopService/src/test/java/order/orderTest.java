@@ -1,5 +1,6 @@
 package order;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import shop.cls.order.service.OrderService;
+import vo.Delivery;
 import vo.Order;
 
 public class orderTest {
@@ -19,7 +21,6 @@ public class orderTest {
         ApplicationContext ac = new ClassPathXmlApplicationContext("dispatcher-servlet.xml");
         os = ac.getBean("orderService", OrderService.class);
     }
-	
 	
 	@Test
 	public void newOrderProductTest(){
@@ -34,6 +35,37 @@ public class orderTest {
 		
 		System.out.println(os.newOrderProduct(order));
 		
+	}
+	
+	@Test
+	public void addDeliveryInfoTest(){
+		
+		Delivery del = new Delivery();
+		
+		del.setAddress("add");
+		del.setMemo("memo!! im busy!");
+		del.setName("chan");
+		del.setOrdernumber("2016061000010001");
+		del.setPhone("010-0000-0000");
+		
+		
+		System.out.println(os.addDeliveryInfo(del));
+	}
+	
+	@Test
+	public void orderPaymentTest(){
+		System.out.println(os.orderPayment("2016061000010001"));
+	}
+	
+	@Test
+	public void addParcelNumberTest(){
+		Delivery del = new Delivery();
+		
+		del.setOrdernumber("2016061000010001");
+		del.setInvoice("00000000000");
+		del.setParcelCode(10);
+		
+		System.out.println(os.addParcelNumber(del));
 	}
 	
 	

@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import shop.intfc.comment.entity.CommentEntityInter;
+import shop.cls.comment.entity.CommentEntity;
 import shop.intfc.comment.service.CommentServiceInter;
 import vo.Comment;
 
@@ -14,7 +14,7 @@ import vo.Comment;
 public class CommentService implements CommentServiceInter {
 
 	@Autowired
-	CommentEntityInter commentEntity;
+	CommentEntity commentEntity;
 	
 	
 	@Override

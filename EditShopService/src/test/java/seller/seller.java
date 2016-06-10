@@ -3,16 +3,25 @@ package seller;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import shop.cls.seller.service.SellerAddService;
 import vo.Seller;
 import vo.SellerLang;
-import cls.seller.service.SellerAddService;
 
 public class seller {
 
-	SellerAddService sas = new SellerAddService();
+	private SellerAddService sas;
 
+	@Before
+    public void start() {
+        ApplicationContext ac = new ClassPathXmlApplicationContext("dispatcher-servlet.xml");
+        sas = ac.getBean("sellerAddService", SellerAddService.class);
+    }
+	
 	@Test
 	public void addTest() {
 		Seller seller = new Seller();

@@ -36,7 +36,7 @@
 	,`dit_memo`
 	,`dit_status`
 	) VALUES (
-	#{ordernumber}, #{name}, #{address}, #{phone}, #{memo}, 62);
+	#{ordernumber}, #{name}, #{address}, #{phone}, #{memo}, 50);
 	</insert>
 	
 	<update id="modifyDeliveryInfo" parameterType="Delivery">

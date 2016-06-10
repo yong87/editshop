@@ -9,15 +9,24 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.management.openmbean.InvalidKeyException;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import shop.cls.user.UserAdminService;
+import shop.encryption.Crypter;
 import vo.User;
-import cls.user.UserAdminService;
-import encryption.Crypter;
 
 public class Useradmin {
 
-	UserAdminService uas = new UserAdminService();
+	UserAdminService uas;
+	
+	@Before
+    public void start() {
+        ApplicationContext ac = new ClassPathXmlApplicationContext("dispatcher-servlet.xml");
+        uas = ac.getBean("userAdminService", UserAdminService.class);
+    }
 	
 	@Test
 	public void logintest() {

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import shop.cls.order.entity.OrderEntity;
 import shop.intfc.order.entity.OrderEntityInter;
 import shop.intfc.order.service.OrderServiceInter;
+import vo.Delivery;
 import vo.Order;
 
 
@@ -33,12 +34,58 @@ public class OrderService implements OrderServiceInter{
 		}
 		
 		orderEntity.newOrderTime(ordernumber);
-		orderEntity.beforePaymentStatus(ordernumber);
+		orderEntity.beforeInsertAddress(ordernumber);
 		
 		return ordernumber;
 	}
-
 	
+	public boolean addDeliveryInfo(Delivery delivery){
+		//상품 정보 입력
+		boolean isInputInfo = orderEntity.addDeliveryInfo(delivery);
+		if(!isInputInfo){
+			return false;
+		}
+		
+		//상품정보 입력후 
+		boolean isStatusChange = orderEntity.beforePaymentStatus(delivery.getOrdernumber());
+		if(!isStatusChange){
+			return false;
+		}
+		return true; 
+	}
+	
+	public boolean orderPayment(String ordernumber){
+		//시간찍기
+		boolean isTimeTemped = orderEntity.orderPaymentTime(ordernumber);
+		if(!isTimeTemped){
+			return false;
+		}
+		
+		//order의Status 변경
+		boolean isStatusChange = orderEntity.afterPaymentStatus(ordernumber);
+		if(!isStatusChange){
+			return false;
+		}
+		return true; 
+	}
+	
+	public boolean addParcelNumber(Delivery delivery){
+		boolean isParcelNumber = orderEntity.modifyDeliveryInfo(delivery);
+		if(!isParcelNumber){
+			return false;
+		}
+		
+		boolean isStatusChange = orderEntity.startDelivery(delivery.getOrdernumber());
+		if(!isStatusChange){
+			return false;
+		}
+		isStatusChange = orderEntity.startDeliveryInfo(delivery.getOrdernumber());
+		if(!isStatusChange){
+			return false;
+		}
+		
+		return true;
+	}
 	
 	
 	// ---------------------------------------// 
@@ -101,11 +148,9 @@ public class OrderService implements OrderServiceInter{
 	
 	// ---------------------------------------
 		public boolean cancelOrder(String ordernumber){
-			OrderEntity orderEntity = new OrderEntity();
 			return orderEntity.cancelOrder(ordernumber);
 		}
 		public boolean returnOrder(String ordernumber){
-			OrderEntity orderEntity = new OrderEntity();
 			return orderEntity.returnOrder(ordernumber);
 		}
 	

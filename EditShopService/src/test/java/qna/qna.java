@@ -1,14 +1,25 @@
 package qna;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import cls.qna.service.QnaService;
+import shop.cls.qna.service.QnaService;
 import vo.QNA;
 
 public class qna {
 
-	QnaService qs = new QnaService();
+	@Autowired
+	private QnaService qs;
 
+	@Before
+    public void start() {
+        ApplicationContext ac = new ClassPathXmlApplicationContext("dispatcher-servlet.xml");
+        qs = ac.getBean("qnaService", QnaService.class);
+    }
+	
 	@Test
 	public void addtest() {
 		QNA qna = new QNA();

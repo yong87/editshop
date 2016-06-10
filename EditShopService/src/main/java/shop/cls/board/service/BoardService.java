@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import shop.intfc.board.entity.BoardEntityInter;
+import shop.cls.board.entity.BoardEntity;
 import shop.intfc.board.service.BoardServiceInter;
 import vo.Board;
 
@@ -14,7 +14,7 @@ import vo.Board;
 public class BoardService implements BoardServiceInter {
 
 	@Autowired
-	BoardEntityInter boardEntity;
+	BoardEntity boardEntity;
 
 	
 	@Override

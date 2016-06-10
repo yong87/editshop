@@ -1,15 +1,27 @@
 package board;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import shop.cls.board.service.BoardService;
 import vo.Board;
 
 public class boardtest {
 
-	BoardService bs = new BoardService();
-
+	private BoardService bs;
+	
+	@Before
+    public void start() {
+        ApplicationContext ac = new ClassPathXmlApplicationContext("dispatcher-servlet.xml");
+        bs = ac.getBean("boardService", BoardService.class);
+    }
+	
 	@Test
 	public void addBoard() {
 
@@ -44,7 +56,10 @@ public class boardtest {
 	
 	@Test
 	public void search() {
-		List<Board> list = bs.searchBoard("content1");
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		
+		List<Board> list = bs.searchBoard(param);
 		
 		for(Board temp : list) {
 			System.out.println(temp);

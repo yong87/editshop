@@ -1,6 +1,8 @@
 package comment;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +11,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import shop.cls.comment.service.CommentService;
-import shop.cls.order.service.OrderService;
 import vo.Comment;
 
 public class commentTest {
@@ -51,7 +52,10 @@ public class commentTest {
 	
 	@Test
 	public void searchTest() {
-		List<Comment> list = cs.searchComment("o");
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		
+		List<Comment> list = cs.searchComment(param);
 		
 		for(Comment cm : list) {
 			System.out.println(cm);
