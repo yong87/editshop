@@ -5,6 +5,7 @@
 
 <mapper namespace="mapper.order.OrderMapper">
 	
+	
 	<insert id="newOrderProduct" parameterType="order">
 		INSERT INTO `editshop`.`order_tb` (
 		`ot_ordernumber`
@@ -51,7 +52,100 @@
 	WHERE `oit_ordernumber`=#{ordernumber};
 	</update>
 	
+	<!-- order Status -->
 	
+	<update id="buyconfirmStatus" parameterType="String">
+	UPDATE `editshop`.`order_tb` 
+	SET `ot_status`=0 
+	WHERE `ot_ordernumber`=#{ordernumber};
+	</update>
+	
+	<update id="beforePaymentStatus" parameterType="String">
+	UPDATE `editshop`.`order_tb` 
+	SET `ot_status`=50 
+	WHERE `ot_ordernumber`=#{ordernumber};
+	</update>
+	
+	<update id="afterPaymentStatus" parameterType="String">
+	UPDATE `editshop`.`order_tb` 
+	SET `ot_status`=51 
+	WHERE `ot_ordernumber`=#{ordernumber};
+	</update>
+	
+	<update id="beforeInsertAddress" parameterType="String">
+	UPDATE `editshop`.`order_tb` 
+	SET `ot_status`=52 
+	WHERE `ot_ordernumber`=#{ordernumber};
+	</update>
+	
+	<update id="checkOrderbySeller" parameterType="String">
+	UPDATE `editshop`.`order_tb` 
+	SET `ot_status`=53 
+	WHERE `ot_ordernumber`=#{ordernumber};
+	</update>
+	
+	<update id="readyProductbySeller" parameterType="String">
+	UPDATE `editshop`.`order_tb` 
+	SET `ot_status`=54 
+	WHERE `ot_ordernumber`=#{ordernumber};
+	</update>
+	
+	<update id="startDelivery" parameterType="String">
+	UPDATE `editshop`.`order_tb` 
+	SET `ot_status`=55
+	WHERE `ot_ordernumber`=#{ordernumber};
+	</update>
+	
+	<update id="sendDelivery" parameterType="String">
+	UPDATE `editshop`.`order_tb` 
+	SET `ot_status`=56 
+	WHERE `ot_ordernumber`=#{ordernumber};
+	</update>
+	
+	<update id="completeDelivery" parameterType="String">
+	UPDATE `editshop`.`order_tb` 
+	SET `ot_status`=57
+	WHERE `ot_ordernumber`=#{ordernumber};
+	</update>
+	
+	<update id="exchangeStatus" parameterType="String">
+	UPDATE `editshop`.`order_tb` 
+	SET `ot_status`=58
+	WHERE `ot_ordernumber`=#{ordernumber};
+	</update>
+	
+	<update id="cancelOrderStatus" parameterType="String">
+	UPDATE `editshop`.`order_tb` 
+	SET `ot_status`=59 
+	WHERE `ot_ordernumber`=#{ordernumber};
+	</update>
+	
+	<update id="refundStatus" parameterType="String">
+	UPDATE `editshop`.`order_tb` 
+	SET `ot_status`=60 
+	WHERE `ot_ordernumber`=#{ordernumber};
+	</update>
+	
+	
+	<!-- delivery info Status -->
+	
+	<update id="startDeliveryInfo" parameterType="String">
+	UPDATE `editshop`.`delivery_info_tb` 
+	SET `dit_status`='55' 
+	WHERE `dit_ordernumber`=#{ordernumber};
+	</update>
+	
+	<update id="sendDeliveryInfo" parameterType="String">
+	UPDATE `editshop`.`delivery_info_tb` 
+	SET `dit_status`='56' 
+	WHERE `dit_ordernumber`=#{ordernumber};
+	</update>
+	
+	<update id="completeDeliveryInfo" parameterType="String">
+	UPDATE `editshop`.`delivery_info_tb` 
+	SET `dit_status`='57' 
+	WHERE `dit_ordernumber`=#{ordernumber};
+	</update>
 	
 	<!-- -->
 

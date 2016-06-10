@@ -14,7 +14,7 @@ public interface OrderMapper {
 	public boolean orderPaymentTime(String ordernumber);
 	
 	/**
-	 * Status 관련 method
+	 * Order Status 관련 method
 	 */
 	public boolean buyconfirmStatus(String ordernumber);
 	public boolean beforePaymentStatus(String ordernumber);
@@ -28,6 +28,13 @@ public interface OrderMapper {
 	public boolean exchangeStatus(String ordernumber);
 	public boolean cancelOrderStatus(String ordernumber);
 	public boolean refundStatus(String ordernumber);
+	
+	/**
+	 * DeliveryInfo Status 관련
+	 */
+	public boolean sendDeliveryInfo(String ordernumber);
+	public boolean completeDeliveryInfo(String ordernumber);
+	public boolean startDeliveryInfo(String ordernumber);
 	
 	// --------------------------------------- 
 	

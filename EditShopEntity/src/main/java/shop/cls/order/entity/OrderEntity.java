@@ -379,6 +379,69 @@ public class OrderEntity implements OrderEntityInter{
 		return isCreate;
 	}
 	
+	/**
+	 * 배송중 딜리버리 인포
+	 */
+	public boolean sendDeliveryInfo(String ordernumber){
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCreate;
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.sendDeliveryInfo(ordernumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isCreate;
+	}
+	
+	/**
+	 * 배송 완료 딜리버리 인포
+	 */
+	public boolean completeDeliveryInfo(String ordernumber){
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCreate;
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.completeDeliveryInfo(ordernumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isCreate;
+	}
+	
+	/**
+	 * 배송시작 딜리버리 인포
+	 */
+	public boolean startDeliveryInfo(String ordernumber){
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCreate;
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			isCreate = orderMapper.startDeliveryInfo(ordernumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isCreate;
+	}
+	
 	// --------------------------------------- 
 	
 	// make by hyun

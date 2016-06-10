@@ -65,6 +65,30 @@ public class OrderTest {
 		System.out.println(oe.orderPaymentTime("2016060800010008"));
 	}
 	
+	
+	@Test
+	public void orderChangeStatusTest(){
+		System.out.println(oe.buyconfirmStatus("2016060800010001"));
+		System.out.println(oe.beforePaymentStatus("2016060800010002"));
+		System.out.println(oe.afterPaymentStatus("2016060800010003"));
+		System.out.println(oe.beforeInsertAddress("2016060800010004"));
+		System.out.println(oe.checkOrderbySeller("2016060800010005"));
+		System.out.println(oe.readyProductbySeller("2016060800010006"));
+		System.out.println(oe.startDelivery("2016060800010007"));
+		System.out.println(oe.sendDelivery("2016060800010008"));
+		System.out.println(oe.completeDelivery("2016060900010001"));
+		System.out.println(oe.exchangeStatus("2016060900010002"));
+		System.out.println(oe.cancelOrderStatus("2016060900010003"));
+		System.out.println(oe.refundStatus("2016060900010004"));
+	}
+	
+	@Test
+	public void deliveryInfoStatusChangeTest(){
+		System.out.println(oe.startDeliveryInfo("2016060900010001"));
+		System.out.println(oe.sendDeliveryInfo("2016060900010002"));
+		System.out.println(oe.completeDeliveryInfo("2016060900010003"));
+	}
+	
 	/** hyun **/
 	
 	@Test
