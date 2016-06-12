@@ -4,6 +4,7 @@ import java.util.Map;
 
 import vo.Delivery;
 import vo.Order;
+import vo.OrderInfo;
 
 
 public interface OrderEntityInter {
@@ -40,6 +41,21 @@ public interface OrderEntityInter {
 	public boolean sendDeliveryInfo(String ordernumber);
 	public boolean completeDeliveryInfo(String ordernumber);
 	public boolean startDeliveryInfo(String ordernumber);
+	
+	/**
+	 * ordernumber로 찾기
+	 */
+	public OrderInfo getOrderInfo(String ordernumber);
+	public Delivery getDeliveryInfo(String ordernumber);
+	
+	/**
+	 * parcelnumber로 찾기
+	 */
+	public Order getOrderByParcelNumber(String parcelnumber);
+	public OrderInfo getOrderInfoByParcelNumber(String parcelnumber);
+	public Delivery getDeliveryInfoByParcelNumber(String parcelnumber);
+	
+	
 	
 	// --------------------------------------- 
 	

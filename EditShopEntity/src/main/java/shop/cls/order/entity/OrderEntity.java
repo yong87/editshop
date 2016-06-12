@@ -11,6 +11,7 @@ import session.ShopSqlSessionFactory;
 import shop.intfc.order.entity.OrderEntityInter;
 import vo.Delivery;
 import vo.Order;
+import vo.OrderInfo;
 
 @Repository
 public class OrderEntity implements OrderEntityInter{
@@ -384,6 +385,7 @@ public class OrderEntity implements OrderEntityInter{
 	 * 배송중 딜리버리 인포
 	 */
 	public boolean sendDeliveryInfo(String ordernumber){
+		
 		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
 		boolean isCreate;
 		try{
@@ -405,6 +407,7 @@ public class OrderEntity implements OrderEntityInter{
 	 * 배송 완료 딜리버리 인포
 	 */
 	public boolean completeDeliveryInfo(String ordernumber){
+		
 		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
 		boolean isCreate;
 		try{
@@ -426,6 +429,7 @@ public class OrderEntity implements OrderEntityInter{
 	 * 배송시작 딜리버리 인포
 	 */
 	public boolean startDeliveryInfo(String ordernumber){
+		
 		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
 		boolean isCreate;
 		try{
@@ -443,8 +447,117 @@ public class OrderEntity implements OrderEntityInter{
 		return isCreate;
 	}
 	
-	// --------------------------------------- 
+	/**
+	 * ordernumber로 OrderInfo찾기
+	 */
+	public OrderInfo getOrderInfo(String ordernumber){
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		OrderInfo orderInfo = new OrderInfo();
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			orderInfo = orderMapper.getOrderInfo(ordernumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}finally{
+			sqlSession.close();
+		}
+		
+		return orderInfo;
+	}
 	
+	/**
+	 * ordernumber로 DeliveryInfo찾기
+	 */
+	public Delivery getDeliveryInfo(String ordernumber){
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		Delivery delivery = new Delivery();
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			delivery = orderMapper.getDeliveryInfo(ordernumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}finally{
+			sqlSession.close();
+		}
+		
+		return delivery;
+	}
+	
+	/**
+	 * 송장번호로 Order찾기
+	 */
+	public Order getOrderByParcelNumber(String parcelnumber){
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		Order order= new Order();
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			order = orderMapper.getOrderByParcelNumber(parcelnumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}finally{
+			sqlSession.close();
+		}
+		
+		return order;
+	}
+	
+	/**
+	 * 송장번호로 OrderInfo찾기
+	 */
+	public OrderInfo getOrderInfoByParcelNumber(String parcelnumber){
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		OrderInfo orderInfo= new OrderInfo();
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			orderInfo = orderMapper.getOrderInfoByParcelNumber(parcelnumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}finally{
+			sqlSession.close();
+		}
+		
+		return orderInfo;
+	}
+	
+	/**
+	 * 송장번호로 DeliveryInfo찾기
+	 */
+	public Delivery getDeliveryInfoByParcelNumber(String parcelnumber){
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		Delivery delivery = new Delivery();
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			delivery = orderMapper.getDeliveryInfo(parcelnumber);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}finally{
+			sqlSession.close();
+		}
+		
+		return delivery;
+	}
+	
+	// --------------------------------------- 
 	// make by hyun
 	@Override
 	public boolean exchange(String ordernumber) {

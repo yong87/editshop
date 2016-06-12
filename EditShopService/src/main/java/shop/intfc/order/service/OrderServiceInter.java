@@ -15,12 +15,10 @@ public interface OrderServiceInter {
 	public boolean addParcelNumber(Delivery delivery);
 	
 	/**
-	 * ordernumber로 order찾아오기(1개) //db
-	 * ordernumber로 orderInfo찾아오기(1개) //db
-	 * ordernumber로 deliveryInfo찾아오기(1개) //db 
-	 * parcelNumber(invoice)로 deliveryInfo찾아오기 //db
-	 * parcelNumber(invoice)로 order찾아오기 // db
-	 * parcelNumber(invoice)로 orderInfo찾아오기  // db
+	 * Status로 찾기
+	 * Order List로 가져오기
+	 * OrderInfo List로 가져오기
+	 * DeliveryInfo List로 가져오기
 	 */
 	
 
