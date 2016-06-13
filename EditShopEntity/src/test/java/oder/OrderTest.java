@@ -8,6 +8,7 @@ import org.junit.Test;
 import shop.cls.order.entity.OrderEntity;
 import vo.Delivery;
 import vo.Order;
+import vo.OrderInfo;
 
 public class OrderTest {
 
@@ -87,6 +88,58 @@ public class OrderTest {
 		System.out.println(oe.startDeliveryInfo("2016060900010001"));
 		System.out.println(oe.sendDeliveryInfo("2016060900010002"));
 		System.out.println(oe.completeDeliveryInfo("2016060900010003"));
+	}
+	
+	@Test
+	public void getOrderInfoTest(){
+		OrderInfo oi = oe.getOrderInfo("2016060800010008");
+		
+		System.out.println(oi.toString());
+	}
+	
+	@Test
+	public void getDeliveryInfoTest(){
+		Delivery del = oe.getDeliveryInfo("2016060900010001");
+		
+		System.out.println(del.toString());
+		
+	}
+	
+	@Test
+	public void getOrderByParcelNumberTest(){
+		Order order = oe.getOrderByParcelNumber("001001000");
+		System.out.println(order.toString());
+	}
+	
+	@Test
+	public void getOrderInfoByParcelNumberTest(){
+		OrderInfo oi = oe.getOrderInfoByParcelNumber("000000000");
+		System.out.println(oi.toString());
+	}
+	
+	@Test
+	public void getDeliveryInfoByParcelNumberTest(){
+		Delivery del = oe.getDeliveryInfoByParcelNumber("000000001");
+		System.out.println(del.toString());
+	}
+	
+	@Test
+	public void getOrderByUserIdTest(){
+		List<Order> orders = oe.getOrderByUserId("test");
+		
+		for(Order order : orders){
+			System.out.println(order.toString());
+		}
+	
+	}
+	
+	@Test
+	public void getDeliveryByUserIdTest(){
+		List<Delivery> dels = oe.getDeliveryByUserId("test");
+		
+		for(Delivery del : dels){
+			System.out.println(del.toString());
+		}
 	}
 	
 	/** hyun **/

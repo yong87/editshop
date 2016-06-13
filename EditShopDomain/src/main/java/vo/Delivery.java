@@ -59,6 +59,13 @@ public class Delivery {
 	public void setParcelCode(int parcelCode) {
 		this.parcelCode = parcelCode;
 	}
+	@Override
+	public String toString() {
+		return "Delivery [ordernumber=" + ordernumber + ", name=" + name
+				+ ", address=" + address + ", phone=" + phone + ", memo="
+				+ memo + ", status=" + status + ", invoice=" + invoice
+				+ ", parcelCode=" + parcelCode + "]";
+	}
 	
 	
 }

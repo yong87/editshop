@@ -1,5 +1,6 @@
 package mapper.order;
 
+import java.util.List;
 import java.util.Map;
 
 import vo.Delivery;
@@ -49,6 +50,34 @@ public interface OrderMapper {
 	public Order getOrderByParcelNumber(String parcelnumber);
 	public OrderInfo getOrderInfoByParcelNumber(String parcelnumber);
 	public Delivery getDeliveryInfoByParcelNumber(String parcelnumber);
+	
+	/**
+	 * userId로 Order찾기
+	 */
+
+	public List<Order> getOrderByUserId(String userId);
+	public List<Delivery> getDeliveryByUserId(String userId);
+	
+	/**
+	 * SellerId로 Order찾기
+	 */
+
+	public List<Order> getOrderBySellerId(String sellerId);
+	public List<Delivery> getDeliveryBySellerId(String sellerId);
+	
+	/**
+	 * 관리자 Order전부 가져오기
+	 */
+	public List<Order> getAllOrder();
+	public List<OrderInfo> getAllOrderInfo();
+	public List<Delivery> getAllDelivery();
+	
+	/**
+	 * Status로 가져오기
+	 */
+	public List<Order> getOrderByStatus(int status);
+	public List<OrderInfo> getOrderInfoByStatus(int status);
+	public List<Delivery> getDeliveryByStatus(int status);
 	// --------------------------------------- 
 	
 	// make by hyun

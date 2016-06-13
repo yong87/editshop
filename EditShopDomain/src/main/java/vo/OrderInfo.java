@@ -7,7 +7,7 @@ public class OrderInfo {
 	private String ordernumber;
 	private Timestamp buyTime;
 	private Timestamp paymentTime;
-	private Timestamp deleveryTime;
+	private Timestamp delieveryTime;
 	private Timestamp complainTime;
 	private Timestamp completeTime;
 	public String getOrdernumber() {
@@ -28,11 +28,11 @@ public class OrderInfo {
 	public void setPaymentTime(Timestamp paymentTime) {
 		this.paymentTime = paymentTime;
 	}
-	public Timestamp getDeleveryTime() {
-		return deleveryTime;
+	public Timestamp getDelieveryTime() {
+		return delieveryTime;
 	}
-	public void setDeleveryTime(Timestamp deleveryTime) {
-		this.deleveryTime = deleveryTime;
+	public void setDelieveryTime(Timestamp delieveryTime) {
+		this.delieveryTime = delieveryTime;
 	}
 	public Timestamp getComplainTime() {
 		return complainTime;
@@ -45,6 +45,13 @@ public class OrderInfo {
 	}
 	public void setCompleteTime(Timestamp completeTime) {
 		this.completeTime = completeTime;
+	}
+	@Override
+	public String toString() {
+		return "OrderInfo [ordernumber=" + ordernumber + ", buyTime=" + buyTime
+				+ ", paymentTime=" + paymentTime + ", delieveryTime="
+				+ delieveryTime + ", complainTime=" + complainTime
+				+ ", completeTime=" + completeTime + "]";
 	}
 	
 	

@@ -1,5 +1,7 @@
 package shop.cls.order.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import mapper.order.OrderMapper;
@@ -544,7 +546,7 @@ public class OrderEntity implements OrderEntityInter{
 		Delivery delivery = new Delivery();
 		try{
 			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
-			delivery = orderMapper.getDeliveryInfo(parcelnumber);
+			delivery = orderMapper.getDeliveryInfoByParcelNumber(parcelnumber);
 			
 			sqlSession.commit();
 		}catch(Exception e){
@@ -557,6 +559,219 @@ public class OrderEntity implements OrderEntityInter{
 		return delivery;
 	}
 	
+	/**
+	 * userId로 가져오기
+	 */
+	@Override
+	public List<Order> getOrderByUserId(String userId) {
+
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<Order> orders = new ArrayList<Order>();
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			orders = orderMapper.getOrderByUserId(userId);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}finally{
+			sqlSession.close();
+		}
+		
+		return orders;
+
+	}
+
+	@Override
+	public List<Delivery> getDeliveryByUserId(String userId) {
+
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<Delivery> delivery = new ArrayList<Delivery>();
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			delivery = orderMapper.getDeliveryByUserId(userId);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}finally{
+			sqlSession.close();
+		}
+		
+		return delivery;
+	}
+
+	/**
+	 * sellerId로 가져오기
+	 */
+	@Override
+	public List<Order> getOrderBySellerId(String sellerId) {
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<Order> orders = new ArrayList<Order>();
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			orders = orderMapper.getOrderBySellerId(sellerId);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}finally{
+			sqlSession.close();
+		}
+		
+		return orders;
+	}
+
+	@Override
+	public List<Delivery> getDeliveryBySellerId(String sellerId) {
+		 
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<Delivery> delivery = new ArrayList<Delivery>();
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			delivery = orderMapper.getDeliveryByUserId(sellerId);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}finally{
+			sqlSession.close();
+		}
+		
+		return delivery;
+	}
+
+	/**
+	 * 관리자 모든정보
+	 */
+	@Override
+	public List<Order> getAllOrder() {
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<Order> orders = new ArrayList<Order>();
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			orders = orderMapper.getAllOrder();
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}finally{
+			sqlSession.close();
+		}
+		
+		return orders;
+	}
+
+	@Override
+	public List<OrderInfo> getAllOrderInfo() {
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<OrderInfo> orderInfos = new ArrayList<OrderInfo>();
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			orderInfos = orderMapper.getAllOrderInfo();
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}finally{
+			sqlSession.close();
+		}
+		
+		return orderInfos;
+	}
+
+	@Override
+	public List<Delivery> getAllDelivery() {
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<Delivery> deliveryList = new ArrayList<Delivery>();
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			deliveryList = orderMapper.getAllDelivery();
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}finally{
+			sqlSession.close();
+		}
+		
+		return deliveryList;
+	}
+
+	/**
+	 * Status로 가져오기
+	 */
+	@Override
+	public List<Order> getOrderByStatus(int status) {
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<Order> orders = new ArrayList<Order>();
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			orders = orderMapper.getOrderByStatus(status);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}finally{
+			sqlSession.close();
+		}
+		
+		return orders;
+	}
+
+	@Override
+	public List<OrderInfo> getOrderInfoByStatus(int status) {
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<OrderInfo> orderInfoList = new ArrayList<OrderInfo>();
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			orderInfoList = orderMapper.getOrderInfoByStatus(status);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}finally{
+			sqlSession.close();
+		}
+		
+		return orderInfoList;
+	}
+
+	@Override
+	public List<Delivery> getDeliveryByStatus(int status) {
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<Delivery> deliveryList = new ArrayList<Delivery>();
+		try{
+			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
+			deliveryList = orderMapper.getDeliveryByStatus(status);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}finally{
+			sqlSession.close();
+		}
+		
+		return deliveryList;
+	}
+
 	// --------------------------------------- 
 	// make by hyun
 	@Override
