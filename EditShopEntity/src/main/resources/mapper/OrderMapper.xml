@@ -199,20 +199,57 @@
 	</select>
 
 	<!-- sellerID로 찾기 -->
-<!-- 	<select id="getOrderBySellerId" parameterType="String" resultType="order" resultMap="orderMap">
+ 	<select id="getOrderBySellerId" parameterType="String" resultType="order" resultMap="orderMap">
 	SELECT `ot_ordernumber`, `ot_user_id`, `ot_seller_id`, `ot_productid`, `ot_pt_option`, `ot_status`
 	FROM order_tb
-	WHERE ot_seller_id = #{sellerId};
+	WHERE ot_seller_id = #{sellerid};
 	</select>
 
-	<select id="getDeliveryByUserId" parameterType="String" resultType="delivery" resultMap="deliveryInfoMap">
-	SELECT dit_ordernumber, dit_name, dit_address, dit_phone, dit_memo, dit_status, dit_invoice, dit_parcelcode
+	<select id="getDeliveryBySellerId" parameterType="String" resultType="delivery" resultMap="deliveryInfoMap">
+ 	SELECT dit_ordernumber, dit_name, dit_address, dit_phone, dit_memo, dit_status, dit_invoice, dit_parcelcode
 	FROM delivery_info_tb
-	WHERE dit_ordernumber = (SELECT ot_ordernumber
-													 FROM order_tb
-													 WHERE ot_seller_id = #{sellerId});
-	</select> -->
+		INNER JOIN order_tb
+ 		   		  ON ot_ordernumber = dit_ordernumber
+	WHERE ot_seller_id = #{sellerid};
+	</select> 
+<!-- 	SELECT dit_ordernumber, dit_name, dit_address, dit_phone, dit_memo, dit_status, dit_invoice, dit_parcelcode
+	FROM delivery_info_tb
+	WHERE dit_ordernumber IN (SELECT ot_ordernumber
+								 						  FROM order_tb
+							               WHERE ot_user_id = #{sellerid}); -->
 
+	<select id="getAllOrder" resultType="order" resultMap="orderMap">
+	SELECT ot_ordernumber, ot_user_id, ot_seller_id, ot_productid, ot_pt_option, ot_status, ot_amount 
+	FROM order_tb;
+	</select>
+
+	<select id="getAllOrderInfo" resultType="order" resultMap="orderInfoMap">
+		SELECT oit_ordernumber, oit_buytime, oit_paymenttime, oit_deliverytime, oit_complaintime, oit_completetime
+		FROM order_info_tb
+	</select>
+	
+	<select id="getAllDelivery" resultType="delivery" resultMap="deliveryInfoMap">
+		SELECT dit_ordernumber, dit_name, dit_address, dit_phone, dit_memo, dit_status, dit_invoice, dit_parcelcode
+		FROM delivery_info_tb
+	</select>
+	
+	<select id="getOrderByStatus" parameterType="int" resultType="order" resultMap="orderMap">
+		SELECT ot_ordernumber, ot_user_id, ot_seller_id, ot_productid, ot_pt_option, ot_status, ot_amount
+		FROM order_tb
+		WHERE ot_status = #{status}
+	</select>
+	<select id="getOrderInfoByStatus" parameterType="int" resultType="orderInfo" resultMap="orderInfoMap">
+		SELECT oit_ordernumber, oit_buytime, oit_paymenttime, oit_deliverytime, oit_complaintime, oit_completetime
+		FROM order_info_tb
+		WHERE oit_ordernumber IN (SELECT ot_ordernumber
+														  FROM order_tb
+						  								WHERE ot_status = #{status});
+	</select>
+	<select id="getDeliveryByStatus" parameterType="int" resultType="delivery" resultMap="deliveryInfoMap">
+		SELECT dit_ordernumber, dit_name, dit_address, dit_phone, dit_memo, dit_status, dit_invoice, dit_parcelcode
+		FROM delivery_info_tb
+		WHERE dit_status = #{status}
+	</select>
 <!-- mapper 3개  -->
 
 	<resultMap id="orderInfoMap" type="vo.OrderInfo">

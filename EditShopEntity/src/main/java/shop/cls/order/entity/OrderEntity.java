@@ -633,7 +633,7 @@ public class OrderEntity implements OrderEntityInter{
 		List<Delivery> delivery = new ArrayList<Delivery>();
 		try{
 			OrderMapper orderMapper = sqlSession.getMapper(OrderMapper.class);
-			delivery = orderMapper.getDeliveryByUserId(sellerId);
+			delivery = orderMapper.getDeliveryBySellerId(sellerId);
 			
 			sqlSession.commit();
 		}catch(Exception e){

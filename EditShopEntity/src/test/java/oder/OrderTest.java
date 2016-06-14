@@ -142,6 +142,73 @@ public class OrderTest {
 		}
 	}
 	
+	@Test
+	public void getOrderBySellerIdTest(){
+		List<Order> orders = oe.getOrderBySellerId("test");
+		
+		for(Order order : orders){
+			System.out.println(order.toString());
+		}
+	}
+	
+	@Test
+	public void getDeliveryBySellerIdTest(){
+		List<Delivery> dels = oe.getDeliveryBySellerId("Test");
+		
+		for(Delivery del : dels){
+			System.out.println(del.toString());
+		}
+	}
+	
+	@Test
+	public void getAllOrderTest(){
+		List<Order> orders = oe.getAllOrder();
+		
+		for(Order order : orders){
+			System.out.println(order.toString());
+		}
+	}
+	
+	@Test
+	public void getAllOrderInfoTest(){
+		List<OrderInfo> ois = oe.getAllOrderInfo();
+		for(OrderInfo oi : ois){
+			System.out.println(oi.toString());
+		}
+	}
+	
+	@Test
+	public void getAllDeliveryTest(){
+		List<Delivery> dels = oe.getAllDelivery();
+		for(Delivery del : dels){
+			System.out.println(del.toString());
+		}
+	}
+	
+	@Test
+	public void getOrderByStatusTest(){
+		List<Order> orders = oe.getOrderByStatus(51);
+		for(Order order : orders){
+			System.out.println(order.toString());
+		}
+	}
+	
+	@Test
+	public void getOrderInfoByStatusTest(){
+		List<OrderInfo> ois = oe.getOrderInfoByStatus(51);
+		
+		for(OrderInfo oi : ois){
+			System.out.println(oi.toString());
+		}
+	}
+	
+	@Test
+	public void getDeliveryByStatusTest(){
+		List<Delivery> dels = oe.getDeliveryByStatus(55);
+		for(Delivery del : dels){
+			System.out.println(del.toString());
+		}
+	}
 	/** hyun **/
 	
 	@Test
