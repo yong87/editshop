@@ -288,12 +288,10 @@
 		INSERT INTO `editshop`.`order_tb` 
 		(`ot_ordernumber`, `ot_user_id`, `ot_seller_id`, `ot_productid`, `ot_pt_option`, `ot_status`) 
 		VALUES 
-		(#{ordernumber}, #{userid}, #{sellerid}, #{productid}, #{productOption}, 1);
-		
+		(#{ordernumber}, #{userid}, #{sellerid}, #{productid}, #{productOption}, 58);
 	</insert>
 
 	<select id="getOrder" parameterType="String" resultType="order" resultMap="orderMap">
-
 		select `ot_ordernumber`, `ot_user_id`, `ot_seller_id`, `ot_productid`, `ot_pt_option`, `ot_status` from order_tb
 		where ot_ordernumber = #{ordernumber};
 	</select>
@@ -301,27 +299,23 @@
 	<select id="getLastOrdernumber" resultType="String" parameterType="String">
 		select max(`ot_ordernumber`) as result from order_tb
 		where ot_ordernumber like CONCAT(#{offend}"%");
-		
 	</select>
 	
 	<insert id="addExchangeLog" parameterType="Map">
-	
 	INSERT INTO `editshop`.`exchange_tb` 
 	(`et_ordernumber`, `et_chaser`, `et_exchangetime`, `et_status`) 
 	VALUES 
-	(#{original}, #{chaser}, now(), '1');
-	
-	
+	(#{original}, #{chaser}, now(), '58');
 	</insert>
 
 
 	<!-- -->
 	<update id="cancelOrder" parameterType="String">
-	update order_tb set ot_status = 0 where ot_ordernumber = #{ordernumber};
+	update order_tb set ot_status = 59 where ot_ordernumber = #{ordernumber};
 	</update>
-	<!-- 반품시 status 8로 번경 -->
+	<!-- 환불시  status 60으로 번경 후 물건받으면 다시 60로 변경 -->
 	<update id="returnOrder" parameterType="String">
-	update order_tb set ot_status = 8 where ot_ordernumber = #{ordernumber};
+	update order_tb set ot_status = 60 where ot_ordernumber = #{ordernumber};
 	</update>
 
 </mapper>
