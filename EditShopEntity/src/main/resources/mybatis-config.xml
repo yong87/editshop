@@ -20,6 +20,8 @@
 		<typeAlias type="vo.Order" alias="order" />
 		<typeAlias type="vo.OrderInfo" alias="orderInfo" />
 		<typeAlias type="vo.Delivery" alias="delivery" />
+		<typeAlias type="vo.Product" alias="product"/>
+		<typeAlias type="vo.ProductLang" alias="productLang"/>
 	</typeAliases>
 
 	<environments default="development">
@@ -47,5 +49,6 @@
 		<mapper resource="mapper/QnaMapper.xml"/>
 		<mapper resource="mapper/QnaCommentMapper.xml"/>
 		<mapper resource="mapper/OrderMapper.xml"/>
+		<mapper resource="mapper/ProductMapper.xml"/>
 	</mappers>
 </configuration>
