@@ -54,7 +54,7 @@ public class Useradmin {
 	@Test
 	public void encrypt() throws InvalidKeyException, java.security.InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
 		Crypter cy = new Crypter();
-		String en = "1234";
+		String en = "11";
 		System.out.println(en);
 		System.out.println(cy.encrypt(en));
 	}
