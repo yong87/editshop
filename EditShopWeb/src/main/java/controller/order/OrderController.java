@@ -1,4 +1,4 @@
-package controller.OrderController;
+package controller.order;
 
 public class OrderController {
 
