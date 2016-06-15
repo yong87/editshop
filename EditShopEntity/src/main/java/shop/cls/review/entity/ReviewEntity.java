@@ -123,7 +123,7 @@ public class ReviewEntity implements ReviewEntityInter {
 	public boolean reviewAppraisal(String userId, int score) {
 		SqlSession sqlsession = ShopSqlSessionFactory.getInstance()
 				.getSqlSession();
-		Map map = new HashMap();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("userId", userId);
 		map.put("score", score);
 

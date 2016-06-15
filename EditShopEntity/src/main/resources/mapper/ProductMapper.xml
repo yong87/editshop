@@ -3,11 +3,18 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
-
-
 <mapper namespace="mapper.product.ProductMapper">
 
-
+<insert id="registProduct">
+INSERT INTO `editshop`.`product_tb` (
+ `pt_productid`
+,`pt_uid`
+,`pt_maxquantity`
+,`pt_sellcount`
+,`pt_option`
+,`pt_commission`
+,`pt_imagepath`) VALUES (
+#{productid}, #{uid}, #{maxquantity}, #{sellcount}, #{option}, #{commission}, #{imagepath});
+</insert>
 
 </mapper>
