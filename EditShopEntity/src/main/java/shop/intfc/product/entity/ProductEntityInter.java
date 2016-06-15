@@ -17,7 +17,7 @@ public interface ProductEntityInter {
 	public boolean addProductLangCn(ProductLang lang);
 	public boolean addProductLangJp(ProductLang lang);
 	public boolean addProductLangKr(ProductLang lang);
-	public boolean confirmProduct(Product product);
+	public boolean confirmProduct(String productId);
 		
 	/**
 	 * Lang Alter Method
@@ -54,4 +54,9 @@ public interface ProductEntityInter {
 	 */
 	public boolean sanctionForAdmin(String productId); 
 	public boolean sanctionForSeller(String productId);
+	/**
+	 * 등록 시간관련 method
+	 * 추가 판매 과련 method
+	 * productSimple관련 method
+	 */
 }

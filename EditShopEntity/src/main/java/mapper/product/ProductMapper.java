@@ -17,7 +17,7 @@ public interface ProductMapper {
 	public boolean addProductLangCn(ProductLang lang);
 	public boolean addProductLangJp(ProductLang lang);
 	public boolean addProductLangKr(ProductLang lang);
-	public boolean confirmProduct(Product product);
+	public boolean confirmProduct(String product);
 		
 	/**
 	 * Lang Alter Method

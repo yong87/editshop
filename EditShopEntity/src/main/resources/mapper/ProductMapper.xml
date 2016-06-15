@@ -5,16 +5,85 @@
 
 <mapper namespace="mapper.product.ProductMapper">
 
-<insert id="registProduct">
+<resultMap id="productMap" type="vo.Product">
+		<id property="productId" column="pt_productid" />
+		<result property="sellerId" column="pt_uid" />
+		<result property="maxQuantity" column="pt_maxquantity" />
+		<result property="sellcnt" column="pt_sellcount" />
+		<result property="limitTime" column="pt_limitTime" />
+		<result property="registTime" column="pt_registTime" />
+		<result property="option" column="pt_option" />
+		<result property="commission" column="pt_commission" />
+		<result property="imagepath" column="pt_imagepath" />
+		<result property="status" column="pt_status" />
+</resultMap>
+
+<resultMap id="productLangMap" type="vo.ProductLang">
+		<id property="productId" column="pt_productid" />
+		<result property="name" column="pt_name" />
+		<result property="content" column="pt_content" />
+</resultMap>
+
+<resultMap id="productSimpleMap" type="vo.ProductSimple">
+		<id property="productId" column="ps_productid" />
+		<result property="price" column="ps_price" />
+		<result property="thombnail" column="ps_thombnail" />
+		<result property="status" column="ps_status" />
+		<result property="type" column="ps_type" />
+</resultMap>
+
+<insert id="registProduct" parameterType="product">
 INSERT INTO `editshop`.`product_tb` (
- `pt_productid`
+`pt_productid` 
 ,`pt_uid`
 ,`pt_maxquantity`
 ,`pt_sellcount`
+,`pt_limittime`
+,`pt_registtime`
 ,`pt_option`
 ,`pt_commission`
-,`pt_imagepath`) VALUES (
-#{productid}, #{uid}, #{maxquantity}, #{sellcount}, #{option}, #{commission}, #{imagepath});
+,`pt_imagepath`
+,`pt_status`) VALUES (
+#{productId}, #{sellerId}, #{maxQuantity}, #{sellcnt}, #{limitTime}, now(), #{option}, #{commission}, #{imagepath}, 40);
 </insert>
+
+<insert id="addProductLangEn" parameterType="productLang">
+INSERT INTO `editshop`.`product_en_tb` (
+`pt_productid`
+,`pt_content`
+,`pt_name`) VALUES (
+#{productid}, #{content}, #{name});
+</insert>
+
+<insert id="addProductLangCn" parameterType="productLang">
+INSERT INTO `editshop`.`product_cn_tb` (
+`pt_productid`
+,`pt_content`
+,`pt_name`) VALUES (
+#{productid}, #{content}, #{name});
+</insert>
+
+<insert id="addProductLangJp" parameterType="productLang">
+INSERT INTO `editshop`.`product_jp_tb` (
+`pt_productid`
+,`pt_content`
+,`pt_name`) VALUES (
+#{productid}, #{content}, #{name});
+</insert>
+
+<insert id="addProductLangKr" parameterType="productLang">
+INSERT INTO `editshop`.`product_kr_tb` (
+`pt_productid`
+,`pt_content`
+,`pt_name`) VALUES (
+#{productid}, #{content}, #{name});
+</insert>
+
+<update id="confirmProduct" parameterType="String">
+UPDATE `editshop`.`product_tb` 
+SET `pt_status`='41' 
+WHERE `pt_productid`=#{productId};
+
+</update>
 
 </mapper>

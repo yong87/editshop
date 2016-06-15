@@ -7,20 +7,27 @@ public class ProductLang {
 	 * aaa
 	 * 내 커밋 돌ㄹ내 개생키양 
 	 */
+	private String productid;
 	private String name;
-	private String address;
+	private String content;
+	
+	
+	public String getProductid() {
+		return productid;
+	}
+	public void setProductid(String productid) {
+		this.productid = productid;
+	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getAddress() {
-		return address;
+	public String getContent() {
+		return content;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	
-	
 }

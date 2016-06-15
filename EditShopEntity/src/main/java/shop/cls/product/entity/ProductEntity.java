@@ -115,7 +115,7 @@ public class ProductEntity implements ProductEntityInter {
 	}
 
 	@Override
-	public boolean confirmProduct(Product product) {
+	public boolean confirmProduct(String product) {
 		// TODO Auto-generated method stub
 		
 		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
