@@ -4,6 +4,7 @@ import java.util.List;
 
 import vo.Product;
 import vo.ProductLang;
+import vo.ProductSimple;
 
 public interface ProductEntityInter {
 
@@ -34,7 +35,7 @@ public interface ProductEntityInter {
 	 * @param product
 	 * @return
 	 */
-	public boolean cancelRegistProduct(Product product);
+	public boolean cancelRegistProduct(String productId);
 	public boolean modifyRegistProduct(Product product);
 	public boolean expireProduct(String productId);
 
@@ -46,7 +47,6 @@ public interface ProductEntityInter {
 	public List<Product> getProductSellerId(String sellerId);
 	public Product getProductByProductId(String productId);
 	public List<Product> getProductByStatus(int status);
-	public List<Product> getSalesProduct();
 	public List<Product> getNewArrival();
 	
 	/**
@@ -54,9 +54,22 @@ public interface ProductEntityInter {
 	 */
 	public boolean sanctionForAdmin(String productId); 
 	public boolean sanctionForSeller(String productId);
+	
 	/**
 	 * 등록 시간관련 method
+	 */
+	public boolean extendProduct(Product product);
+	
+	/**
 	 * 추가 판매 과련 method
 	 * productSimple관련 method
 	 */
+	public boolean quitProductSimple(String productId);
+	
+	public List<ProductSimple> newArrivalMain();
+	public List<ProductSimple> productByType(int type);
+	public List<ProductSimple> productByStatus(int status);
+	public List<ProductSimple> productBySellerId(String sellerId);
+	
+	
 }

@@ -11,6 +11,7 @@ import session.ShopSqlSessionFactory;
 import shop.intfc.product.entity.ProductEntityInter;
 import vo.Product;
 import vo.ProductLang;
+import vo.ProductSimple;
 
 @Repository
 public class ProductEntity implements ProductEntityInter {
@@ -215,14 +216,14 @@ public class ProductEntity implements ProductEntityInter {
 	}
 
 	@Override
-	public boolean cancelRegistProduct(Product product) {
+	public boolean cancelRegistProduct(String productId) {
 		// TODO Auto-generated method stub
 
 		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
 		boolean isTrue = false;
 		try{
 			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.cancelRegistProduct(product);
+			isTrue = mapper.cancelRegistProduct(productId);
 			
 			sqlSession.commit();
 		}catch(Exception e){
@@ -355,26 +356,6 @@ public class ProductEntity implements ProductEntityInter {
 	}
 
 	@Override
-	public List<Product> getSalesProduct() {
-		// TODO Auto-generated method stub
-		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		List<Product> products = null;
-		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			products = mapper.getSalesProduct();
-			
-			sqlSession.commit();
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			sqlSession.close();
-		}
-		
-		return products;
-	}
-
-	@Override
 	public List<Product> getNewArrival() {
 		// TODO Auto-generated method stub
 		
@@ -433,6 +414,124 @@ public class ProductEntity implements ProductEntityInter {
 		
 		return isTrue;
 	}
-	
-	
+
+	@Override
+	public boolean extendProduct(Product product) {
+		// TODO Auto-generated method stub
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isTrue = false;
+		try{
+			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
+			isTrue = mapper.extendProduct(product);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isTrue;
+	}
+
+	@Override
+	public boolean quitProductSimple(String productId) {
+		// TODO Auto-generated method stub
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isTrue = false;
+		try{
+			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
+			isTrue = mapper.quitProductSimple(productId);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isTrue;
+	}
+
+	@Override
+	public List<ProductSimple> newArrivalMain() {
+		// TODO Auto-generated method stub
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<ProductSimple> products = null;
+		try{
+			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
+			products = mapper.newArrivalMain();
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			sqlSession.close();
+		}
+		
+		return products;
+	}
+
+	@Override
+	public List<ProductSimple> productByType(int type) {
+		// TODO Auto-generated method stub
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<ProductSimple> products = null;
+		try{
+			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
+			products = mapper.productByType(type);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			sqlSession.close();
+		}
+		
+		return products;
+	}
+
+	@Override
+	public List<ProductSimple> productByStatus(int status) {
+		// TODO Auto-generated method stub
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<ProductSimple> products = null;
+		try{
+			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
+			products = mapper.productByStatus(status);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			sqlSession.close();
+		}
+		
+		return products;
+	}
+
+	@Override
+	public List<ProductSimple> productBySellerId(String sellerId) {
+		// TODO Auto-generated method stub
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<ProductSimple> products = null;
+		try{
+			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
+			products = mapper.productBySellerId(sellerId);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			sqlSession.close();
+		}
+		
+		return products;
+	}
 }

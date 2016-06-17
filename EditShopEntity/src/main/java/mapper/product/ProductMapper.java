@@ -4,6 +4,7 @@ import java.util.List;
 
 import vo.Product;
 import vo.ProductLang;
+import vo.ProductSimple;
 
 public interface ProductMapper {
 
@@ -34,7 +35,7 @@ public interface ProductMapper {
 	 * @param product
 	 * @return
 	 */
-	public boolean cancelRegistProduct(Product product);
+	public boolean cancelRegistProduct(String productId);
 	public boolean modifyRegistProduct(Product product);
 	public boolean expireProduct(String productId);
 
@@ -46,7 +47,6 @@ public interface ProductMapper {
 	public List<Product> getProductSellerId(String sellerId);
 	public Product getProductByProductId(String productId);
 	public List<Product> getProductByStatus(int status);
-	public List<Product> getSalesProduct();
 	public List<Product> getNewArrival();
 	
 	/**
@@ -54,4 +54,13 @@ public interface ProductMapper {
 	 */
 	public boolean sanctionForAdmin(String productId); 
 	public boolean sanctionForSeller(String productId);
+	
+	
+	public boolean extendProduct(Product product);
+	public boolean quitProductSimple(String productId);
+	
+	public List<ProductSimple> newArrivalMain();
+	public List<ProductSimple> productByType(int type);
+	public List<ProductSimple> productByStatus(int status);
+	public List<ProductSimple> productBySellerId(String sellerId);
 }

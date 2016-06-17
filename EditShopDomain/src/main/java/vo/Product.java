@@ -105,6 +105,17 @@ public class Product {
 	public void setLanguageList(Map<String, ProductLang> languageList) {
 		this.languageList = languageList;
 	}
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", sellerId=" + sellerId
+				+ ", maxQuantity=" + maxQuantity + ", sellcnt=" + sellcnt
+				+ ", limitTime=" + limitTime + ", registTime=" + registTime
+				+ ", option=" + option + ", commission=" + commission
+				+ ", imagepath=" + imagepath + ", status=" + status
+				+ ", languageList=" + languageList + ", name=" + name
+				+ ", content=" + content + "]";
+	}
+	
 	
 	
 
