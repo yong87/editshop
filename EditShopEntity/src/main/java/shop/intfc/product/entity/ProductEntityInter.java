@@ -64,12 +64,21 @@ public interface ProductEntityInter {
 	 * 추가 판매 과련 method
 	 * productSimple관련 method
 	 */
+	public boolean addProductSimple(ProductSimple productSimple);
+	public boolean modifyProductSimple(ProductSimple productSimple);
 	public boolean quitProductSimple(String productId);
 	
 	public List<ProductSimple> newArrivalMain();
 	public List<ProductSimple> productByType(int type);
-	public List<ProductSimple> productByStatus(int status);
+	public List<ProductSimple> productSimpleByStatus(int status);
 	public List<ProductSimple> productBySellerId(String sellerId);
+	
+	/**
+	 * 마지막 제품번호 가져오기
+	 * @return 제품번호
+	 */
+	public String lastProductNumber();
+	
 	
 	
 }

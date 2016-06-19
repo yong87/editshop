@@ -22,6 +22,7 @@
 		<typeAlias type="vo.Delivery" alias="delivery" />
 		<typeAlias type="vo.Product" alias="product"/>
 		<typeAlias type="vo.ProductLang" alias="productLang"/>
+		<typeAlias type="vo.ProductSimple" alias="productSimple"/>
 	</typeAliases>
 
 	<environments default="development">

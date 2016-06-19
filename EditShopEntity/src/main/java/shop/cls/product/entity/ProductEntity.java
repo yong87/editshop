@@ -496,14 +496,14 @@ public class ProductEntity implements ProductEntityInter {
 	}
 
 	@Override
-	public List<ProductSimple> productByStatus(int status) {
+	public List<ProductSimple> productSimpleByStatus(int status) {
 		// TODO Auto-generated method stub
 		
 		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
 		List<ProductSimple> products = null;
 		try{
 			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			products = mapper.productByStatus(status);
+			products = mapper.productSimpleByStatus(status);
 			
 			sqlSession.commit();
 		}catch(Exception e){
@@ -534,4 +534,64 @@ public class ProductEntity implements ProductEntityInter {
 		
 		return products;
 	}
+
+	@Override
+	public boolean addProductSimple(ProductSimple productSimple) {
+		
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isTrue = false;
+		try{
+			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
+			isTrue = mapper.addProductSimple(productSimple);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isTrue;
+		
+	}
+
+	@Override
+	public boolean modifyProductSimple(ProductSimple productSimple) {
+
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isTrue = false;
+		try{
+			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
+			isTrue = mapper.modifyProductSimple(productSimple);
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			sqlSession.close();
+		}
+		
+		return isTrue;
+	}
+
+	@Override
+	public String lastProductNumber() {
+
+		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
+		String lastNumber = "";
+		try{
+			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
+			lastNumber = mapper.lastProductNumber();
+			
+			sqlSession.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			sqlSession.close();
+		}
+		
+		return lastNumber;
+	}
+	
+	
 }

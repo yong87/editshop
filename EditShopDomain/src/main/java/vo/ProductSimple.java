@@ -4,7 +4,7 @@ public class ProductSimple {
 
 	private String productid;
 	private int price;
-	private String thombnail;
+	private String thumbnail;
 	private int status;
 	private int type;
 	
@@ -21,11 +21,11 @@ public class ProductSimple {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getThombnail() {
-		return thombnail;
+	public String getThumbnail() {
+		return thumbnail;
 	}
-	public void setThombnail(String thombnail) {
-		this.thombnail = thombnail;
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 	public int getStatus() {
 		return status;
@@ -39,4 +39,12 @@ public class ProductSimple {
 	public void setType(int type) {
 		this.type = type;
 	}
+	@Override
+	public String toString() {
+		return "ProductSimple [productid=" + productid + ", price=" + price
+				+ ", thumbnail=" + thumbnail + ", status=" + status + ", type="
+				+ type + "]";
+	}
+	
+	
 }

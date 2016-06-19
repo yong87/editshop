@@ -57,10 +57,15 @@ public interface ProductMapper {
 	
 	
 	public boolean extendProduct(Product product);
+	
+	public boolean addProductSimple(ProductSimple productSimple);
+	public boolean modifyProductSimple(ProductSimple productSimple);
 	public boolean quitProductSimple(String productId);
 	
 	public List<ProductSimple> newArrivalMain();
 	public List<ProductSimple> productByType(int type);
-	public List<ProductSimple> productByStatus(int status);
+	public List<ProductSimple> productSimpleByStatus(int status);
 	public List<ProductSimple> productBySellerId(String sellerId);
+	
+	public String lastProductNumber();
 }

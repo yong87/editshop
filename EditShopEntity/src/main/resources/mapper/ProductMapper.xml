@@ -38,7 +38,7 @@
 <resultMap id="productSimpleMap" type="vo.ProductSimple">
 		<id property="productId" column="ps_productid" />
 		<result property="price" column="ps_price" />
-		<result property="thombnail" column="ps_thombnail" />
+		<result property="thumbnail" column="ps_thumbnail" />
 		<result property="status" column="ps_status" />
 		<result property="type" column="ps_type" />
 </resultMap>
@@ -187,7 +187,8 @@ FROM product_tb
 WHERE pt_productid=#{sellerid};
 </select>
 
-<!-- 위에까지 test완료 -->
+
+<!-- 관리자 전용 팔고있는것만 가져오기 -->
 <select id="getProductByStatus" parameterType="int" resultType="product" resultMap="productMap">
 SELECT `pt_productid`
 			,`pt_uid`
@@ -203,6 +204,8 @@ FROM product_tb
 WHERE pt_status=#{status};
 </select>
 
+
+<!-- 신상목록 가져오기 -->
 <select id="getNewArrival" resultType="product" resultMap="productMap">
 SELECT `pt_productid`
 			,`pt_uid`
@@ -219,37 +222,95 @@ WHERE pt_status=42
 ORDER BY pt_registtime DESC LIMIT 10;
 </select>
 
-<update id="sanctionForAdmin" parameterType="int">
+<!-- 관리자에 의한 판매 재제 -->
+<update id="sanctionForAdmin" parameterType="String">
 UPDATE `editshop`.`product_tb` 
 SET `pt_status`='46' 
 WHERE `pt_productid`=#{productid};
 </update>
 
+<!-- 셀러에 의한 판매  재제 -->
 <update id="sanctionForSeller">
 UPDATE `editshop`.`product_tb` 
 SET `pt_status`='45' 
 WHERE `pt_productid`=#{productid};
 </update>
 
+<!-- 시간 추가하기 -->
 <update id="extendProduct" parameterType="product">
 UPDATE `editshop`.`product_tb` 
-SET `pt_limittime`=#{limittime} 
-WHERE `pt_productid`=#{productid};
+SET `pt_limittime`= #{limitTime} 
+WHERE `pt_productid`= #{productId};
 </update>
 
+<!-- product에서 expire 하면 불러오는 method -->
 <update id="quitProductSimple" parameterType="String">
 UPDATE `editshop`.`product_simple_tb` 
 SET `ps_status`='0' 
 WHERE `ps_productid`=#{productid};
 </update>
 
-<select id="newArrivalMain" resultType="product" resultMap="productMap">
-SELECT ps_productid, ps_thumbnail, ps_price, ps_type, ps_status
+<!-- 메인화면 신상품 -->
+<select id="newArrivalMain" resultType="productSimple" resultMap="productSimpleMap">
+SELECT ps_productid as productId, ps_thumbnail, ps_price, ps_type, ps_status
 FROM product_simple_tb
 INNER JOIN product_tb
-ON ps_productid = pt_productid
+				ON pt_productid = ps_productid
 WHERE pt_status = 42
 ORDER BY pt_registtime DESC LIMIT 3;
 </select>
 
+<!-- 메뉴로 클릭시-->
+<select id="productByType" parameterType="int" resultType="productSimple" resultMap="productSimpleMap">
+SELECT ps_productid as productId, ps_thumbnail, ps_price, ps_type, ps_status
+FROM product_simple_tb
+WHERE ps_type = #{type}
+AND ps_status = 42;
+</select>
+
+<!-- 관리자 전용 -->
+<select id="productSimpleByStatus" parameterType="int" resultType="productSimple" resultMap="productSimpleMap">
+SELECT ps_productid as productId, ps_thumbnail, ps_price, ps_type, ps_status
+FROM product_simple_tb
+WHERE ps_status = #{status}
+</select>
+
+<!-- 셀러로 검색시 -->
+<select id="productBySellerId" parameterType="String" resultType="productSimple" resultMap="productSimpleMap">
+SELECT ps_productid as productId, ps_thumbnail, ps_price, ps_type, ps_status
+FROM product_simple_tb
+INNER JOIN product_tb
+ON ps_productid = pt_productid
+WHERE pt_uid = #{sellerid}
+AND ps_status = 42
+ORDER BY pt_registtime DESC;
+</select>
+
+<!-- product 생성때 같이 생성 -->
+<insert id="addProductSimple" parameterType="productSimple">
+INSERT INTO `editshop`.`product_simple_tb` (
+`ps_productid`
+,`ps_price`
+,`ps_thumbnail`
+,`ps_status`
+,`ps_type`) VALUES (
+#{productid}, #{price}, #{thumbnail}, #{status}, #{type});
+</insert>
+
+<!-- product 고칠때 같이 고칠것. -->
+<update id="modifyProductSimple" parameterType="productSimple">
+UPDATE `editshop`.`product_simple_tb` 
+SET `ps_price` = #{price}
+	 ,`ps_thumbnail` = #{thumbnail}
+	 ,`ps_type` = #{type}
+	 ,`ps_status`=#{status} 
+WHERE `ps_productid`=#{productid};
+</update>
+
+<!-- 마지막 제품 번호 가져오기 -->
+<select id="lastProductNumber" resultType="String">
+SELECT max(pt_productid)
+FROM product_tb;
+</select>
+<!-- 위에까지 test완료 -->
 </mapper>
