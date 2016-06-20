@@ -132,8 +132,13 @@ WHERE `pt_productid`=#{productid};
 </update>
 
 <update id="modifyRegistProduct" parameterType="product">
-UPDATE `editshop`.`product_tb` 
-SET `pt_status`='42' 
+UPDATE `editshop`.`product_tb`
+SET `pt_maxquantity` = #{maxQuantity}
+		,`pt_sellcount` = #{sellcnt}
+		,`pt_option` = #{option}
+		,`pt_commission` = #{commission}
+		,`pt_imagepath` = #{imagepath}
+		,`pt_status`='41' 
 WHERE `pt_productid`=#{productId};
 </update>
 

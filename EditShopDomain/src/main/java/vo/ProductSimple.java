@@ -8,7 +8,6 @@ public class ProductSimple {
 	private int status;
 	private int type;
 	
-	
 	public String getProductid() {
 		return productid;
 	}
