@@ -38,7 +38,9 @@ public interface ProductMapper {
 	public boolean cancelRegistProduct(String productId);
 	public boolean modifyRegistProduct(Product product);
 	public boolean expireProduct(String productId);
-
+	public boolean modifyProduct(String productId);
+	public boolean modifyConfirm(String productId);
+	
 	/**
 	 * 불러오기 관련
 	 * @return

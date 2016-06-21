@@ -1,5 +1,8 @@
 package shop.cls.product.service;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -24,15 +27,20 @@ public class ProductService implements ProductServiceInter {
 		// TODO 제품을 등록한다. 등록하는데 기본으로 Lang
 		String productId = generateProductNumber();
 		product.setProductId(productId);
-				
+		product.setLimitTime(getLimitTime());		
 		boolean isRegist = productEntity.registProduct(product);
 		
-		Map<String, ProductLang> lang = product.getLanguageList();
+		// 테스트 끝나고 조금 더 줄여보자!!
 		
-		boolean krRegist = productEntity.addProductLangKr(lang.get("kr"));
+		Map<String, ProductLang> lang = product.getLanguageList();
+		ProductLang krLang = lang.get("kr");
+		krLang.setProductid(productId);
+		
+		//kr먼저 등록
+		boolean krRegist = productEntity.addProductLangKr(krLang);
 		boolean isOther = registOtherLang(productId);
 		
-		if(!isRegist || !krRegist || isOther){
+		if(!isRegist || !krRegist || !isOther){
 			return false;
 		}
 		
@@ -203,11 +211,27 @@ public class ProductService implements ProductServiceInter {
 	 */
 	private String generateProductNumber(){
 		String lastNumber = productEntity.lastProductNumber();
-		System.out.println(lastNumber);
+		
 		int parsed = Integer.parseInt(lastNumber);
 		String returnNumber = String.valueOf(++parsed);
 		
 		return returnNumber;
+	}
+	
+	/**
+	 * 판매 종료시간
+	 * @return
+	 */
+	private Timestamp getLimitTime(){
+		
+		SimpleDateFormat formet = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, 3);
+		
+		String calTime = formet.format(cal.getTime());
+		Timestamp limitTime = Timestamp.valueOf(calTime);
+		
+		return limitTime;
 	}
 
 }

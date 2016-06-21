@@ -2,6 +2,7 @@ package product;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -298,7 +299,18 @@ public class ProductTest {
 		System.out.println(nowtime);
 	}
 
-
+	@Test
+	public void getLimitTimeTest(){
+		
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, 7);
+		
+		SimpleDateFormat formet = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		String ss = formet.format(cal.getTime());
+		
+		System.out.println(ss);
+	}
 
 
 

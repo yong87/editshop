@@ -13,6 +13,7 @@
    	판매자에 의한 판매 중단 : 45
    	관리자에 의한 판매 중단 : 46
    	사용자 신고에 의한 판매 중단 : 47
+   	수정됨 : 48
     -->
 <mapper namespace="mapper.product.ProductMapper">
 
@@ -299,7 +300,7 @@ INSERT INTO `editshop`.`product_simple_tb` (
 ,`ps_thumbnail`
 ,`ps_status`
 ,`ps_type`) VALUES (
-#{productid}, #{price}, #{thumbnail}, #{status}, #{type});
+#{productid}, #{price}, #{thumbnail}, 40, #{type});
 </insert>
 
 <!-- product 고칠때 같이 고칠것. -->
