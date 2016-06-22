@@ -1,5 +1,6 @@
 package shop.cls.product.entity;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import mapper.product.ProductMapper;
@@ -17,581 +18,956 @@ import vo.ProductSimple;
 public class ProductEntity implements ProductEntityInter {
 
 	@Override
-	public boolean registProduct(Product product) {
+	public boolean addProduct(Product product) {
 		// TODO Auto-generated method stub
 		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isTrue = false;
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isAdd = false;
+		
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.registProduct(product);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isAdd = mapper.addProduct(product);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return isTrue;
+		return isAdd;
+	}
+
+	@Override
+	public boolean addProductLangKr(ProductLang lang) {
+		// TODO Auto-generated method stub
+		
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isAdd = false;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isAdd = mapper.addProductLangKr(lang);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return isAdd;
 	}
 
 	@Override
 	public boolean addProductLangEn(ProductLang lang) {
 		// TODO Auto-generated method stub
 		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isTrue = false;
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isAdd = false;
+		
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.addProductLangEn(lang);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isAdd = mapper.addProductLangEn(lang);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return isTrue;
+		return isAdd;
 	}
 
 	@Override
 	public boolean addProductLangCn(ProductLang lang) {
 		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isAdd = false;
 		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isTrue = false;
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.addProductLangCn(lang);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isAdd = mapper.addProductLangCn(lang);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return isTrue;
+		return isAdd;
 	}
 
 	@Override
 	public boolean addProductLangJp(ProductLang lang) {
 		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isAdd = false;
 		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isTrue = false;
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.addProductLangJp(lang);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isAdd = mapper.addProductLangJp(lang);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return isTrue;
+		return isAdd;
 	}
 
 	@Override
-	public boolean addProductLangKr(ProductLang lang) {
+	public boolean addProductSimple(ProductSimple simple) {
 		// TODO Auto-generated method stub
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isTrue = false;
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isAdd = false;
+		
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.addProductLangKr(lang);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isAdd = mapper.addProductSimple(simple);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return isTrue;
+		return isAdd;
 	}
 
 	@Override
-	public boolean confirmProduct(String product) {
+	public boolean addModifyProduct(Product product) {
 		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isAdd = false;
 		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isTrue = false;
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.confirmProduct(product);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isAdd = mapper.addModifyProduct(product);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return isTrue;
+		return isAdd;
+	}
+
+	/** 수정 */
+	
+	@Override
+	public boolean modifyProduct(String productId) {
+		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isModify = false;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isModify = mapper.modifyProduct(productId);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return isModify;
 	}
 
 	@Override
-	public boolean registProductLangEn(ProductLang lang) {
+	public boolean modifyProductLangKr(ProductLang lang) {
 		// TODO Auto-generated method stub
 
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isTrue = false;
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isModify = false;
+		
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.registProductLangEn(lang);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isModify = mapper.modifyProductLangKr(lang);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return isTrue;
+		return isModify;
 	}
 
 	@Override
-	public boolean registProductLangCn(ProductLang lang) {
+	public boolean modifyProductLangEn(ProductLang lang) {
 		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isModify = false;
 		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isTrue = false;
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.registProductLangCn(lang);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isModify = mapper.modifyProductLangEn(lang);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return isTrue;
+		return isModify;
 	}
 
 	@Override
-	public boolean registProductLangJp(ProductLang lang) {
+	public boolean modifyProductLangCn(ProductLang lang) {
 		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isModify = false;
 		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isTrue = false;
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.registProductLangJp(lang);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isModify = mapper.modifyProductLangCn(lang);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return isTrue;
+		return isModify;
 	}
 
 	@Override
-	public boolean registProductLangKr(ProductLang lang) {
+	public boolean modifyProductLangJp(ProductLang lang) {
 		// TODO Auto-generated method stub
 
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isTrue = false;
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isModify = false;
+		
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.registProductLangKr(lang);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isModify = mapper.modifyProductLangJp(lang);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return isTrue;
+		return isModify;
 	}
 
 	@Override
-	public boolean cancelRegistProduct(String productId) {
+	public boolean modifyProductSimple(String productId) {
 		// TODO Auto-generated method stub
 
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isTrue = false;
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isModify = false;
+		
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.cancelRegistProduct(productId);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isModify = mapper.modifyProductSimple(productId);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return isTrue;
+		return isModify;
 	}
 
 	@Override
-	public boolean modifyRegistProduct(Product product) {
+	public boolean addModifyChaser(String productId, String chaserId) {
 		// TODO Auto-generated method stub
 
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isTrue = false;
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isModify = false;
+		
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.modifyRegistProduct(product);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isModify = mapper.addModifyChaser(productId, chaserId);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return isTrue;
+		return isModify;
+	}
+
+	/*@Override
+	public boolean modifyChaser() {
+		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isModify = false;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isModify = mapper.modifyChaser();
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return isModify;
+	}*/
+
+	/** 등록 승인 */
+	@Override
+	public boolean confirmProduct(String productId) {
+		// TODO Auto-generated method stub
+		
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isConfirm = false;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isConfirm = mapper.confirmProduct(productId);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return isConfirm;
 	}
 
 	@Override
-	public boolean expireProduct(String productId) {
+	public boolean confirmProductSimple(String productId) {
 		// TODO Auto-generated method stub
 
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isTrue = false;
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isConfirm = false;
+		
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.expireProduct(productId);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isConfirm = mapper.confirmProductSimple(productId);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return isTrue;
+		return isConfirm;
 	}
 
 	@Override
-	public List<Product> getAllProduct() {
+	public boolean confirmModifyProduct(String productId) {
 		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isConfirm = false;
 		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		List<Product> products = null;
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			products = mapper.getAllProduct();
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isConfirm = mapper.confirmModifyProduct(productId);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return products;
+		return isConfirm;
 	}
 
 	@Override
-	public List<Product> getProductSellerId(String sellerId) {
+	public boolean confirmModifyProductSimple(String productId) {
 		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isConfirm = false;
 		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		List<Product> products = null;
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			products = mapper.getProductSellerId(sellerId);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isConfirm = mapper.confirmModifyProductSimple(productId);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return products;
+		return isConfirm;
+	}
+
+	@Override
+	public boolean confirmModifyChaser(String productId) {
+		// TODO Auto-generated method stub
+		
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isConfirm = false;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isConfirm = mapper.confirmModifyChaser(productId);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return isConfirm;
+	}
+
+	/** 취소 관련 */
+	@Override
+	public boolean cancelProduct(String productId) {
+		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCancel = false;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isCancel = mapper.cancelProduct(productId);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return isCancel;
+	}
+
+	@Override
+	public boolean cancelProductSimple(String productId) {
+		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCancel = false;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isCancel = mapper.cancelProductSimple(productId);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return isCancel;
+	}
+
+	@Override
+	public boolean returnProduct(String productId) {
+		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCancel = false;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isCancel = mapper.returnProduct(productId);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return isCancel;
+	}
+
+	@Override
+	public boolean cancelModifyProduct(String productId) {
+		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCancel = false;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isCancel = mapper.cancelModifyProduct(productId);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return isCancel;
+	}
+
+	@Override
+	public boolean cancelModifyProductSimple(String productId) {
+		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCancel = false;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isCancel = mapper.cancelModifyProductSimple(productId);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return isCancel;
+	}
+
+	@Override
+	public boolean cancelMdofiyProductChaser(String productId) {
+		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isCancel = false;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isCancel = mapper.cancelMdofiyProductChaser(productId);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return isCancel;
+	}
+
+	/** 삭제 관련 */
+	@Override
+	public boolean overLimitTime(String productId) {
+		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isDelete = false;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isDelete = mapper.overLimitTime(productId);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return isDelete;
+	}
+
+	@Override
+	public boolean expireProdcut(String productId) {
+		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isDelete = false;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isDelete = mapper.expireProdcut(productId);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return isDelete;
+	}
+
+	@Override
+	public boolean expireProductSimple(String productId) {
+		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isDelete = false;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isDelete = mapper.expireProductSimple(productId);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return isDelete;
+	}
+
+	/** 제재 관련 */
+	@Override
+	public boolean sanctionProductByAdmin(String productId) {
+		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isSanction = false;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isSanction = mapper.sanctionProductByAdmin(productId);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return isSanction;
+	}
+
+	@Override
+	public boolean sanctionProductSimpleByAdmin(String productId) {
+		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isSanction = false;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isSanction = mapper.sanctionProductByAdmin(productId);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return isSanction;
+	}
+
+	/** getAll */
+	@Override
+	public List<ProductSimple> getNewArrival() {
+		// TODO Auto-generated method stub
+		
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<ProductSimple> newArrival = null;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			newArrival = mapper.getNewArrival();
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return newArrival;
+	}
+
+	@Override
+	public List<ProductSimple> getNewArrivalMain() {
+		// TODO Auto-generated method stub
+		
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<ProductSimple> newArrival = null;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			newArrival = mapper.getNewArrivalMain();
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return newArrival;
+	}
+
+	@Override
+	public List<ProductSimple> getProductSimpleByType(int type) {
+		// TODO Auto-generated method stub
+		
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<ProductSimple> simple = null;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			simple = mapper.getProductSimpleByType(type);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return simple;
+	}
+
+	@Override
+	public List<ProductSimple> getProductSimpleBySellerId(String sellerId) {
+		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<ProductSimple> simple = null;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			simple = mapper.getProductSimpleBySellerId(sellerId);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return simple;
 	}
 
 	@Override
 	public Product getProductByProductId(String productId) {
 		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		Product product = null;
 		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		Product products = null;
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			products = mapper.getProductByProductId(productId);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			product = mapper.getProductByProductId(productId);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return products;
+		return product;
 	}
 
 	@Override
-	public List<Product> getProductByStatus(int status) {
+	public ProductLang getProductLangKrByProductId(String productId) {
 		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		ProductLang lang = null;
 		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		List<Product> products = null;
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			products = mapper.getProductByStatus(status);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			lang = mapper.getProductLangKrByProductId(productId);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return products;
+		return lang;
 	}
 
 	@Override
-	public List<Product> getNewArrival() {
+	public ProductLang getProductLangEnByProductId(String productId) {
 		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		ProductLang lang = null;
 		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		List<Product> products = null;
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			products = mapper.getNewArrival();
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			lang = mapper.getProductLangEnByProductId(productId);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return products;
+		return lang;
 	}
 
 	@Override
-	public boolean sanctionForAdmin(String productId) {
+	public ProductLang getProductLangCnByProductId(String productId) {
 		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		ProductLang lang = null;
 		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isTrue = false;
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.sanctionForAdmin(productId);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			lang = mapper.getProductLangCnByProductId(productId);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return isTrue;
+		return lang;
 	}
 
 	@Override
-	public boolean sanctionForSeller(String productId) {
+	public ProductLang getProductLangJpByProductId(String productId) {
 		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		ProductLang lang = null;
 		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isTrue = false;
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.sanctionForSeller(productId);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			lang = mapper.getProductLangJpByProductId(productId);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return isTrue;
+		return lang;
 	}
 
 	@Override
-	public boolean extendProduct(Product product) {
+	public List<ProductSimple> getSanctionBySellerId(String sellerId) {
 		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<ProductSimple> simple = null;
 		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isTrue = false;
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.extendProduct(product);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			simple = mapper.getSanctionBySellerId(sellerId);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return isTrue;
+		return simple;
 	}
 
 	@Override
-	public boolean quitProductSimple(String productId) {
+	public List<ProductSimple> getResponseProductSimpleBySellerId(
+			String sellerId) {
 		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<ProductSimple> simple = null;
 		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isTrue = false;
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.quitProductSimple(productId);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			simple = mapper.getResponseProductSimpleBySellerId(sellerId);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return isTrue;
+		return simple;
 	}
 
 	@Override
-	public List<ProductSimple> newArrivalMain() {
+	public String getLastProductNumber() {
 		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		String lastProductNumber = null;
 		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		List<ProductSimple> products = null;
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			products = mapper.newArrivalMain();
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			lastProductNumber = mapper.getLastProductNumber();
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return products;
+		return lastProductNumber;
 	}
 
 	@Override
-	public List<ProductSimple> productByType(int type) {
+	public boolean extendProduct(Timestamp timestamp) {
 		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isExtend = false;
 		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		List<ProductSimple> products = null;
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			products = mapper.productByType(type);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			isExtend = mapper.extendProduct(timestamp);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return products;
+		return isExtend;
 	}
 
 	@Override
-	public List<ProductSimple> productSimpleByStatus(int status) {
+	public String getChaserNumber(String productId) {
 		// TODO Auto-generated method stub
+
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		String chaserNumber = null;
 		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		List<ProductSimple> products = null;
 		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			products = mapper.productSimpleByStatus(status);
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			chaserNumber = mapper.getChaserNumber(productId);
 			
-			sqlSession.commit();
+			session.commit();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
-			sqlSession.close();
+			session.close();
 		}
 		
-		return products;
+		return chaserNumber;
 	}
-
-	@Override
-	public List<ProductSimple> productBySellerId(String sellerId) {
-		// TODO Auto-generated method stub
-		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		List<ProductSimple> products = null;
-		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			products = mapper.productBySellerId(sellerId);
-			
-			sqlSession.commit();
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			sqlSession.close();
-		}
-		
-		return products;
-	}
-
-	@Override
-	public boolean addProductSimple(ProductSimple productSimple) {
-		
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isTrue = false;
-		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.addProductSimple(productSimple);
-			
-			sqlSession.commit();
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			sqlSession.close();
-		}
-		
-		return isTrue;
-		
-	}
-
-	@Override
-	public boolean modifyProductSimple(ProductSimple productSimple) {
-
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isTrue = false;
-		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			isTrue = mapper.modifyProductSimple(productSimple);
-			
-			sqlSession.commit();
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			sqlSession.close();
-		}
-		
-		return isTrue;
-	}
-
-	@Override
-	public String lastProductNumber() {
-
-		SqlSession sqlSession = ShopSqlSessionFactory.getInstance().getSqlSession();
-		String lastNumber = "";
-		try{
-			ProductMapper mapper = sqlSession.getMapper(ProductMapper.class);
-			lastNumber = mapper.lastProductNumber();
-			
-			sqlSession.commit();
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			sqlSession.close();
-		}
-		
-		return lastNumber;
-	}
-	
 	
 }

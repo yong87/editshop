@@ -2,21 +2,19 @@
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-   <!-- 
-   	Status 
-   	판매기일 만료 : 0;
-   	판매 승인전 : 40
-   	수정 승인전 : 41
-   	판매중 : 42
-   	세일중 : 43
-   	승인전 취소 : 44 
-   	판매자에 의한 판매 중단 : 45
-   	관리자에 의한 판매 중단 : 46
-   	사용자 신고에 의한 판매 중단 : 47
-   	수정됨 : 48
-    -->
 <mapper namespace="mapper.product.ProductMapper">
-
+<!-- Status 관련
+	만       료 : 0;
+	승  인  전 : 40;
+	수  정  중 : 41;
+	판  매  중 : 42;
+	세  일  중 : 43;
+	판매 중단 : 44;
+	판매 중단 : 45; //admin
+	수  정  됨 : 46;
+	반  려  됨 : 47;
+	취  소  됨 : 48;
+ -->
 <resultMap id="productMap" type="vo.Product">
 		<id property="productId" column="pt_productid" />
 		<result property="sellerId" column="pt_uid" />
@@ -44,7 +42,8 @@
 		<result property="type" column="ps_type" />
 </resultMap>
 
-<insert id="registProduct" parameterType="product">
+<!-- 등록 -->
+<insert id="addProduct" parameterType="product">
 INSERT INTO `editshop`.`product_tb` (
 `pt_productid` 
 ,`pt_uid`
@@ -57,6 +56,14 @@ INSERT INTO `editshop`.`product_tb` (
 ,`pt_imagepath`
 ,`pt_status`) VALUES (
 #{productId}, #{sellerId}, #{maxQuantity}, #{sellcnt}, #{limitTime}, now(), #{option}, #{commission}, #{imagepath}, 40);
+</insert>
+
+<insert id="addProductLangKr" parameterType="productLang">
+INSERT INTO `editshop`.`product_kr_tb` (
+`pt_productid`
+,`pt_content`
+,`pt_name`) VALUES (
+#{productid}, #{content}, #{name});
 </insert>
 
 <insert id="addProductLangEn" parameterType="productLang">
@@ -83,216 +90,6 @@ INSERT INTO `editshop`.`product_jp_tb` (
 #{productid}, #{content}, #{name});
 </insert>
 
-<insert id="addProductLangKr" parameterType="productLang">
-INSERT INTO `editshop`.`product_kr_tb` (
-`pt_productid`
-,`pt_content`
-,`pt_name`) VALUES (
-#{productid}, #{content}, #{name});
-</insert>
-
-<update id="confirmProduct" parameterType="String">
-UPDATE `editshop`.`product_tb` 
-SET `pt_status`='42' 
-WHERE `pt_productid`=#{productId};
-
-</update>
-
-<update id="registProductLangEn" parameterType="productLang">
-UPDATE `editshop`.`product_en_tb` 
-SET `pt_content`=#{content}
-  , `pt_name`=#{name} 
-WHERE `pt_productid`=#{productid};
-</update>
-
-<update id="registProductLangCn" parameterType="productLang">
-UPDATE `editshop`.`product_cn_tb` 
-SET `pt_content`=#{content}
-  , `pt_name`=#{name} 
-WHERE `pt_productid`=#{productid};
-</update>
-
-<update id="registProductLangJp" parameterType="productLang">
-UPDATE `editshop`.`product_jp_tb` 
-SET `pt_content`=#{content}
-  , `pt_name`=#{name} 
-WHERE `pt_productid`=#{productid};
-</update>
-
-<update id="registProductLangKr" parameterType="productLang">
-UPDATE `editshop`.`product_kr_tb` 
-SET `pt_content`=#{content}
-  , `pt_name`=#{name} 
-WHERE `pt_productid`=#{productid};
-</update>
-
-<update id="cancelRegistProduct" parameterType="String">
-UPDATE `editshop`.`product_tb` 
-SET `pt_status`='0' 
-WHERE `pt_productid`=#{productid};
-</update>
-
-<update id="modifyRegistProduct" parameterType="product">
-UPDATE `editshop`.`product_tb`
-SET `pt_maxquantity` = #{maxQuantity}
-		,`pt_sellcount` = #{sellcnt}
-		,`pt_option` = #{option}
-		,`pt_commission` = #{commission}
-		,`pt_imagepath` = #{imagepath}
-		,`pt_status`='41' 
-WHERE `pt_productid`=#{productId};
-</update>
-
-<update id="expireProduct" parameterType="String">
-UPDATE `editshop`.`product_tb` 
-SET `pt_status`='0' 
-WHERE `pt_productid`=#{productid};
-</update>
-
-<select id="getAllProduct" resultType="product" resultMap="productMap">
-SELECT `pt_productid`
-			,`pt_uid`
-			,`pt_maxquantity`
-			,`pt_sellcount`
-			,`pt_limittime`
-			,`pt_registtime`
-			,`pt_option`
-			,`pt_commission`
-			,`pt_imagepath`
-			,`pt_status`
-FROM `product_tb`;
-</select>
-
-<select id="getProductSellerId" parameterType="String" resultType="product" resultMap="productMap">
-SELECT `pt_productid`
-			,`pt_uid`
-			,`pt_maxquantity`
-			,`pt_sellcount`
-			,`pt_limittime`
-			,`pt_registtime`
-			,`pt_option`
-			,`pt_commission`
-			,`pt_imagepath`
-			,`pt_status`
-FROM product_tb
-WHERE pt_uid=#{sellerid};
-</select>
-
-<select id="getProductByProductId" parameterType="String" resultType="product" resultMap="productMap">
-SELECT `pt_productid`
-			,`pt_uid`
-			,`pt_maxquantity`
-			,`pt_sellcount`
-			,`pt_limittime`
-			,`pt_registtime`
-			,`pt_option`
-			,`pt_commission`
-			,`pt_imagepath`
-			,`pt_status`
-FROM product_tb
-WHERE pt_productid=#{sellerid};
-</select>
-
-
-<!-- 관리자 전용 팔고있는것만 가져오기 -->
-<select id="getProductByStatus" parameterType="int" resultType="product" resultMap="productMap">
-SELECT `pt_productid`
-			,`pt_uid`
-			,`pt_maxquantity`
-			,`pt_sellcount`
-			,`pt_limittime`
-			,`pt_registtime`
-			,`pt_option`
-			,`pt_commission`
-			,`pt_imagepath`
-			,`pt_status`
-FROM product_tb
-WHERE pt_status=#{status};
-</select>
-
-
-<!-- 신상목록 가져오기 -->
-<select id="getNewArrival" resultType="product" resultMap="productMap">
-SELECT `pt_productid`
-			,`pt_uid`
-			,`pt_maxquantity`
-			,`pt_sellcount`
-			,`pt_limittime`
-			,`pt_registtime`
-			,`pt_option`
-			,`pt_commission`
-			,`pt_imagepath`
-			,`pt_status`
-FROM product_tb 
-WHERE pt_status=42
-ORDER BY pt_registtime DESC LIMIT 10;
-</select>
-
-<!-- 관리자에 의한 판매 재제 -->
-<update id="sanctionForAdmin" parameterType="String">
-UPDATE `editshop`.`product_tb` 
-SET `pt_status`='46' 
-WHERE `pt_productid`=#{productid};
-</update>
-
-<!-- 셀러에 의한 판매  재제 -->
-<update id="sanctionForSeller">
-UPDATE `editshop`.`product_tb` 
-SET `pt_status`='45' 
-WHERE `pt_productid`=#{productid};
-</update>
-
-<!-- 시간 추가하기 -->
-<update id="extendProduct" parameterType="product">
-UPDATE `editshop`.`product_tb` 
-SET `pt_limittime`= #{limitTime} 
-WHERE `pt_productid`= #{productId};
-</update>
-
-<!-- product에서 expire 하면 불러오는 method -->
-<update id="quitProductSimple" parameterType="String">
-UPDATE `editshop`.`product_simple_tb` 
-SET `ps_status`='0' 
-WHERE `ps_productid`=#{productid};
-</update>
-
-<!-- 메인화면 신상품 -->
-<select id="newArrivalMain" resultType="productSimple" resultMap="productSimpleMap">
-SELECT ps_productid as productId, ps_thumbnail, ps_price, ps_type, ps_status
-FROM product_simple_tb
-INNER JOIN product_tb
-				ON pt_productid = ps_productid
-WHERE pt_status = 42
-ORDER BY pt_registtime DESC LIMIT 3;
-</select>
-
-<!-- 메뉴로 클릭시-->
-<select id="productByType" parameterType="int" resultType="productSimple" resultMap="productSimpleMap">
-SELECT ps_productid as productId, ps_thumbnail, ps_price, ps_type, ps_status
-FROM product_simple_tb
-WHERE ps_type = #{type}
-AND ps_status = 42;
-</select>
-
-<!-- 관리자 전용 -->
-<select id="productSimpleByStatus" parameterType="int" resultType="productSimple" resultMap="productSimpleMap">
-SELECT ps_productid as productId, ps_thumbnail, ps_price, ps_type, ps_status
-FROM product_simple_tb
-WHERE ps_status = #{status}
-</select>
-
-<!-- 셀러로 검색시 -->
-<select id="productBySellerId" parameterType="String" resultType="productSimple" resultMap="productSimpleMap">
-SELECT ps_productid as productId, ps_thumbnail, ps_price, ps_type, ps_status
-FROM product_simple_tb
-INNER JOIN product_tb
-ON ps_productid = pt_productid
-WHERE pt_uid = #{sellerid}
-AND ps_status = 42
-ORDER BY pt_registtime DESC;
-</select>
-
-<!-- product 생성때 같이 생성 -->
 <insert id="addProductSimple" parameterType="productSimple">
 INSERT INTO `editshop`.`product_simple_tb` (
 `ps_productid`
@@ -303,20 +100,290 @@ INSERT INTO `editshop`.`product_simple_tb` (
 #{productid}, #{price}, #{thumbnail}, 40, #{type});
 </insert>
 
-<!-- product 고칠때 같이 고칠것. -->
-<update id="modifyProductSimple" parameterType="productSimple">
+<insert id="addModifyProduct" parameterType="product">
+INSERT INTO `editshop`.`product_tb` (
+`pt_productid` 
+,`pt_uid`
+,`pt_maxquantity`
+,`pt_sellcount`
+,`pt_limittime`
+,`pt_registtime`
+,`pt_option`
+,`pt_commission`
+,`pt_imagepath`
+,`pt_status`) VALUES (
+#{productId}, #{sellerId}, #{maxQuantity}, #{sellcnt}, #{limitTime}, #{registTime}, #{option}, #{commission}, #{imagepath}, 41);
+</insert>
+
+<!-- 수정 -->
+<update id="modifyProduct" parameterType="String">
+UPDATE `editshop`.`product_tb`
+SET `pt_status`='41' 
+WHERE `pt_productid`=#{productId};
+</update>
+
+<update id="modifyProductLangKr" parameterType="String">
+UPDATE `editshop`.`product_kr_tb` 
+SET `pt_content`=#{content}
+  , `pt_name`=#{name} 
+WHERE `pt_productid`=#{productid};
+</update>
+
+<update id="modifyProductLangEn" parameterType="String">
+UPDATE `editshop`.`product_en_tb` 
+SET `pt_content`=#{content}
+  , `pt_name`=#{name} 
+WHERE `pt_productid`=#{productid};
+</update>
+
+<update id="modifyProductLangCn" parameterType="String">
+UPDATE `editshop`.`product_cn_tb` 
+SET `pt_content`=#{content}
+  , `pt_name`=#{name} 
+WHERE `pt_productid`=#{productid};
+</update>
+
+<update id="modifyProductLangJp" parameterType="String">
+UPDATE `editshop`.`product_jp_tb` 
+SET `pt_content`=#{content}
+  , `pt_name`=#{name} 
+WHERE `pt_productid`=#{productid};
+</update>
+
+<update id="modifyProductSimple" parameterType="String">
+
+</update>
+
+<insert id="addModifyChaser">
+INSERT INTO `editshop`.`modifyproduct_tb` (
+`mt_productid`
+,`mt_chaserid`
+,`mt_modifytime`
+,`mt_status`) VALUES (
+#{productid}, #{chaserid}, now(), 41);
+</insert>
+
+<!-- <update id="modifyChaser" parameterType="String">
+UPDATE `editshop`.`modifyproduct_tb` 
+	 SET `mt_status`='42' 
+ WHERE `mt_productid`=#{productid};
+</update> -->
+
+<!-- 등록 승인 -->
+<!-- new!! -->
+<update id="confirmProduct" parameterType="String">
+UPDATE `editshop`.`product_tb` 
+SET `pt_status`='42' 
+WHERE `pt_productid`=#{productId};
+</update>
+
+<update id="confirmProductSimple" parameterType="String">
 UPDATE `editshop`.`product_simple_tb` 
-SET `ps_price` = #{price}
-	 ,`ps_thumbnail` = #{thumbnail}
-	 ,`ps_type` = #{type}
-	 ,`ps_status`=#{status} 
+SET `ps_status`= 42 
 WHERE `ps_productid`=#{productid};
 </update>
 
-<!-- 마지막 제품 번호 가져오기 -->
-<select id="lastProductNumber" resultType="String">
+<!-- 원본 수정 status 46 : 수정 완료  -->
+<update id="confirmModifyProduct" parameterType="String">
+UPDATE `editshop`.`product_tb` 
+SET `pt_status`= 46 
+WHERE `pt_productid`=#{productId};
+</update>
+
+<update id="confirmModifyProductSimple" parameterType="String">
+UPDATE `editshop`.`product_simple_tb` 
+SET `ps_status`= 46 
+WHERE `ps_productid`=#{productid};
+</update>
+
+<update id="confirmModifyChaser" parameterType="String">
+UPDATE `editshop`.`modifyproduct_tb` 
+	 SET `mt_status`='46' 
+ WHERE `mt_productid`=#{productid};
+</update>
+
+<!-- 취소 관련 -->
+<update id="cancelProduct" parameterType="String">
+UPDATE `editshop`.`product_tb` 
+SET `pt_status`= 0 
+WHERE `pt_productid`=#{productid};
+</update>
+
+<update id="cancelProductSimple" parameterType="String">
+UPDATE `editshop`.`product_simple_tb` 
+SET `ps_status`= 0 
+WHERE `ps_productid`=#{productid};
+</update>
+
+<!-- status : 47 반려됨  : 48 취소됨-->
+<update id="returnProduct" parameterType="String">
+UPDATE `editshop`.`product_tb` 
+SET `pt_status`= 47
+WHERE `pt_productid`=#{productid};
+</update>
+
+<update id="cancelModifyProduct" parameterType="String">
+UPDATE `editshop`.`product_tb` 
+SET `pt_status`= 48 
+WHERE `pt_productid`=#{productid};
+</update>
+
+<update id="cancelModifyProductSimple" parameterType="String">
+UPDATE `editshop`.`product_simple_tb` 
+SET `ps_status`= 48 
+WHERE `ps_productid`=#{productid};
+</update>
+
+<update id="cancelMdofiyProductChaser" parameterType="String">
+UPDATE `editshop`.`modifyproduct_tb` 
+	 SET `mt_status`= 48 
+ WHERE `mt_productid`=#{productid};
+</update>
+
+<!-- 삭제 관련 -->
+<update id="overLimitTime" parameterType="String">
+UPDATE `editshop`.`product_tb` 
+SET `pt_status`= 0 
+WHERE `pt_productid`=#{productid};
+</update>
+<update id="expireProdcut" parameterType="String">
+UPDATE `editshop`.`product_tb` 
+SET `pt_status`= 0 
+WHERE `pt_productid`=#{productid};
+</update>
+<update id="expireProductSimple" parameterType="String">
+UPDATE `editshop`.`product_simple_tb` 
+SET `ps_status`= 0
+WHERE `ps_productid`=#{productid};
+</update>
+
+<!-- 재제 관련 -->
+<update id="sanctionProductByAdmin" parameterType="String">
+UPDATE `editshop`.`product_tb` 
+SET `pt_status`= 44 
+WHERE `pt_productid`=#{productid};
+</update>
+<update id="sanctionProductSimpleByAdmin" parameterType="String">
+UPDATE `editshop`.`product_simple_tb` 
+SET `ps_status`= 44
+WHERE `ps_productid`=#{productid};
+</update>
+
+<!-- get(all) -->
+<select id="getNewArrival" resultType="productSimple" resultMap="productSimpleMap">
+SELECT ps_productid as productId, ps_thumbnail, ps_price, ps_type, ps_status
+FROM product_simple_tb
+INNER JOIN product_tb
+				ON pt_productid = ps_productid
+WHERE pt_status = 42
+ORDER BY pt_registtime DESC LIMIT 15;
+</select>
+
+<select id="getNewArrivalMain" resultType="productSimple" resultMap="productSimpleMap">
+SELECT ps_productid as productId, ps_thumbnail, ps_price, ps_type, ps_status
+FROM product_simple_tb
+INNER JOIN product_tb
+				ON pt_productid = ps_productid
+WHERE pt_status = 42
+ORDER BY pt_registtime DESC LIMIT 3;
+</select>
+
+<select id="getProductSimpleByType" parameterType="int" resultType="productSimple" resultMap="productSimpleMap">
+SELECT ps_productid as productId, ps_thumbnail, ps_price, ps_type, ps_status
+FROM product_simple_tb
+WHERE ps_type = #{type}
+AND ps_status = 42;
+</select>
+
+<select id="getProductSimpleBySellerId" parameterType="String" resultType="productSimple" resultMap="productSimpleMap">
+SELECT ps_productid as productId, ps_thumbnail, ps_price, ps_type, ps_status
+FROM product_simple_tb
+INNER JOIN product_tb
+ON ps_productid = pt_productid
+WHERE pt_uid = #{sellerid}
+AND ps_status = 42
+ORDER BY pt_registtime DESC;
+</select>
+
+<!-- detail View -->
+<select id="getProductByProductId" resultType="product" resultMap="productMap">
+SELECT `pt_productid`
+			,`pt_uid`
+			,`pt_maxquantity`
+			,`pt_sellcount`
+			,`pt_limittime`
+			,`pt_registtime`
+			,`pt_option`
+			,`pt_commission`
+			,`pt_imagepath`
+			,`pt_status`
+FROM product_tb
+WHERE pt_productid=#{productid};
+</select>
+
+<select id="getProductLangKrByProductId" parameterType="String" resultType="productLang" resultMap="productLangMap">
+SELECT pt_productid, pt_content, pt_name
+FROM product_kr_tb
+WHERE pt_productid = #{productid}; 
+</select>
+
+<select id="getProductLangEnByProductId" parameterType="String" resultType="productLang" resultMap="productLangMap">
+SELECT pt_productid, pt_content, pt_name
+FROM product_en_tb
+WHERE pt_productid = #{productid}; 
+</select>
+
+<select id="getProductLangCnByProductId" parameterType="String" resultType="productLang" resultMap="productLangMap">
+SELECT pt_productid, pt_content, pt_name
+FROM product_cn_tb
+WHERE pt_productid = #{productid}; 
+</select>
+
+<select id="getProductLangJpByProductId" parameterType="String" resultType="productLang" resultMap="productLangMap">
+SELECT pt_productid, pt_content, pt_name
+FROM product_jp_tb
+WHERE pt_productid = #{productid}; 
+</select>
+
+
+<!-- get(seller) -->
+<select id="getSanctionBySellerId" parameterType="String" resultType="productSimple" resultMap="productSimple">
+SELECT ps_productid as productId, ps_thumbnail, ps_price, ps_type, ps_status
+FROM product_simple_tb
+INNER JOIN product_tb
+ON ps_productid = pt_productid
+WHERE pt_uid = #{sellerid}
+AND ps_status = 44
+ORDER BY pt_registtime DESC;
+</select>
+
+<select id="getResponseProductSimpleBySellerId" parameterType="String" resultType="productSimple" resultMap="productSimple">
+SELECT ps_productid as productId, ps_thumbnail, ps_price, ps_type, ps_status
+FROM product_simple_tb
+INNER JOIN product_tb
+ON ps_productid = pt_productid
+WHERE pt_uid = #{sellerid}
+AND ps_status = 40
+AND ps_status = 41
+ORDER BY pt_registtime DESC;
+</select>
+
+<!-- other -->
+<select id="getLastProductNumber">
 SELECT max(pt_productid)
 FROM product_tb;
 </select>
-<!-- 위에까지 test완료 -->
+
+<update id="extendProduct" parameterType="product">
+UPDATE product_tb
+SET pt_limittime=#{limittime}
+WHERE pt_productid = #{productid}
+</update>
+
+<select id="getChaserNumber" parameterType="String">
+SELECT mt_chaserid
+FROM modifyproduct_tb
+WHERE mt_productid = #{productid}
+</select>
+
 </mapper>

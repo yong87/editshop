@@ -1,73 +1,112 @@
 package mapper.product;
 
+import java.sql.Timestamp;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 
 import vo.Product;
 import vo.ProductLang;
 import vo.ProductSimple;
 
 public interface ProductMapper {
-
 	/**
-	 * 등록관련 method
+	 * 등록 관련
 	 * @param product
 	 * @return
 	 */
-	public boolean registProduct(Product product);
+	public boolean addProduct(Product product);
+	public boolean addProductLangKr(ProductLang lang);
 	public boolean addProductLangEn(ProductLang lang);
 	public boolean addProductLangCn(ProductLang lang);
 	public boolean addProductLangJp(ProductLang lang);
-	public boolean addProductLangKr(ProductLang lang);
-	public boolean confirmProduct(String product);
-		
-	/**
-	 * Lang Alter Method
-	 * @param lang
-	 * @return
-	 */
-	public boolean registProductLangEn(ProductLang lang);
-	public boolean registProductLangCn(ProductLang lang);
-	public boolean registProductLangJp(ProductLang lang);
-	public boolean registProductLangKr(ProductLang lang);
+	public boolean addProductSimple(ProductSimple simple);
+	public boolean addModifyProduct(Product product);
 	
 	/**
-	 * 등록 취소/ 수정 관련 Method
+	 * 수정 관련
 	 * @param product
 	 * @return
 	 */
-	public boolean cancelRegistProduct(String productId);
-	public boolean modifyRegistProduct(Product product);
-	public boolean expireProduct(String productId);
 	public boolean modifyProduct(String productId);
-	public boolean modifyConfirm(String productId);
+	public boolean modifyProductLangKr(ProductLang lang);
+	public boolean modifyProductLangEn(ProductLang lang);
+	public boolean modifyProductLangCn(ProductLang lang);
+	public boolean modifyProductLangJp(ProductLang lang);
+	public boolean modifyProductSimple(String productId);
+	public boolean addModifyChaser(@Param("productid")String productId, @Param("chaserid")String chaserId);
+	//public boolean modifyChaser();
 	
 	/**
-	 * 불러오기 관련
+	 * 등록 승인
+	 * @param productId
 	 * @return
 	 */
-	public List<Product> getAllProduct();
-	public List<Product> getProductSellerId(String sellerId);
-	public Product getProductByProductId(String productId);
-	public List<Product> getProductByStatus(int status);
-	public List<Product> getNewArrival();
+	public boolean confirmProduct(String productId);
+	public boolean confirmProductSimple(String productId);
+	public boolean confirmModifyProduct(String productId);
+	public boolean confirmModifyProductSimple(String productId);
+	public boolean confirmModifyChaser(String productId);
 	
 	/**
-	 * Status 변경 관련
+	 * 취소 관련
+	 * @param productId
+	 * @return
 	 */
-	public boolean sanctionForAdmin(String productId); 
-	public boolean sanctionForSeller(String productId);
+	public boolean cancelProduct(String productId);
+	public boolean cancelProductSimple(String productId);
+	public boolean returnProduct(String productId);
+	public boolean cancelModifyProduct(String productId);
+	public boolean cancelModifyProductSimple(String productId);
+	public boolean cancelMdofiyProductChaser(String productId);
 	
+	/**
+	 * 삭제 관련 
+	 * status = 0으로 변경으로 
+	 * @param productId
+	 * @return
+	 */
+	public boolean overLimitTime(String productId);
+	public boolean expireProdcut(String productId);
+	public boolean expireProductSimple(String productId);
 	
-	public boolean extendProduct(Product product);
+	/**
+	 * 제재 관련
+	 * @param productId
+	 * @return
+	 */
+	public boolean sanctionProductByAdmin(String productId);
+	public boolean sanctionProductSimpleByAdmin(String productId);
 	
-	public boolean addProductSimple(ProductSimple productSimple);
-	public boolean modifyProductSimple(ProductSimple productSimple);
-	public boolean quitProductSimple(String productId);
+	/**
+	 * All
+	 * @return
+	 */
+	public List<ProductSimple> getNewArrival();
+	public List<ProductSimple> getNewArrivalMain();
+	public List<ProductSimple> getProductSimpleByType(int type);
+	public List<ProductSimple> getProductSimpleBySellerId(String sellerId);
+	public Product getProductByProductId(String productId);
+	public ProductLang getProductLangKrByProductId(String productId);
+	public ProductLang getProductLangEnByProductId(String productId);
+	public ProductLang getProductLangCnByProductId(String productId);
+	public ProductLang getProductLangJpByProductId(String productId);
 	
-	public List<ProductSimple> newArrivalMain();
-	public List<ProductSimple> productByType(int type);
-	public List<ProductSimple> productSimpleByStatus(int status);
-	public List<ProductSimple> productBySellerId(String sellerId);
+	/**
+	 * seller확인 가능 method
+	 * @param sellerId
+	 * @return
+	 */
+	public List<ProductSimple> getSanctionBySellerId(String sellerId);
+	public List<ProductSimple> getResponseProductSimpleBySellerId(String sellerId);
 	
-	public String lastProductNumber();
+	/**
+	 * 1. 제품의 마지막 번호를 가져온다
+	 * 2. 제품의 limittime을 연장한다
+	 * 3. 수정되기전 productId로 수정된 product불러오기
+	 * @return
+	 */
+	public String getLastProductNumber();
+	public boolean extendProduct(Timestamp timestamp);
+	public String getChaserNumber(String productId);
 }
