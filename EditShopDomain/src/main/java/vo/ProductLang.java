@@ -30,4 +30,11 @@ public class ProductLang {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	@Override
+	public String toString() {
+		return "ProductLang [productid=" + productid + ", name=" + name
+				+ ", content=" + content + "]";
+	}
+	
+	
 }

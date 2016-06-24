@@ -163,19 +163,16 @@ public class ProductEntity implements ProductEntityInter {
 		
 		return isAdd;
 	}
-
-	/** 수정 */
-	
 	@Override
-	public boolean modifyProduct(String productId) {
+	public boolean addModifyProductSimple(ProductSimple simple) {
 		// TODO Auto-generated method stub
-
+		
 		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isModify = false;
+		boolean isAdd = false;
 		
 		try{
 			ProductMapper mapper = session.getMapper(ProductMapper.class);
-			isModify = mapper.modifyProduct(productId);
+			isAdd = mapper.addModifyProductSimple(simple);
 			
 			session.commit();
 		}catch(Exception e){
@@ -184,8 +181,12 @@ public class ProductEntity implements ProductEntityInter {
 			session.close();
 		}
 		
-		return isModify;
+		return isAdd;
 	}
+
+	/** 수정 */
+	
+
 
 	@Override
 	public boolean modifyProductLangKr(ProductLang lang) {
@@ -271,26 +272,6 @@ public class ProductEntity implements ProductEntityInter {
 		return isModify;
 	}
 
-	@Override
-	public boolean modifyProductSimple(String productId) {
-		// TODO Auto-generated method stub
-
-		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isModify = false;
-		
-		try{
-			ProductMapper mapper = session.getMapper(ProductMapper.class);
-			isModify = mapper.modifyProductSimple(productId);
-			
-			session.commit();
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			session.close();
-		}
-		
-		return isModify;
-	}
 
 	@Override
 	public boolean addModifyChaser(String productId, String chaserId) {
@@ -547,7 +528,7 @@ public class ProductEntity implements ProductEntityInter {
 	}
 
 	@Override
-	public boolean cancelMdofiyProductChaser(String productId) {
+	public boolean cancelModifyProductChaser(String productId) {
 		// TODO Auto-generated method stub
 
 		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
@@ -555,7 +536,7 @@ public class ProductEntity implements ProductEntityInter {
 		
 		try{
 			ProductMapper mapper = session.getMapper(ProductMapper.class);
-			isCancel = mapper.cancelMdofiyProductChaser(productId);
+			isCancel = mapper.cancelModifyProductChaser(productId);
 			
 			session.commit();
 		}catch(Exception e){

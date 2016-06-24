@@ -48,14 +48,13 @@ INSERT INTO `editshop`.`product_tb` (
 `pt_productid` 
 ,`pt_uid`
 ,`pt_maxquantity`
-,`pt_sellcount`
 ,`pt_limittime`
 ,`pt_registtime`
 ,`pt_option`
 ,`pt_commission`
 ,`pt_imagepath`
 ,`pt_status`) VALUES (
-#{productId}, #{sellerId}, #{maxQuantity}, #{sellcnt}, #{limitTime}, now(), #{option}, #{commission}, #{imagepath}, 40);
+#{productId}, #{sellerId}, #{maxQuantity}, #{limitTime}, now(), #{option}, #{commission}, #{imagepath}, 40);
 </insert>
 
 <insert id="addProductLangKr" parameterType="productLang">
@@ -114,13 +113,20 @@ INSERT INTO `editshop`.`product_tb` (
 ,`pt_status`) VALUES (
 #{productId}, #{sellerId}, #{maxQuantity}, #{sellcnt}, #{limitTime}, #{registTime}, #{option}, #{commission}, #{imagepath}, 41);
 </insert>
+<insert id="addModifyProductSimple" parameterType="productSimple">
+INSERT INTO `editshop`.`product_simple_tb` (
+`ps_productid`
+,`ps_price`
+,`ps_thumbnail`
+,`ps_status`
+,`ps_type`) VALUES (
+#{productid}, #{price}, #{thumbnail}, 41, #{type});
+</insert>
 
 <!-- 수정 -->
-<update id="modifyProduct" parameterType="String">
-UPDATE `editshop`.`product_tb`
-SET `pt_status`='41' 
-WHERE `pt_productid`=#{productId};
-</update>
+<!-- modifyProduct삭제 & addModifyProductSimple추가할것 -->
+<!-- modifyProductSimple도 삭제 -->
+
 
 <update id="modifyProductLangKr" parameterType="String">
 UPDATE `editshop`.`product_kr_tb` 
@@ -148,10 +154,6 @@ UPDATE `editshop`.`product_jp_tb`
 SET `pt_content`=#{content}
   , `pt_name`=#{name} 
 WHERE `pt_productid`=#{productid};
-</update>
-
-<update id="modifyProductSimple" parameterType="String">
-
 </update>
 
 <insert id="addModifyChaser">
@@ -203,10 +205,11 @@ UPDATE `editshop`.`modifyproduct_tb`
 </update>
 
 <!-- 취소 관련 -->
+<!-- 등록전 취소 -->
 <update id="cancelProduct" parameterType="String">
 UPDATE `editshop`.`product_tb` 
-SET `pt_status`= 0 
-WHERE `pt_productid`=#{productid};
+SET `pt_status` = 0 
+WHERE `pt_productid`= #{productId};
 </update>
 
 <update id="cancelProductSimple" parameterType="String">
@@ -215,6 +218,7 @@ SET `ps_status`= 0
 WHERE `ps_productid`=#{productid};
 </update>
 
+<!-- 등록후 취소 -->
 <!-- status : 47 반려됨  : 48 취소됨-->
 <update id="returnProduct" parameterType="String">
 UPDATE `editshop`.`product_tb` 
@@ -234,7 +238,7 @@ SET `ps_status`= 48
 WHERE `ps_productid`=#{productid};
 </update>
 
-<update id="cancelMdofiyProductChaser" parameterType="String">
+<update id="cancelModifyProductChaser" parameterType="String">
 UPDATE `editshop`.`modifyproduct_tb` 
 	 SET `mt_status`= 48 
  WHERE `mt_productid`=#{productid};
@@ -276,6 +280,7 @@ FROM product_simple_tb
 INNER JOIN product_tb
 				ON pt_productid = ps_productid
 WHERE pt_status = 42
+  AND ps_status = 42
 ORDER BY pt_registtime DESC LIMIT 15;
 </select>
 
@@ -322,32 +327,32 @@ WHERE pt_productid=#{productid};
 </select>
 
 <select id="getProductLangKrByProductId" parameterType="String" resultType="productLang" resultMap="productLangMap">
-SELECT pt_productid, pt_content, pt_name
+SELECT pt_productid as productId, pt_content, pt_name
 FROM product_kr_tb
 WHERE pt_productid = #{productid}; 
 </select>
 
 <select id="getProductLangEnByProductId" parameterType="String" resultType="productLang" resultMap="productLangMap">
-SELECT pt_productid, pt_content, pt_name
+SELECT pt_productid as productId, pt_content, pt_name
 FROM product_en_tb
 WHERE pt_productid = #{productid}; 
 </select>
 
 <select id="getProductLangCnByProductId" parameterType="String" resultType="productLang" resultMap="productLangMap">
-SELECT pt_productid, pt_content, pt_name
+SELECT pt_productid as productId, pt_content, pt_name
 FROM product_cn_tb
 WHERE pt_productid = #{productid}; 
 </select>
 
 <select id="getProductLangJpByProductId" parameterType="String" resultType="productLang" resultMap="productLangMap">
-SELECT pt_productid, pt_content, pt_name
+SELECT pt_productid as productId, pt_content, pt_name
 FROM product_jp_tb
 WHERE pt_productid = #{productid}; 
 </select>
 
 
 <!-- get(seller) -->
-<select id="getSanctionBySellerId" parameterType="String" resultType="productSimple" resultMap="productSimple">
+<select id="getSanctionBySellerId" parameterType="String" resultType="productSimple" resultMap="productSimpleMap">
 SELECT ps_productid as productId, ps_thumbnail, ps_price, ps_type, ps_status
 FROM product_simple_tb
 INNER JOIN product_tb
@@ -357,20 +362,20 @@ AND ps_status = 44
 ORDER BY pt_registtime DESC;
 </select>
 
-<select id="getResponseProductSimpleBySellerId" parameterType="String" resultType="productSimple" resultMap="productSimple">
+<select id="getResponseProductSimpleBySellerId" parameterType="String" resultType="productSimple" resultMap="productSimpleMap">
 SELECT ps_productid as productId, ps_thumbnail, ps_price, ps_type, ps_status
 FROM product_simple_tb
 INNER JOIN product_tb
 ON ps_productid = pt_productid
 WHERE pt_uid = #{sellerid}
 AND ps_status = 40
-AND ps_status = 41
+OR ps_status = 41
 ORDER BY pt_registtime DESC;
 </select>
 
 <!-- other -->
-<select id="getLastProductNumber">
-SELECT max(pt_productid)
+<select id="getLastProductNumber" resultType="String">
+SELECT max(pt_productid+0)
 FROM product_tb;
 </select>
 
@@ -380,7 +385,7 @@ SET pt_limittime=#{limittime}
 WHERE pt_productid = #{productid}
 </update>
 
-<select id="getChaserNumber" parameterType="String">
+<select id="getChaserNumber" parameterType="String" resultType="String">
 SELECT mt_chaserid
 FROM modifyproduct_tb
 WHERE mt_productid = #{productid}

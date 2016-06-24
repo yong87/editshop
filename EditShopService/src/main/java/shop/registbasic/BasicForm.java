@@ -10,6 +10,7 @@ public class BasicForm {
 	public Map<String, ProductLang> langBaiscForm(String productid){
 		
 		Map<String, ProductLang> lang = new HashMap<String, ProductLang>();
+		lang.put("kr", basicProductLangKr(productid));
 		lang.put("cn", basicProductLangCn(productid));
 		lang.put("en", basicProductLangEn(productid));
 		lang.put("jp", basicProductLangJp(productid));
@@ -41,4 +42,14 @@ public class BasicForm {
 		
 		return lang;
 	}
+	private ProductLang basicProductLangKr(String productid){
+		ProductLang lang = new ProductLang();
+		lang.setContent("현재 상품은 준비중입니다.");
+		lang.setName("상품 준비중입니다.");
+		lang.setProductid(productid);
+		
+		return lang;
+	}
+	
+	
 }

@@ -23,194 +23,258 @@ public class ProductService implements ProductServiceInter {
 	private ProductEntityInter productEntity; 
 	
 	@Override
-	public boolean addProduct(Product product) {
-		// TODO 제품을 등록한다. 등록하는데 기본으로 Lang
+	public boolean registProduct(Product product, ProductSimple simple) {
+		// TODO Auto-generated method stub
 		String productId = generateProductNumber();
+		
 		product.setProductId(productId);
-		product.setLimitTime(getLimitTime());		
-		boolean isRegist = productEntity.registProduct(product);
-		
-		// 테스트 끝나고 조금 더 줄여보자!!
-		
-		Map<String, ProductLang> lang = product.getLanguageList();
-		ProductLang krLang = lang.get("kr");
-		krLang.setProductid(productId);
-		
-		//kr먼저 등록
-		boolean krRegist = productEntity.addProductLangKr(krLang);
-		boolean isOther = registOtherLang(productId);
-		
-		if(!isRegist || !krRegist || !isOther){
-			return false;
+		product.setLimitTime(getLimitTime());
+		simple.setProductid(productId);
+		boolean isAdd = productEntity.addProduct(product);
+		//product추가후 simple추가
+		if(isAdd){
+			isAdd = productEntity.addProductSimple(simple);
+			//simple추하구 lang basic추가
+			if(isAdd){
+				isAdd = addBasicLang(productId);
+				return isAdd;
+			}
+			return isAdd;
 		}
-		
-		return true;
+		return isAdd;
 	}
 
-	@Override
-	public boolean registProductSimple(ProductSimple productSimple) {
-		// TODO 제품의 간략한 정보를 등록한다.
+	/**
+	 * basic언어 setting
+	 * @param productId
+	 * @return
+	 */
+	private boolean addBasicLang(String productId){
+		BasicForm basic = new BasicForm();
+		Map<String, ProductLang> langs = basic.langBaiscForm(productId);
+
+		if(langs != null){
+			if(langs.get("kr") != null){
+				productEntity.addProductLangKr(langs.get("kr"));
+			}
+			if(langs.get("en") != null){
+				productEntity.addProductLangEn(langs.get("en"));
+			}
+			if(langs.get("cn") != null){
+				productEntity.addProductLangCn(langs.get("cn"));
+			}
+			if(langs.get("jp") != null){
+				productEntity.addProductLangJp(langs.get("cn"));
+			}
+			return true;
+		}
 		
-		boolean isSimple = productEntity.addProductSimple(productSimple);
+		return false;
+		
+	}
+	
+	@Override
+	public boolean registProductLang(Map<String, ProductLang> langList) {
+		// TODO Auto-generated method stub
+		boolean isAdd = false;
+		
+		for(Map.Entry<String, ProductLang> lang : langList.entrySet()){
+			String key = lang.getKey();
+			isAdd = modifyProductLang(lang.getValue(), key);
+			if(lang.getValue() == null){
+				return isAdd;
+			}
+		}
+		return isAdd;
+	}
+
+
+	@Override
+	public boolean modifyProduct(Product product, ProductSimple simple) {
+		// TODO Auto-generated method stub
+		
+		String newProductId	= generateProductNumber();
+		boolean isChaser = productEntity.addModifyChaser(product.getProductId(), newProductId);
+		
+		if(!isChaser){
+			return false;
+		}
+		product.setProductId(newProductId);
+		simple.setProductid(newProductId);
+		
+		boolean isProduct = productEntity.addModifyProduct(product);
+		boolean isSimple = productEntity.addModifyProductSimple(simple);
+		
+		//검사부분 다시한번 생각하기
+		if(!isProduct){
+			System.out.println("product가 만들어지지 않았습니다.");
+			return false;
+		}
 		if(!isSimple){
-			return false;
-		}
-		return true;
-	}
-
-	@Override
-	public boolean modifyProduct(Product product) {
-		// TODO Auto-generated method stub
-		
-		boolean isModify = productEntity.modifyRegistProduct(product);
-		//boolean isLog = productEntity.logProduct();
-		
-		if(!isModify){
+			System.out.println("product가 만들어지지 않았습니다.");
 			return false;
 		}
 		
 		return true;
 	}
-
+	
+	
 	@Override
-	public boolean modifyProductSimple(ProductSimple productSimple) {
+	public boolean modifyProductLang(ProductLang lang, String key) {
 		// TODO Auto-generated method stub
-		
-		boolean isModify = productEntity.modifyProductSimple(productSimple);
-		if(!isModify){
-			return false;
+		boolean isModify = false;
+		if("kr".equals(key)){
+			isModify = productEntity.modifyProductLangKr(lang);
+		}
+		if("jp".equals(key)){
+			isModify = productEntity.modifyProductLangJp(lang);
+		}
+		if("en".equals(key)){
+			isModify = productEntity.modifyProductLangEn(lang);
+		}
+		if("cn".equals(key)){
+			isModify = productEntity.modifyProductLangCn(lang);	
 		}
 		
-		return true;
+		return isModify;
+	}
+	//cancel 해야함
+	@Override
+	public boolean cancelProduct(String productId) {
+		// TODO Auto-generated method stub
+		boolean isCancel = productEntity.cancelProduct(productId);
+		if(!isCancel){
+			return isCancel;
+		}
+		isCancel = productEntity.cancelProductSimple(productId);
+		return isCancel; 
 	}
 
 	@Override
-	public boolean confirmProduct(String productId) {
+	public boolean cancelModifyProduct(String productId) {
 		// TODO Auto-generated method stub
-		boolean isConfirm = productEntity.confirmProduct(productId);
 		
-		if(!isConfirm){
-			return false;
+		boolean isCancel = productEntity.cancelModifyProduct(productId);
+		if(!isCancel){
+			return isCancel;
 		}
+		isCancel = productEntity.cancelModifyProductSimple(productId);
+		if(!isCancel){
+			return isCancel;
+		}
+		isCancel = productEntity.cancelModifyProductChaser(productId);
 		
-		return true;
+		return isCancel;
+	}
+
+	@Override
+	public boolean returnProduct(String productId) {
+		// TODO Auto-generated method stub
+		return productEntity.returnProduct(productId);
 	}
 
 	@Override
 	public boolean expireProduct(String productId) {
 		// TODO Auto-generated method stub
-		
-		boolean isExpire = productEntity.expireProduct(productId);
-		if(!isExpire){
-			return false;
+		boolean expire = productEntity.expireProdcut(productId);
+		if(!expire){
+			return expire;
 		}
-		return true;
+		expire = productEntity.expireProductSimple(productId);
+		return expire;
 	}
-
+	//confirm test완료 confirmModify 해야함
 	@Override
-	public boolean regsitProductLang(Map<String, ProductLang> lang) {
+	public boolean confirmProduct(String productId) {
 		// TODO Auto-generated method stub
-		
-		ProductLang cnLang = lang.get("cn");
-		ProductLang enLang = lang.get("en");
-		ProductLang jpLang = lang.get("jp");
-		
-		//중국등록
-		if(cnLang != null){
-			boolean isModify = productEntity.registProductLangCn(cnLang);
-			if(!isModify){
-				return false;
-			}
+		boolean isConfirm = productEntity.confirmProduct(productId);
+		if(!isConfirm){
+			return isConfirm;
 		}
+		isConfirm = productEntity.confirmProductSimple(productId);
 		
-		//영어 등록
-		if(enLang != null){
-			boolean isModify = productEntity.registProductLangEn(enLang);
-			if(!isModify){
-				return false;
-			}
+		return isConfirm;
+	}
+
+	@Override
+	public boolean confirmModifyProduct(String productId) {
+		// TODO Auto-generated method stub
+		
+		String chaserId = productEntity.getChaserNumber(productId);
+		boolean isConfirm = productEntity.confirmModifyProduct(chaserId); // 원본 아이디가 들어가야함
+		if(!isConfirm){
+			return isConfirm;
 		}
-		
-		//일본어 등록
-		if(jpLang != null){
-			boolean isModify = productEntity.registProductLangJp(jpLang);
-			if(!isModify){
-				return false;
-			}
+		isConfirm = productEntity.confirmModifyProductSimple(chaserId); // 원본 아이디가 들어가야함.
+		if(!isConfirm){
+			return isConfirm;
 		}
+		isConfirm = productEntity.confirmModifyChaser(productId); //원본아이디가 들어가야함.
+		//chaserId를가지고 수정본 confirm시켜야함.
 		
-		return true;
+		return isConfirm;
 	}
 
-	//all 검색시
 	@Override
-	public List<ProductSimple> findAllProduct() {
+	public boolean sanctionProduct(String productId) {
 		// TODO Auto-generated method stub
-		return productEntity.productSimpleByStatus(42);
+		
+		boolean isSanction = productEntity.sanctionProductByAdmin(productId);
+		if(!isSanction){
+			return isSanction;
+		}
+		isSanction = productEntity.sanctionProductSimpleByAdmin(productId);
+		return isSanction;
 	}
 
 	@Override
-	public List<ProductSimple> newArrivalMain() {
+	public List<ProductSimple> findNewArrivalMain() {
 		// TODO Auto-generated method stub
-		return productEntity.newArrivalMain();
+		return productEntity.getNewArrivalMain();
 	}
 
 	@Override
-	public List<ProductSimple> findCategory(int type) {
+	public List<ProductSimple> findProductByType(int type) {
 		// TODO Auto-generated method stub
-		return productEntity.productByType(type);
-	}
-
-	/**
-	 * 관리자 전용
-	 * @param status && sellerId
-	 * @return
-	 */
-	@Override
-	public List<ProductSimple> findProductByStatus(int status) {
-		// TODO Auto-generated method stub
-		return productEntity.productSimpleByStatus(status);
+		return productEntity.getProductSimpleByType(type);
 	}
 
 	@Override
-	public List<ProductSimple> findProductBySellerId(String sellerId) {
-		// TODO Auto-generated method stub
-		return productEntity.productBySellerId(sellerId);
-	}
-
-	@Override
-	public Product findProductById(String productId) {
+	public Product findProductByProductId(String productId) {
 		// TODO Auto-generated method stub
 		return productEntity.getProductByProductId(productId);
 	}
-	
-	/**
-	 * 한국어 제외 기본 폼등록
-	 * @param productId
-	 * @return
-	 */
-	private boolean registOtherLang(String productId){
-		BasicForm form = new BasicForm();
-		Map<String, ProductLang>lang = form.langBaiscForm(productId);
-		boolean isCn = productEntity.addProductLangCn(lang.get("cn"));
-		boolean isEn = productEntity.addProductLangEn(lang.get("en"));
-		boolean isJp = productEntity.addProductLangJp(lang.get("jp"));
-		
-		if(!isCn || !isEn || !isJp){
-			return false;
-		}
-		
-		return true;
+
+	@Override
+	public List<ProductSimple> findNewArrvival() {
+		// TODO Auto-generated method stub
+		return productEntity.getNewArrival();
+	}
+
+	@Override
+	public List<ProductSimple> findProductSellerId(String sellerId) {
+		// TODO Auto-generated method stub
+		return productEntity.getProductSimpleBySellerId(sellerId);
+	}
+
+	@Override
+	public List<ProductSimple> findSanctionBySellerId(String sellerId) {
+		// TODO Auto-generated method stub
+		return productEntity.getSanctionBySellerId(sellerId);
+	}
+
+	@Override
+	public List<ProductSimple> findResponseProduct(String sellerId) {
+		// TODO Auto-generated method stub
+		return productEntity.getResponseProductSimpleBySellerId(sellerId);
 	}
 	
-	
-
 	/**
 	 * 네~ 다음번호!
 	 * @return
 	 */
 	private String generateProductNumber(){
-		String lastNumber = productEntity.lastProductNumber();
+		String lastNumber = productEntity.getLastProductNumber();
 		
 		int parsed = Integer.parseInt(lastNumber);
 		String returnNumber = String.valueOf(++parsed);

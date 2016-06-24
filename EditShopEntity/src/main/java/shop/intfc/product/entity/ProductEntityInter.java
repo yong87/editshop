@@ -23,6 +23,7 @@ public interface ProductEntityInter {
 	public boolean addProductLangJp(ProductLang lang);
 	public boolean addProductSimple(ProductSimple simple);
 	public boolean addModifyProduct(Product product);
+	public boolean addModifyProductSimple(ProductSimple simple);
 	
 	/**
 	 * 수정 관련
@@ -31,12 +32,10 @@ public interface ProductEntityInter {
 	 * @param product
 	 * @return
 	 */
-	public boolean modifyProduct(String productId);
 	public boolean modifyProductLangKr(ProductLang lang);
 	public boolean modifyProductLangEn(ProductLang lang);
 	public boolean modifyProductLangCn(ProductLang lang);
 	public boolean modifyProductLangJp(ProductLang lang);
-	public boolean modifyProductSimple(String productId); // 필요한지 검토
 	public boolean addModifyChaser(String productId, String chaserId);
 	//public boolean modifyChaser();
 	
@@ -61,7 +60,7 @@ public interface ProductEntityInter {
 	public boolean returnProduct(String productId);
 	public boolean cancelModifyProduct(String productId);
 	public boolean cancelModifyProductSimple(String productId);
-	public boolean cancelMdofiyProductChaser(String productId);
+	public boolean cancelModifyProductChaser(String productId);
 	
 	/**
 	 * 삭제 관련 

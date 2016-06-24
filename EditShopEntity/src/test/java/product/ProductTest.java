@@ -4,7 +4,9 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -100,11 +102,6 @@ public class ProductTest {
 	}
 	
 	@Test
-	public void modifyProductTest(){
-		System.out.println(pe.modifyProduct("6"));
-	}
-	
-	@Test
 	public void modifyProductLangEnTest(){
 		ProductLang lang = new ProductLang();
 		lang.setContent("I write in English");
@@ -178,7 +175,139 @@ public class ProductTest {
 	
 	@Test
 	public void cancelProductTest(){
+		System.out.println(pe.cancelProduct("6"));
+	}
+	
+	@Test
+	public void cancelProductSimpleTest(){
+		System.out.println(pe.cancelProductSimple("6"));
+	}
+	
+	@Test
+	public void returnProudctTest(){
+		System.out.println(pe.returnProduct("6"));
+	}
+	
+	@Test
+	public void cancelModfiyProductTest(){
+		System.out.println(pe.cancelModifyProduct("6"));
+	}
+	
+	@Test
+	public void cancelModfiyProductSimpleTest(){
+		System.out.println(pe.cancelModifyProductSimple("6"));
+	}
+	
+	@Test
+	public void cancelModifyProductChaserTest(){
+		System.out.println(pe.cancelModifyProductChaser("6"));
+	}
+	
+	@Test
+	public void overLimitTimeTest(){
+		System.out.println(pe.overLimitTime("6"));
+	}
+	
+	@Test
+	public void expireProductTest(){
+		System.out.println(pe.expireProdcut("7"));
+	}
+	
+	@Test
+	public void expireProductSimpleTest(){
+		System.out.println(pe.expireProductSimple("7"));
+	}
+	
+	@Test
+	public void sanctionProductByAdminTest(){
+		System.out.println(pe.sanctionProductByAdmin("6"));
+	}
+	
+	@Test
+	public void sanctionProductSimpleByAdminTest(){
+		System.out.println(pe.sanctionProductSimpleByAdmin("6"));
+	}
+	
+	@Test
+	public void getNewArrivalTest(){
+		List<ProductSimple> ps = pe.getNewArrival();
+		for(ProductSimple simple : ps){
+			System.out.println(simple.toString());
+		}
+	}
+	@Test
+	public void getNewArrivalMainTest(){
+		List<ProductSimple> ps = pe.getNewArrivalMain();
+		for(ProductSimple simple : ps){
+			System.out.println(simple.toString());
+		}
+	}
+	
+	@Test
+	public void getProductSimpleByTypeTest(){
+		List<ProductSimple> ps = pe.getProductSimpleByType(3);
+		for(ProductSimple simple : ps){
+			System.out.println(simple.toString());
+		}
+	}
+	@Test
+	public void getProductSimpleBySellerIdTest(){
+		List<ProductSimple> ps = pe.getProductSimpleBySellerId("test");
+		for(ProductSimple simple : ps){
+			System.out.println(simple.toString());
+		}
+	}
+	
+	@Test
+	public void getProductByProductIdTest(){
+		Product product = pe.getProductByProductId("3");
 		
+		System.out.println(product.toString());
+	}
+	
+	@Test
+	public void getProductLangKrByProductIdTest(){
+		ProductLang lang = pe.getProductLangKrByProductId("3");
+		System.out.println(lang.toString());
+	}
+	@Test
+	public void getProductLangEnByProductIdTest(){
+		ProductLang lang = pe.getProductLangEnByProductId("3");
+		System.out.println(lang.toString());
+	}
+	@Test
+	public void getProductLangCnByProductIdTest(){
+		ProductLang lang = pe.getProductLangCnByProductId("3");
+		System.out.println(lang.toString());
+	}
+	@Test
+	public void getProductLangJpByProductIdTest(){
+		ProductLang lang = pe.getProductLangJpByProductId("3");
+		System.out.println(lang.toString());
+	}
+	
+	@Test
+	public void getSanctionBySellerIdTest(){
+		List<ProductSimple> ps = pe.getSanctionBySellerId("test");
+		
+		for(ProductSimple simple : ps){
+			System.out.println(simple.toString());
+		}
+	}
+	
+	
+	@Test
+	public void getResponseProductSimpleBySellerIdTest(){
+		List<ProductSimple> ps = pe.getResponseProductSimpleBySellerId("test");
+		
+		for(ProductSimple simple : ps){
+			System.out.println(simple.toString());
+		}
+	}
+	
+	@Test
+	public void getLastProductNumberTest(){
+		System.out.println(pe.getLastProductNumber());
 	}
 	
 	@Test
@@ -202,5 +331,75 @@ public class ProductTest {
 	}
 
 
+	@Test
+	public void forEachMapTest(){
+		Map<String, ProductLang>langs =  langBasicForm("1");
+		
+		for(Map.Entry<String, ProductLang> init: langs.entrySet()){
+			if(init.getKey().equals("kr")){
+				if(init.getValue() != null){
+					System.out.println(init.getValue().toString());;
+				}
+			}
+			if(init.getKey().equals("en")){
+				if(init.getValue() != null){
+					System.out.println(init.getValue().toString());;
+				}
+			}
+			if(init.getKey().equals("cn")){
+				if(init.getValue() != null){
+					System.out.println(init.getValue().toString());;
+				}
+			}
+			if(init.getKey().equals("jp")){
+				if(init.getValue() != null){
+					System.out.println(init.getValue().toString());;
+				}
+			}
+		}
+	}
 
+	public Map<String, ProductLang> langBasicForm(String productid){
+		
+		Map<String, ProductLang> lang = new HashMap<String, ProductLang>();
+		lang.put("kr", basicProductLangKr(productid));
+		lang.put("cn", basicProductLangCn(productid));
+		lang.put("en", basicProductLangEn(productid));
+		lang.put("jp", basicProductLangJp(productid));
+		
+		return lang;
+	}
+
+	private ProductLang basicProductLangCn(String productid){
+		ProductLang lang = new ProductLang();
+		lang.setContent("该产品是语言方面的准备。");
+		lang.setName("品的制备");
+		lang.setProductid(productid);
+		
+		return lang;
+	}
+	private ProductLang basicProductLangEn(String productid){
+		ProductLang lang = new ProductLang();
+		lang.setContent("The product is the language preparation.");
+		lang.setName("Preparation of goods");
+		lang.setProductid(productid);
+		
+		return lang;
+	}
+	private ProductLang basicProductLangJp(String productid){
+		ProductLang lang = new ProductLang();
+		lang.setContent("その言語の商品は準備中です。");
+		lang.setName("準備中の商品");
+		lang.setProductid(productid);
+		
+		return lang;
+	}
+	private ProductLang basicProductLangKr(String productid){
+		ProductLang lang = new ProductLang();
+		lang.setContent("현재 상품은 준비중입니다.");
+		lang.setName("상품 준비중입니다.");
+		lang.setProductid(productid);
+		
+		return lang;
+	}
 }
