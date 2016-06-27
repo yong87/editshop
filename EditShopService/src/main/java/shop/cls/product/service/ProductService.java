@@ -138,7 +138,7 @@ public class ProductService implements ProductServiceInter {
 		
 		return isModify;
 	}
-	//cancel 해야함
+	
 	@Override
 	public boolean cancelProduct(String productId) {
 		// TODO Auto-generated method stub
@@ -153,12 +153,12 @@ public class ProductService implements ProductServiceInter {
 	@Override
 	public boolean cancelModifyProduct(String productId) {
 		// TODO Auto-generated method stub
-		
-		boolean isCancel = productEntity.cancelModifyProduct(productId);
+		String chaserId = productEntity.getChaserNumber(productId);
+		boolean isCancel = productEntity.cancelModifyProduct(chaserId);
 		if(!isCancel){
 			return isCancel;
 		}
-		isCancel = productEntity.cancelModifyProductSimple(productId);
+		isCancel = productEntity.cancelModifyProductSimple(chaserId);
 		if(!isCancel){
 			return isCancel;
 		}
@@ -201,16 +201,32 @@ public class ProductService implements ProductServiceInter {
 		// TODO Auto-generated method stub
 		
 		String chaserId = productEntity.getChaserNumber(productId);
-		boolean isConfirm = productEntity.confirmModifyProduct(chaserId); // 원본 아이디가 들어가야함
+		boolean isOriginal = modifyOriginalProduct(productId);
+		if(!isOriginal){
+			return isOriginal;
+		}
+		boolean isConfirm = confirmProduct(chaserId);
 		if(!isConfirm){
 			return isConfirm;
 		}
-		isConfirm = productEntity.confirmModifyProductSimple(chaserId); // 원본 아이디가 들어가야함.
+		return isConfirm;
+	}
+	/**
+	 * 제품 수정 수락시 오리지널 데이터 스테이터스 변경
+	 * @param productId
+	 * @return
+	 */
+	private boolean modifyOriginalProduct(String productId){
+
+		boolean isConfirm = productEntity.confirmModifyProduct(productId); 
 		if(!isConfirm){
 			return isConfirm;
 		}
-		isConfirm = productEntity.confirmModifyChaser(productId); //원본아이디가 들어가야함.
-		//chaserId를가지고 수정본 confirm시켜야함.
+		isConfirm = productEntity.confirmModifyProductSimple(productId); 
+		if(!isConfirm){
+			return isConfirm;
+		}
+		isConfirm = productEntity.confirmModifyChaser(productId); 
 		
 		return isConfirm;
 	}

@@ -46,7 +46,69 @@ public class ProductServiceTest {
 	
 	@Test
 	public void confirmModifyProductTest(){
-		System.out.println(ps.confirmModifyProduct("16"));
+		System.out.println(ps.confirmModifyProduct("14"));
+	}
+	
+	@Test
+	public void cancelProductTest(){
+		System.out.println(ps.cancelProduct("17"));
+	}
+	
+	@Test
+	public void cancelModifyProductTest(){
+		System.out.println(ps.cancelModifyProduct("19"));
+	}
+	
+	@Test
+	public void findNewArrivalMainTest(){
+		for(ProductSimple product : ps.findNewArrivalMain()){
+			System.out.println(product.toString());
+		}
+	}
+	
+	@Test
+	public void findNewArrivalTest(){
+		for(ProductSimple product : ps.findNewArrvival()){
+			System.out.println(product.toString());
+		}
+	}
+	
+	@Test
+	public void findProductByTypeTest(){
+		for(ProductSimple product : ps.findProductByType(2)){
+			System.out.println(product.toString());
+		}
+	}
+	
+	@Test
+	public void findProductByProductIdTest(){
+		System.out.println(ps.findProductByProductId("13"));
+	}
+	
+	@Test
+	public void findProductSellerIdTest(){
+		for(ProductSimple product: ps.findProductSellerId("test")){
+			System.out.println(product.toString());
+		}
+	}
+	
+	@Test
+	public void findSanctionBySellerIdTest(){
+		for(ProductSimple product: ps.findSanctionBySellerId("test")){
+			System.out.println(product.toString());
+		}
+	}
+	
+	@Test
+	public void findResponseProductTest(){
+		for(ProductSimple product: ps.findResponseProduct("test2")){
+			System.out.println(product.toString());
+		}
+	}
+	
+	@Test
+	public void sanctionProductTest(){
+		System.out.println(ps.sanctionProduct("15"));
 	}
 	
 	/**
@@ -62,7 +124,7 @@ public class ProductServiceTest {
 		product.setMaxQuantity(200);
 		product.setOption("blueblack,royleBlue");
 		product.setSellerId("test2");
-		product.setProductId("14");
+		product.setProductId("19");
 		
 		
 		
