@@ -18,16 +18,15 @@ public class emailTEst {
 	
 	@Before
     public void start() {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("dispatcher-servlet.xml");
+	
+		ApplicationContext ac = new ClassPathXmlApplicationContext("dispatcher-servlet.xml");
         uas = ac.getBean("userAdminService", UserAdminService.class);
     }
 	
 	@Test
 	public void email() throws ParseException {
-		
 
 		uas.addUser("test7", "1234", "xplay84@gmail.com");
-		
 		
 	}
 

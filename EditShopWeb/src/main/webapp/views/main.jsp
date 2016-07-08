@@ -3,72 +3,235 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<c:if test="${sessionScope.user eq null }">
-		<form action="/EditShopWeb/login.do" method="POST">
-			<table>
-				<tr>
-					<td>id</td>
-					<td><input type="text" placeholder="id" name="id"></td>
-				</tr>
-				<tr>
-					<td>pw</td>
-					<td><input type="password" placeholder="pw" name="pwd"></td>
-				</tr>
-			</table>
-			<input type="submit" value="login">
-		</form>
-	</c:if>
-	<c:if test="${sessionScope.user ne null }">
-		${sessionScope.user.id }님
-		<a href="/EditShopWeb/logout.do"><button>logout</button></a>
-	</c:if>
+	<head>
+		<title>8Round</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/another.css" />
+	</head>
+	<body class="single">
 
-	product
-	<br>
-	<c:forEach var="product" items="${productList }">
-		<a
-			href="/EditShopWeb/productDetail.do?productId=${product.productId }">${product.productId }</a>
-		<br>
-${product.sellerId }<br>
-${product.maxQuantity }<br>
-${product.sellcnt }<br>
-${product.option }<br>
-${product.commission }<br>
-		<img src="${product.imagepath }"
-			onclick="detailView('${product.productId}')">
-		<br>
-${product.status }<br>
-${product.name }<br>
-${product.content }<br>
-${product.languageList.kor.name }<br>
-${product.languageList.chn.address }<br>
-
-		<br>
-	</c:forEach>
-	<c:forEach var="review" items="${reviews }">
-	${review.content }<br>
-	${review.hate }<br>
-	${review.like }<br>
-	${review.ordernumber }<br>
-	${review.point }<br>
-		<br>
-	</c:forEach>
-
-	<form action="/EditShopWeb/searchProduct.do" method="get">
-		<select id="searchType" name="searchType">
-			<option value="all">select</option>
-			<option value="productName">Product Name</option>
-			<option value="productType">Product Type</option>
-			<option value="salesName">Sales Name</option>
-		</select> <input type="text" placeholder="search" name="search">
-		<input type="submit" value="Search">
-	</form>
-
-
-</body>
-</html>
+    <!-- Wrapper -->
+    <div id="wrapper">
+      
+      <!-- Header -->
+      <header id="header">
+        <h1><a href="#">8Round</a></h1>
+        <nav class="links">
+          <ul>
+            <li><a href="#" onclick="menuclick('men')" class="catebtn">men</a></li>
+            <li><a href="#" onclick="menuclick('women')" class="catebtn">women</a></li>
+            <li><a href="#" onclick="menuclick('acc')" class="catebtn">accessory</a></li>
+            <li><a href="#" onclick="menuclick('etc')" class="catebtn">etc</a></li>
+            <li><a href="#">Community</a></li>
+          </ul>
+        </nav>
+        <nav class="links subcategory">
+          <ul>
+            <li>sss</li>
+            <li>sss</li>
+            <li>sss</li>
+            <li>sss</li>
+          </ul>
+        </nav>
+        <nav class="links subcategory">
+          <ul>
+            <li>aaa</li>
+            <li>aaa</li>
+            <li>aaa</li>
+            <li>aaa</li>
+          </ul>
+        </nav>
+        <nav class="links subcategory">
+          <ul>
+            <li>ddd</li>
+            <li>ddd</li>
+            <li>ddd</li>
+            <li>ddd</li>
+          </ul>
+        </nav>
+        <nav class="links subcategory">
+          <ul>
+            <li>vvv</li>
+            <li>vvv</li>
+            <li>vvv</li>
+            <li>vvv</li>
+          </ul>
+        </nav>
+        <nav class="main">
+          <ul>
+            <li class="menu">
+              <a class="fa-bars" href="#menu">Menu</a>
+            </li>
+          </ul>
+        </nav>
+        
+      </header>
+      
+      <!-- Menu -->
+      <section id="menu">
+        
+        <!-- Search -->
+        <section>
+          
+        </section>
+        
+        <!-- Actions -->
+        <section class="useraction">
+          <ul class="actions vertical">
+            <li><a href="#" class="button big fit">Log In</a></li>
+          </ul>
+          <ul class="actions vertical">
+            <li><a href="#" class="button big fit">Log Out</a></li>
+          </ul>
+          <ul class="actions vertical">
+            <li><a href="#" class="button big fit">My Info</a></li>
+          </ul>
+        </section>
+        
+      </section>
+      
+      <!-- Main -->
+      <div id="main">
+        
+        <!-- Post -->
+        <article class="post">
+          <header>
+            
+          </header>
+          <div class="slide-container">
+            <div class="slides fade">
+              <img src="http://placehold.it/1024x300" style="width:100%">
+              <div class="productinfo">ProductInfo</div>
+            </div>
+            <div class="slides fade">
+              <img src="http://placehold.it/1025x300" style="width:100%">
+              <div class="productinfo">ProductInfo</div>
+            </div>
+            <div class="slides fade">
+              <img src="http://placehold.it/1026x300" style="width:100%">
+              <div class="productinfo">ProductInfo</div>
+            </div>
+            <a class="imgprev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="imgnext" onclick="plusSlides(1)">&#10095;</a>
+            <div class="imgpages">
+              <span class="dot" onclick="currentSlide(1)"></span> 
+              <span class="dot" onclick="currentSlide(2)"></span> 
+              <span class="dot" onclick="currentSlide(3)"></span> 
+            </div>
+          </div>
+          <br>
+          <!-- new Arrival-->
+          <div class="title">
+            <h1><a href="#">NewArrival</a></h1>
+            <section class="tiles">
+              
+              <article class="style1">
+                <span class="image">
+                  <img src="http://placehold.it/150x150" alt="" />
+                </span>
+                <a href="generic.html">
+                  <h2>ProductName</h2>
+                  <div class="contents">
+                    <p>ProductInfo</p>
+                  </div>
+                </a>
+              </article>
+              <article class="style2">
+                <span class="image">
+                  <img src="http://placehold.it/150x150" alt="" />
+                </span>
+                <a href="generic.html">
+                  <h2>ProductName</h2>
+                  <div class="contents">
+                    <p>ProductInfo</p>
+                  </div>
+                </a>
+              </article>
+              <article class="style2">
+                <span class="image">
+                  <img src="http://placehold.it/150x150" alt="" />
+                </span>
+                <a href="generic.html">
+                  <h2>ProductName</h2>
+                  <div class="contents">
+                    <p>ProductInfo</p>
+                  </div>
+                </a>
+              </article>
+            </section>
+          </div>
+          <!-- Best Review -->
+          <div class="title">
+            <h1><a href="#">Best Review</a></h1>
+            <section class="tiles">
+              
+              <article class="style1">
+                <span class="image">
+                  <img src="http://placehold.it/150x150" alt="" />
+                </span>
+                <a href="generic.html">
+                  <h2>ProductName</h2>
+                  <div class="contents">
+                    <p>ProductInfo</p>
+                  </div>
+                </a>
+              </article>
+              <article class="style2">
+                <span class="image">
+                  <img src="http://placehold.it/150x150" alt="" />
+                </span>
+                <a href="generic.html">
+                  <h2>ProductName</h2>
+                  <div class="contents">
+                    <p>ProductInfo</p>
+                  </div>
+                </a>
+              </article>
+              <article class="style2">
+                <span class="image">
+                  <img src="http://placehold.it/150x150" alt="" />
+                </span>
+                <a href="generic.html">
+                  <h2>ProductName</h2>
+                  <div class="contents">
+                    <p>ProductInfo</p>
+                  </div>
+                </a>
+              </article>
+            </section>
+          </div>
+          <div>
+            <h1><a href="#">notice</a></h1>
+            <h1><a href="#">Board</a></h1>
+          </div>
+        </article>
+      </div>
+      
+      <!-- Footer -->
+      <section id="footer">
+        <ul class="icons">
+          <li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a> </li>
+          <li><a href="#" class="fa-facebook"><span class="label">Facebook</span></a> </li>
+          <li><a href="#" class="fa-instagram"><span class="label">Instagram</span> </a></li>
+          <li><a href="#" class="fa-rss"><span class="label">RSS</span></a></li>
+          <li><a href="#" class="fa-envelope"><span class="label">Email</span></a>  </li>
+        </ul>
+        <p class="copyright">&copy; Untitled. Design: <a  href="http://html5up.net">HTML5 UP</a>. Images: <a  href="http://unsplash.com">Unsplash</a>.</p>
+      </section>
+      
+    </div>
+    
+    <!-- Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/another.js"></script>
+    <script type="text/javascript">
+    
+    </script>
+  </body>
+</html> 
