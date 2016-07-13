@@ -31,7 +31,6 @@ public class UserAdminEntity implements UserAdminEntityInter {
 			returnMap.put("password", userAdministrationMapper.getPasswordById(id));
 			returnMap.put("status", getStatusById(id, sqlsession));
 			
-			sqlsession.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -49,8 +48,7 @@ public class UserAdminEntity implements UserAdminEntityInter {
 					.getMapper(UserAdministrationMapper.class);
 				
 			status = userAdministrationMapper.getStatusById(id);
-			
-			sqlsession.commit();
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;

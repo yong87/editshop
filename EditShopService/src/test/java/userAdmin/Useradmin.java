@@ -30,12 +30,12 @@ public class Useradmin {
 	
 	@Test
 	public void logintest() {
-		System.out.println(uas.Login("test", "1234"));
+		System.out.println(uas.login("test", "1234"));
 	}
 	
 	@Test
 	public void logout() {
-		System.out.println(uas.LogOut("test"));
+		System.out.println(uas.logOut("test"));
 	}
 	
 	@Test

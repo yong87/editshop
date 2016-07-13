@@ -9,7 +9,9 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.management.openmbean.InvalidKeyException;
 
+import org.springframework.stereotype.Service;
 
+@Service
 public class Crypter {
 
 	

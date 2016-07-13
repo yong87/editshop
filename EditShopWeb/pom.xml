@@ -97,6 +97,12 @@
 		
 		<dependency>
 			<groupId>com.editshop</groupId>
+			<artifactId>EditShopEntity</artifactId>
+			<version>SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.editshop</groupId>
 			<artifactId>EditShopDomain</artifactId>
 			<version>SNAPSHOT</version>
 		</dependency>

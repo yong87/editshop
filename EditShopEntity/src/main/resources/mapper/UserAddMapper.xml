@@ -10,7 +10,7 @@
 		(`user_id`, `user_pwd`)
 		VALUES (#{id}, #{pwd});
 	</insert>
-
+<!-- email test -->
 	<insert id="addDetailUser" parameterType="userDetail">
 		UPDATE `editshop`.`user_detail_tb` 
 		SET `user_name`=#{name}, `user_email`=#{email}, `user_address`=#{address}, `user_phone`=#{phone}, 
