@@ -25,6 +25,9 @@ public class UserAdminService implements UserAdminServiceInter {
 	UserAddEntityInter userAdd;
 
 	// 0530/1434 complete test
+	/**
+	 * login
+	 */
 	public Map<String, Object> login(String id, String password) {
 
 		Map<String, Object> map = userAd.getPasswordById(id);
@@ -43,11 +46,17 @@ public class UserAdminService implements UserAdminServiceInter {
 	}
 
 	// 0530/1437 complete test
+	/**
+	 * logout
+	 */
 	public boolean logOut(String id) {
 		return userAd.addExitTime(id);
 	}
 
 	// 0530/1450 complete test
+	/**
+	 * 유저탈퇴
+	 */
 	public boolean exitUser(String id, String password) {
 		if (!password.equals(userAd.getPasswordById(id))) {
 			return false;
@@ -55,6 +64,9 @@ public class UserAdminService implements UserAdminServiceInter {
 		return userAd.changeAuthority(id, 0);
 	}
 
+	/**
+	 * 회원가입
+	 */
 	public boolean addUser(String id, String password, String email)
 			throws ParseException {
 		
@@ -65,7 +77,10 @@ public class UserAdminService implements UserAdminServiceInter {
 		//인증번호 생성
 		String centificationKey = new Centification()
 				.GenerateCentificationKey(id);
-		
+		//DB에 있는지 확인
+		//있으면 새로 생성
+		//없으면 certification_tb에 저장 //만료시간추가
+		//
 		if (centificationKey == null) {
 			return false;
 		}

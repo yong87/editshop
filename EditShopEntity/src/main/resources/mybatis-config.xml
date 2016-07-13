@@ -6,6 +6,7 @@
 <configuration>
 
 	<typeAliases>
+		<typeAlias type="vo.CertificationVO" alias="certification" />
 		<typeAlias type="vo.UserDetail" alias="userDetail" />
 		<typeAlias type="vo.UserInfo" alias="userInfo" />
 		<typeAlias type="vo.User" alias="user" />
@@ -39,6 +40,7 @@
 	</environments>
 
 	<mappers>
+		<mapper resource="mapper/CertificationMapper.xml" />
 		<mapper resource="mapper/UserAddMapper.xml" />
 		<mapper resource="mapper/UserModifyMapper.xml" />
 		<mapper resource="mapper/UserLogMapper.xml" />
