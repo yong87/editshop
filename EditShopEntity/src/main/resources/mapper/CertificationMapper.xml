@@ -5,26 +5,34 @@
 
 <mapper namespace="mapper.certification.CertificationMapper">
 
-<insert id="addCertification" parameterType="CertificationVO">
+<resultMap id="certification" type="vo.CertificationVO">
+		<id property="id" column="cen_uid" />
+		<result property="key" column="cen_key" />
+		<result property="limitKeyTime" column="cen_limitkeytime" />
+		<result property="status" column="cen_status" />
+</resultMap>
+
+
+<insert id="addCertification" parameterType="certification">
 INSERT INTO `editshop`.`certification_tb` (
-`cen_uid`
+`cen_uid` 
 ,`cen_key`
-,`cen_limitkeytime`
+,`cen_limitkeytime` 
 ,`cen_status`) VALUES (
-id, '001100110011', now(), '0'); -- id,인증코드,만료시간, 10
+#{id}, #{key}, #{limitKeyTime}, 10);
 </insert>
 
 <update id="modifyCertification" parameterType="certification">
 UPDATE `editshop`.`certification_tb` 
-SET `cen_status`='10' 
-WHERE `cen_uid`= 'krok3' 
-AND `cen_key`= '001100110011';
+SET `cen_status`=0 
+WHERE `cen_uid`= #{id} 
+AND `cen_key`= #{key}
 </update>
 
 <select id="getCertificationByUserId" parameterType="String" resultType="String">
 SELECT cen_key
 FROM certification_tb
-WHERE cen_uid = ${id}
+WHERE cen_uid = #{id}
 AND cen_status = 10;
 </select>
 </mapper>
