@@ -1,6 +1,9 @@
 package shop.cls.user;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
@@ -9,12 +12,12 @@ import org.springframework.stereotype.Service;
 
 import shop.centification.Centification;
 import shop.emailing.EmailService;
+import shop.intfc.certification.entity.CertificationEntityInter;
 import shop.intfc.user.entity.UserAddEntityInter;
 import shop.intfc.user.entity.UserAdminEntityInter;
 import shop.intfc.user.service.UserAdminServiceInter;
+import vo.CertificationVO;
 import vo.User;
-
-import com.sun.jmx.snmp.Timestamp;
 
 @Service
 public class UserAdminService implements UserAdminServiceInter {
@@ -23,6 +26,8 @@ public class UserAdminService implements UserAdminServiceInter {
 	UserAdminEntityInter userAd;
 	@Autowired
 	UserAddEntityInter userAdd;
+	@Autowired
+	CertificationEntityInter certification;
 
 	// 0530/1434 complete test
 	/**
@@ -77,12 +82,19 @@ public class UserAdminService implements UserAdminServiceInter {
 		//인증번호 생성
 		String centificationKey = new Centification()
 				.GenerateCentificationKey(id);
-		//DB에 있는지 확인
-		//있으면 새로 생성
-		//없으면 certification_tb에 저장 //만료시간추가
-		//
-		if (centificationKey == null) {
-			return false;
+		
+		//반복하는 메소드 만들기 // 시간남으면
+		//DB에 있는지 확인 및 재생성 반복
+		if(existKey(centificationKey)){
+			for( ; ; ){
+				//있으면 새로 생성
+				centificationKey = new Centification()
+				.GenerateCentificationKey(id);
+				
+				if(!existKey(centificationKey)){
+					break;
+				}
+			}			
 		}
 		
 		//메일 발송
@@ -91,6 +103,14 @@ public class UserAdminService implements UserAdminServiceInter {
 		emailService.emailSend(email, geratedMailContent(centificationKey, id));
 
 		//certification tb저장;
+		//저장하는 메소드 따로 만들기
+		//없으면 certification_tb에 저장 //만료시간추가
+		CertificationVO ceri = new CertificationVO();
+		ceri.setId(id);
+		ceri.setKey(centificationKey);
+		ceri.setLimitKeyTime(limitKeyTime());
+		
+		certification.addCertification(ceri);
 		
 		return true;
 	}
@@ -119,5 +139,20 @@ public class UserAdminService implements UserAdminServiceInter {
 	
 	public boolean existUser(String id){
 		return userAdd.overlap(id);
+	}	
+	
+	private boolean existKey(String key){
+		return certification.existKey(key);
+	}
+	
+	private Timestamp limitKeyTime(){
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MINUTE, 15);
+		
+		SimpleDateFormat formet = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String calTime = formet.format(cal.getTime()).toString();
+		Timestamp time = Timestamp.valueOf(calTime);
+		
+		return time;
 	}
 }

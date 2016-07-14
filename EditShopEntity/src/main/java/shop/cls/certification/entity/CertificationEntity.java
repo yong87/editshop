@@ -36,10 +36,10 @@ public class CertificationEntity implements CertificationEntityInter {
 		// TODO Auto-generated method stub
 		
 		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
-		boolean isAdd = false;
+		boolean isModify = false;
 		try{
 			CertificationMapper mapper = session.getMapper(CertificationMapper.class);
-			isAdd = mapper.modifyCertification(certification);
+			isModify = mapper.modifyCertification(certification);
 			
 			session.commit();
 		}catch(Exception e){
@@ -49,19 +49,39 @@ public class CertificationEntity implements CertificationEntityInter {
 			session.close();
 		}
 		
-		return isAdd;
+		return isModify;
 	
 	}
 
 	@Override
-	public String getCertificationByUserId(String id) {
+	public CertificationVO getCertificationByUserId(String id) {
 		// TODO Auto-generated method stub
 		
 		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
-		String key = null;
+		CertificationVO vo = null;
 		try{
 			CertificationMapper mapper = session.getMapper(CertificationMapper.class);
-			key = mapper.getCertificationByUserId(id);
+			vo = mapper.getCertificationByUserId(id);
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			session.close();
+		}
+		
+		return vo;
+		
+	}
+	
+	public boolean existKey(String key){
+		
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isModify = false;
+		try{
+			CertificationMapper mapper = session.getMapper(CertificationMapper.class);
+			isModify = mapper.existKey(key);
 			
 			session.commit();
 		}catch(Exception e){
@@ -71,7 +91,6 @@ public class CertificationEntity implements CertificationEntityInter {
 			session.close();
 		}
 		
-		return key;
-		
+		return isModify; 
 	}
 }

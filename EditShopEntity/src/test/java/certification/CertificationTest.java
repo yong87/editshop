@@ -50,7 +50,12 @@ public class CertificationTest {
 	
 	@Test
 	public void getCertificationByUserId(){
-		System.out.println(entity.getCertificationByUserId("ttt"));
+		CertificationVO vo = entity.getCertificationByUserId("ttt");
+		System.out.println(vo.getId());
 	}
 	
+	@Test
+	public void existCertificationKeyTest(){
+		System.out.println(entity.existKey("0"));
+	}
 }

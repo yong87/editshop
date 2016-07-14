@@ -5,7 +5,7 @@
 
 <mapper namespace="mapper.certification.CertificationMapper">
 
-<resultMap id="certification" type="vo.CertificationVO">
+<resultMap id="certificationMap" type="vo.CertificationVO">
 		<id property="id" column="cen_uid" />
 		<result property="key" column="cen_key" />
 		<result property="limitKeyTime" column="cen_limitkeytime" />
@@ -29,10 +29,17 @@ WHERE `cen_uid`= #{id}
 AND `cen_key`= #{key}
 </update>
 
-<select id="getCertificationByUserId" parameterType="String" resultType="String">
-SELECT cen_key
+<select id="getCertificationByUserId" parameterType="String" resultType="certification">
+SELECT `cen_uid`, `cen_key`, MAX(cen_limitkeytime), cen_status
 FROM certification_tb
 WHERE cen_uid = #{id}
 AND cen_status = 10;
 </select>
+
+<select id="existKey" parameterType="String" resultType="boolean">
+SELECT COUNT(cen_key)
+FROM certification_tb
+WHERE cen_key = #{key}
+</select>
+
 </mapper>
