@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath" value="${pageContext.request.contextPath }/views/"
+	scope="request" />
 <!DOCTYPE HTML>
 <html>
 	<head>
 		<title>8Round</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="assets/css/another.css" />
+		<link rel="stylesheet" href="${cpath }assets/css/main.css" />
+    <link rel="stylesheet" href="${cpath }assets/css/another.css" />
 	</head>
 	<body class="single">
 
@@ -17,7 +19,7 @@
       
       <!-- Header -->
       <header id="header">
-        <h1><a href="#">8Round</a></h1>
+        <h1><a href="/EditShopWeb/main.do">8Round</a></h1>
         <nav class="links">
           <ul>
             <li><a href="#" onclick="menuclick('men')" class="catebtn">men</a></li>
@@ -101,14 +103,15 @@
             
           </header>
           <!-- new Arrival-->
+          <form>
           <table>
             <tr>
               <td>ID : </td>
-              <td></td>
+              <td>${detail.id }</td>
             </tr>
             <tr>
               <td>NickName</td>
-              <td><input type="text" class="small"></td>
+              <td><input type="text" class="small" value="${detail.nickname }"></td>
             </tr>
             <tr>
               <td>PW : </td>
@@ -120,7 +123,7 @@
             </tr>
             <tr>
               <td>Address</td>
-              <td><input type="text" class="long"></td>
+              <td><input type="text" class="long" value="${detail.address }"></td>
             </tr>
             <tr>
               <td></td>
@@ -128,12 +131,13 @@
             </tr>
             <tr>
               <td>Phone</td>
-              <td><input type="text" class="small" placeholder="phone"></td>
+              <td><input type="text" class="small" placeholder="phone" value="${detail.phone }"></td>
             </tr>
             <tr>
               <td>Favorite Language</td>
               <td>
                 <select class="small">
+                	<option>--SELECT--</option>
                   <option>한국어</option>
                   <option>English</option>
                   <option>日本語</option>
@@ -142,15 +146,16 @@
               </td>
             </tr>
             <tr>
-              <td>visite count</td>
-              <td></td>
+              <td>visit count</td>
+              <td>${info.visitcount }</td>
             </tr>
             <tr>
               <td>milage</td>
-              <td></td>
+              <td>${info.milage }</td>
             </tr>
           </table>
           <input type="submit" value="변경">
+          </form>
         </article>
       </div>
       
@@ -169,12 +174,11 @@
     </div>
     
     <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/skel.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/another.js"></script>
+    <script src="${cpath }assets/js/jquery.min.js"></script>
+    <script src="${cpath }assets/js/skel.min.js"></script>
+    <script src="${cpath }assets/js/util.js"></script>
+    <script src="${cpath }assets/js/main.js"></script>
+    <script src="${cpath }assets/js/another.js"></script>
     <script type="text/javascript">
    
     </script>

@@ -19,7 +19,7 @@
       
       <!-- Header -->
       <header id="header">
-        <h1><a href="#">8Round</a></h1>
+        <h1><a href="/EditShopWeb/main.do">8Round</a></h1>
         <nav class="links">
           <ul>
             <li><a href="#" onclick="menuclick('men')" class="catebtn">Dog</a></li>
@@ -93,7 +93,7 @@
             <li><a href="/EditShopWeb/logout.do" class="button big fit">Log Out</a></li>
           </ul>
           <ul class="actions vertical">
-            <li><a href="/EditShopWeb/mypage.jsp" class="button big fit">My Info</a></li>
+            <li><a href="/EditShopWeb/views/mypage.jsp" class="button big fit">My Info</a></li>
           </ul>
         </c:if>
         </section>

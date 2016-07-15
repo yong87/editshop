@@ -109,6 +109,7 @@ public class UserAddEntity implements UserAddEntityInter {
 		return flag;
 	}
 
+
 	private boolean makeDetailUser(String id, SqlSession sqlsession) {
 		
 		try {
@@ -120,11 +121,10 @@ public class UserAddEntity implements UserAddEntityInter {
 			e.printStackTrace();
 			return false;
 		} finally {
+			
 		}
 		
 		return true;
 	}
-
 	
-
 }

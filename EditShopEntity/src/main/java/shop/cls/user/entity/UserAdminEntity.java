@@ -168,6 +168,7 @@ public class UserAdminEntity implements UserAdminEntityInter {
 			UserAdministrationMapper userAdministrationMapper = sqlsession
 					.getMapper(UserAdministrationMapper.class);
 			userInfo = userAdministrationMapper.getUserInfoById(id);
+			
 			sqlsession.commit();
 
 		} catch (Exception e) {
@@ -187,6 +188,7 @@ public class UserAdminEntity implements UserAdminEntityInter {
 			UserAdministrationMapper userAdministrationMapper = sqlsession
 					.getMapper(UserAdministrationMapper.class);
 			userDetail = userAdministrationMapper.getUserDetailById(id);
+			
 			sqlsession.commit();
 
 		} catch (Exception e) {
@@ -208,6 +210,7 @@ public class UserAdminEntity implements UserAdminEntityInter {
 			UserAdministrationMapper userAdministrationMapper = sqlsession
 					.getMapper(UserAdministrationMapper.class);
 			resultLanguage = userAdministrationMapper.returnLanguage(id);
+			
 			sqlsession.commit();
 
 		} catch (Exception e) {
@@ -216,6 +219,25 @@ public class UserAdminEntity implements UserAdminEntityInter {
 			sqlsession.close();
 		}
 		return resultLanguage;
+	}
+
+	@Override
+	public List<UserDetail> getUserDetailByEmail(String email) {
+		// TODO Auto-generated method stub
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		List<UserDetail> user = null;
+		try{
+			UserAdministrationMapper mapper = session.getMapper(UserAdministrationMapper.class);
+			user = mapper.getUserDetailByEmail(email);
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return user;
 	}
 
 }

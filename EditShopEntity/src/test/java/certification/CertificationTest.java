@@ -49,9 +49,33 @@ public class CertificationTest {
 	}
 	
 	@Test
-	public void getCertificationByUserId(){
-		CertificationVO vo = entity.getCertificationByUserId("ttt");
-		System.out.println(vo.getId());
+	public void getCertificationByUserIdTest(){
+		CertificationVO vo = new CertificationVO();
+		vo.setId("ttt");
+		vo.setKey("000100010001");
+		CertificationVO	vo2 = entity.getCertificationByUserId(vo);
+		System.out.println(vo2.toString());
+	}
+	
+	@Test
+	public void compareTime(){
+		CertificationVO vo = new CertificationVO();
+		vo.setId("krok3");
+		vo.setKey("001100100011");
+		CertificationVO	vo2 = entity.getCertificationByUserId(vo);
+		Calendar cal = Calendar.getInstance();
+
+
+		SimpleDateFormat formet = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String calTime = formet.format(cal.getTime()).toString();
+		Timestamp s1 = Timestamp.valueOf(calTime);
+		
+		Timestamp s2 = vo2.getLimitKeyTime();
+		System.out.println(s1.toString());
+		System.out.println(s2.toString());
+		
+		
+		System.out.println(s1.before(s2));
 	}
 	
 	@Test

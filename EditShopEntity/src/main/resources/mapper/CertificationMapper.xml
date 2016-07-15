@@ -7,7 +7,7 @@
 
 <resultMap id="certificationMap" type="vo.CertificationVO">
 		<id property="id" column="cen_uid" />
-		<result property="key" column="cen_key" />
+		<id property="key" column="cen_key" />
 		<result property="limitKeyTime" column="cen_limitkeytime" />
 		<result property="status" column="cen_status" />
 </resultMap>
@@ -24,15 +24,16 @@ INSERT INTO `editshop`.`certification_tb` (
 
 <update id="modifyCertification" parameterType="certification">
 UPDATE `editshop`.`certification_tb` 
-SET `cen_status`=0 
+SET `cen_status`=#{status}
 WHERE `cen_uid`= #{id} 
 AND `cen_key`= #{key}
 </update>
 
-<select id="getCertificationByUserId" parameterType="String" resultType="certification">
-SELECT `cen_uid`, `cen_key`, MAX(cen_limitkeytime), cen_status
+<select id="getCertificationByUserId" parameterType="certification" resultType="certification" resultMap="certificationMap">
+SELECT `cen_uid`, `cen_key`, `cen_limitkeytime`, `cen_status`
 FROM certification_tb
 WHERE cen_uid = #{id}
+AND cen_key = #{key}
 AND cen_status = 10;
 </select>
 

@@ -3,11 +3,13 @@ package shop.cls.certification.entity;
 import mapper.certification.CertificationMapper;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Controller;
 
 import session.ShopSqlSessionFactory;
 import shop.intfc.certification.entity.CertificationEntityInter;
 import vo.CertificationVO;
 
+@Controller
 public class CertificationEntity implements CertificationEntityInter {
 
 	@Override
@@ -54,14 +56,14 @@ public class CertificationEntity implements CertificationEntityInter {
 	}
 
 	@Override
-	public CertificationVO getCertificationByUserId(String id) {
+	public CertificationVO getCertificationByUserId(CertificationVO vo) {
 		// TODO Auto-generated method stub
 		
 		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
-		CertificationVO vo = null;
+		CertificationVO initVo = null;
 		try{
 			CertificationMapper mapper = session.getMapper(CertificationMapper.class);
-			vo = mapper.getCertificationByUserId(id);
+			initVo = mapper.getCertificationByUserId(vo);
 			
 			
 		}catch(Exception e){
@@ -71,7 +73,7 @@ public class CertificationEntity implements CertificationEntityInter {
 			session.close();
 		}
 		
-		return vo;
+		return initVo;
 		
 	}
 	

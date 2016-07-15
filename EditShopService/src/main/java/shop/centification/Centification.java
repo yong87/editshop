@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Centification {
 
-	public String GenerateCentificationKey(String id) {
+	public String GenerateCentificationKey() {
 
 		Random rand = new Random();
 

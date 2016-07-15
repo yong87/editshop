@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath" value="${pageContext.request.contextPath }/views/"
+	scope="request" />
 <!DOCTYPE HTML>
 <html>
 	<head>
 		<title>8Round</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="assets/css/another.css" />
+		<link rel="stylesheet" href="${cpath }assets/css/main.css" />
+    <link rel="stylesheet" href="${cpath }assets/css/another.css" />
 	</head>
 	<body class="single">
 
@@ -17,7 +19,7 @@
       
       <!-- Header -->
       <header id="header">
-        <h1><a href="#">8Round</a></h1>
+        <h1><a href="/EditShopWeb/main.do">8Round</a></h1>
         <nav class="links">
           <ul>
             <li><a href="#" onclick="menuclick('men')" class="catebtn">men</a></li>
@@ -79,15 +81,21 @@
         
         <!-- Actions -->
         <section class="useraction">
+         <c:if test="${sessionScope.user eq null}">
           <ul class="actions vertical">
-            <li><a href="#" class="button big fit">Log In</a></li>
+            <li><a href="/EditShopWeb/views/login.jsp" class="button big fit">Log In</a></li>
+            <li><a href="/EditShopWeb/views/signup.jsp" class="button big fit">Sign Up</a></li>
+          </ul>
+        </c:if>
+        <c:if test="${sessionScope.user ne null }">
+        ${user.id }님!
+          <ul class="actions vertical">
+            <li><a href="/EditShopWeb/logout.do" class="button big fit">Log Out</a></li>
           </ul>
           <ul class="actions vertical">
-            <li><a href="#" class="button big fit">Log Out</a></li>
+            <li><a href="/EditShopWeb/views/mypage.jsp" class="button big fit">My Info</a></li>
           </ul>
-          <ul class="actions vertical">
-            <li><a href="#" class="button big fit">My Info</a></li>
-          </ul>
+        </c:if>
         </section>
         
       </section>
@@ -109,7 +117,7 @@
                 <span class="image">
                   <img src="http://placehold.it/150x150" alt="" />
                 </span>
-                <a href="generic.html">
+                <a href="/EditShopWeb/privateInfomation.do">
                   <h2>Private Info</h2>
                   <div class="contents">
                     <p>Destination / private info</p>
@@ -158,12 +166,11 @@
     </div>
     
     <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/skel.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/another.js"></script>
+    <script src="${cpath }assets/js/jquery.min.js"></script>
+    <script src="${cpath }assets/js/skel.min.js"></script>
+    <script src="${cpath }assets/js/util.js"></script>
+    <script src="${cpath }assets/js/main.js"></script>
+    <script src="${cpath }assets/js/another.js"></script>
     <script type="text/javascript">
    
     </script>

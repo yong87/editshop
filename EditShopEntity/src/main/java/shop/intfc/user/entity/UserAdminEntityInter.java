@@ -25,6 +25,8 @@ public interface UserAdminEntityInter {
 	public UserInfo getUserInfoById(String id);
 	
 	public String returnLanguage(String id);
+	
+	public List<UserDetail> getUserDetailByEmail(String email);
 
 	
 }

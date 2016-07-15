@@ -1,10 +1,8 @@
 package controller.user;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import shop.cls.user.UserAdminService;
 import shop.encryption.Crypter;
+import vo.CertificationVO;
 import vo.User;
 import vo.UserDetail;
 
@@ -35,15 +33,10 @@ public class UserController {
 	 * @return Status에 맞는 화면 userDetail.VO
 	 */
 	@RequestMapping(value="login.do", method=RequestMethod.POST)
-	public String login(User user, HttpSession session, HttpServletResponse response){
-		//pw암화화 
-		//date 받아오기
-		//null check
-		//status check
-		//session 저장
-		//redirect!
-		
+	public String login(User user, HttpSession session){
+				
 		String pwd = null;
+		//암호화
 		try{
 			pwd = crypter.encrypt(user.getPassword().trim());
 
@@ -51,43 +44,38 @@ public class UserController {
 			e.printStackTrace();
 		}
 		
+		// user받아오기
 		Map<String, Object> inUser = service.login(user.getId(), pwd);
 		if(inUser == null){
 			//없는유저
 		}
 
+		
 		int status = (Integer)inUser.get("status");
 		//정상이 아실시
 		if(status != 11){
 			if(status == 10){
-				//mail send
-				/*try{
-					response.sendRedirect("/EditShopWeb/views/checkmail.jsp");
-				}catch(Exception e){
+				try{
+					service.reSendMail(user.getId());	
+				}catch(ParseException e){
 					e.printStackTrace();
-				}*/
-				return "redirect:/EditShopWeb/views/checkmail.jsp";
+				}
+				
+				return "redirect:/views/checkemail.jsp";
 			}
 			//제재시
 			else if(status == 12){
-				try{
-					//ErrorPage로
-					response.sendRedirect("/EditShopWeb/views/login.jsp");				
-				}catch(Exception e){
-					e.printStackTrace();
-				}
+				//error페이지로
+				return "redirect:/views/login.jsp";
 			}
 			else if(status == 20){
 				//판매자
-				try{
-					response.sendRedirect("/EditShopWeb/seller.do");
-				}catch(Exception e){
-					e.printStackTrace();
-				}
+				
+				return "redirect:/seller.do";
 			}
 		}else{
 			session.setAttribute("user", user);
-			return "redirect:/EditShopWeb/main.do";
+			return "redirect:/main.do";
 		}
 		
 		return "main";
@@ -125,6 +113,7 @@ public class UserController {
 	}
 	
 	/**
+	 * 가입때 userID확인
 	 * id확인 method
 	 * @param id
 	 * @return
@@ -141,89 +130,15 @@ public class UserController {
 	 * @return 
 	 */
 	@RequestMapping(value="logout.do")
-	public void logoutUser(HttpSession session, HttpServletResponse response){
+	public String logoutUser(HttpSession session){
 		User user = (User)session.getAttribute("user");
 		
 		if(!service.logOut(user.getId())){
 			System.out.println("로그아웃이 되지 않았습니다.");
 		}
 		session.invalidate();
-		try{
-			response.sendRedirect("/EditShopWeb/main.do");			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * findId
-	 * 서비스 불러서 서비스에서 email전송? 아니면 Id몇글자만 보여줌?
-	 * @param email
-	 * @param name
-	 * @return String
-	 */
-	@RequestMapping(value="findId.do", method=RequestMethod.POST)
-	public String findUserId(@RequestParam String email, @RequestParam String name){
 		
-		System.out.println(email);
-		System.out.println(name);
-		
-		return "afterjoin";
-	}
-	
-	
-	/**
-	 * findpwd
-	 * 서비스불러서 서비스에서 email전송
-	 * @param userId
-	 * @param email
-	 * @return String
-	 */
-	@RequestMapping(value="findPwd.do", method=RequestMethod.POST)
-	public String findUserPwd(@RequestParam String userId, @RequestParam String email){
-		
-		System.out.println(userId);
-		System.out.println(email);
-		
-		return "afterjoin";
-	}
-	
-	/**
-	 * 유저 상세정보 
-	 * service에서 method불러오기
-	 * @param session
-	 * @return mnv
-	 */
-	@RequestMapping(value="userDetail.do")
-	public ModelAndView userDetail(HttpSession session){
-		
-		User user = (User)session.getAttribute("user");
-		System.out.println(user.getId());
-		
-		ModelAndView mnv = new ModelAndView();
-		mnv.setViewName("userDetail");
-			
-		return mnv;
-	}
-	
-	/**
-	 * 비밀번호 변경
-	 * @param response
-	 * @param session
-	 * @param pwd
-	 */
-	@RequestMapping(value="changePwd.do")
-	public void changeUserPwd(HttpServletResponse response, HttpSession session, @RequestParam String pwd){
-		
-		User user = (User)session.getAttribute("user");
-		System.out.println(user.getId());
-		
-		//main화면으로 이동
-		try{
-			response.sendRedirect("/EditShopWeb/main.do");
-		}catch(IOException e){
-			e.printStackTrace();
-		}
+		return "redirect:/main.do";
 	}
 	
 	/**
@@ -234,36 +149,52 @@ public class UserController {
 	 * @return views // session userDetail
 	 */
 	@RequestMapping(value="certification.do")
-	public ModelAndView certificationUser(@RequestParam String id, @RequestParam String key){
+	public String certificationUser(@RequestParam String id, @RequestParam String key, @RequestParam String email, HttpSession session){
 		System.out.println(id);
 		System.out.println(key);
 		
-		ModelAndView mnv = new ModelAndView();
 		
-		/*boolean isExist = service.existUser(id);
-		if(!isExist){
-			// Error 페이지
-			return null;
-		}*/
-		//확인
-		mnv.setViewName("certification");
 		
-		return mnv;
+		// ID확인
+		if(service.existUser(id)){
+			//Exception
+			System.out.println("없음!");	
+			return "redirect:main.do";
+		}
+		
+		CertificationVO vo = new CertificationVO();
+		vo.setId(id);
+		vo.setKey(key);
+		//인증키 비교
+		if(!service.compareKeyTime(vo)){
+			//이메일 재 전송
+			//메일 재발송 method
+			try{
+				service.reSendMail(id);
+				
+			}catch(ParseException e){
+				e.printStackTrace();
+			}
+			return "checkemail";
+		}
+		session.setAttribute("userid", id);
+		session.setAttribute("email", email);
+		
+		return "certification";
 	}
 	
 	@RequestMapping(value="aftercertification.do", method=RequestMethod.POST)
 	public String afterCertificatoin(UserDetail userDetail, HttpSession session){
-		System.out.println(userDetail.getNickname());
-		System.out.println(userDetail.getName());
-		System.out.println(userDetail.getAddress());
-		System.out.println(userDetail.getPhone());
-		System.out.println(userDetail.getLanguage());
-		
+		String userId = (String)session.getAttribute("userid");
+		String userEmail = (String)session.getAttribute("email");
+
+		userDetail.setId(userId);
+		userDetail.setEmail(userEmail);
 		User user = new User();
 		user.setUserDetail(userDetail);
 		
-		//service.addDetailUser(user);
-		
+		service.addDetailUser(user);
+		session.setAttribute("user", userDetail);
 		
 		return "redirect:/main.do";
 	}

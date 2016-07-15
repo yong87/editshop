@@ -22,6 +22,6 @@ public interface UserAdministrationMapper {
 	public UserInfo getUserInfoById(String id);
 	public String returnLanguage(String id);
 	
-	public UserDetail getUserDetailByEmail(String id);
+	public List<UserDetail> getUserDetailByEmail(String id);
 	public List<UserDetail> getUserDetailByStatus(Map<String, Integer> param);
 }

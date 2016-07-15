@@ -20,9 +20,7 @@ public class EmailService {
 	
 	public void emailSend(String email, String message) {
 
-		/**
-		 * 보통 이런거 테스트 할때는 이렇게 합니다
-		 */
+		
 
 		Properties p = System.getProperties();
 		p.put("mail.smtp.starttls.enable", "true"); // gmail은 무조건 true 고정,

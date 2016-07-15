@@ -118,9 +118,13 @@
               <td>PW : </td>
               <td><input type="password" placeholder="PW" name="password"></td>
             </tr>
+            <tr>
+            	<td colspan="2"><input type="submit" value="login"></td>
+            </tr>
           </table>
+          <a href="/EditShopWeb/views/findid.jsp">ID찾기</a>
+          <a href="/EditShopWeb/views/findpw.jsp">PW찾기</a>
           
-          <input type="submit" value="login">
           </form>
         </article>
         
