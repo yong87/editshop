@@ -136,12 +136,12 @@
               <c:forEach var="newproduct" items="${newarrival }">
               <article class="style1">
                 <span class="image">
-                  <img src="${newproduct.thumbnail }" alt="" />
+                  <img src="${newproduct.productSimple.thumbnail }" alt="" />
                 </span>
-                <a href="generic.html">
-                  <h2>${newproduct.productid }</h2>
+                <a href="/EditShopWeb/productDetail.do?productId=${newproduct.productId }">
+                  <h2>${newproduct.languageList.kor.name }</h2>
                   <div class="contents">
-                    <p>${newproduct.price }</p>
+                    <p>${newproduct.productSimple.price }</p>
                   </div>
                 </a>
               </article>

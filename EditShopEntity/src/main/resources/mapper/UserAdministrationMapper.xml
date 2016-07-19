@@ -60,6 +60,7 @@
 		<result property="language" column="user_language" />
 		<result property="nickname" column="user_nickname" />
 	</resultMap>
+	
 	<select id="getAllUserDetail" resultType="userDetail" resultMap="userDetailMap" parameterType="java.util.Map">
 		select user_id, user_name, user_email, user_address, user_phone, user_jointime, user_status, user_age, user_language, user_nickname 
 		from user_detail_tb
@@ -122,6 +123,7 @@
 		<result property="exittime" column="ui_exittime" />
 		<result property="lastvisittime" column="ui_lastvisittime" />
 	</resultMap>
+	
 	<select id="getUserInfoById" resultType="userInfo" resultMap="userInfoMap" parameterType="String">
 		select ui_uid, ui_milage, ui_visitcount, ui_exittime, ui_lastvisittime
 		from user_info_tb
@@ -132,8 +134,21 @@
 	<select id="returnLanguage" resultType="String" parameterType="String">
 		select user_language from user_detail_tb
 		where user_id = #{id};
-		
 	</select>
 	
+	<update id="modifyUserPwd" parameterType="User">
+	UPDATE `editshop`.`user_tb` 
+	SET `user_pwd`= #{password} 
+	WHERE `user_id`=#{id}; 
+	</update>
+	
+	<update id="modifyUserDetail" parameterType="userDetail">
+	UPDATE `editshop`.`user_detail_tb` 
+	SET `user_address`=#{address}
+		, `user_phone`=#{phone}
+		, `user_language`=#{language}
+		, `user_nickname`=#{nickname} 
+	WHERE `user_id`= #{id};
+	</update>
 	
 </mapper>

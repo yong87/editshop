@@ -358,6 +358,12 @@ public class ProductTest {
 			}
 		}
 	}
+	
+	@Test
+	public void getProductSimpleByProductIdTest(){
+		ProductSimple ps = pe.getProductSimpleByProductId("17");
+		System.out.println(ps.toString());
+	}
 
 	public Map<String, ProductLang> langBasicForm(String productid){
 		

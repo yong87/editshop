@@ -3,6 +3,7 @@ package shop.intfc.user.entity;
 import java.util.List;
 import java.util.Map;
 
+import vo.User;
 import vo.UserDetail;
 import vo.UserInfo;
 
@@ -28,5 +29,7 @@ public interface UserAdminEntityInter {
 	
 	public List<UserDetail> getUserDetailByEmail(String email);
 
+	public boolean modifyUserPwd(User user);
 	
+	public boolean modifyUserDetail(UserDetail detail);
 }

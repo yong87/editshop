@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import session.ShopSqlSessionFactory;
 import shop.intfc.user.entity.UserAdminEntityInter;
+import vo.User;
 import vo.UserDetail;
 import vo.UserInfo;
 
@@ -240,4 +241,43 @@ public class UserAdminEntity implements UserAdminEntityInter {
 		return user;
 	}
 
+	public boolean modifyUserPwd(User user){
+		
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isUpdate = false;
+		try{
+			UserAdministrationMapper mapper = session.getMapper(UserAdministrationMapper.class);
+			isUpdate = mapper.modifyUserPwd(user);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return isUpdate;
+	}
+
+	@Override
+	public boolean modifyUserDetail(UserDetail detail) {
+		// TODO Auto-generated method stub
+		
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		boolean isUpdate = false;
+		try{
+			UserAdministrationMapper mapper = session.getMapper(UserAdministrationMapper.class);
+			isUpdate = mapper.modifyUserDetail(detail);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return isUpdate;
+	}
+	
+	
 }

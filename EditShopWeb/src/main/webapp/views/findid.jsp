@@ -110,7 +110,7 @@
           </header>
           <!-- new Arrival-->
           <h1>find your ID</h1>
-          <form action="/EditShopWeb/findid.do" method="POST">
+          <form action="/EditShopWeb/findId.do" method="POST">
           <table>
             <tr>
               <td>your email</td>

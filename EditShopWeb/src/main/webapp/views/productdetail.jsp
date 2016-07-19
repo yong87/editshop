@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath" value="${pageContext.request.contextPath }/views/"
+	scope="request" />
 <!DOCTYPE HTML>
 <html>
 	<head>
 		<title>8Round</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="assets/css/another.css" />
+		<link rel="stylesheet" href="${cpath }assets/css/main.css" />
+    <link rel="stylesheet" href="${cpath }assets/css/another.css" />
 	</head>
 	<body class="single">
 
@@ -17,7 +19,7 @@
       
       <!-- Header -->
       <header id="header">
-        <h1><a href="#">8Round</a></h1>
+        <h1><a href="/EditShopWeb/main.do">8Round</a></h1>
         <nav class="links">
           <ul>
             <li><a href="#" onclick="menuclick('men')" class="catebtn">men</a></li>
@@ -29,10 +31,7 @@
         </nav>
         <nav class="links subcategory">
           <ul>
-            <li>sss</li>
-            <li>sss</li>
-            <li>sss</li>
-            <li>sss</li>
+            <li><a href="#">sss</a></li>
           </ul>
         </nav>
         <nav class="links subcategory">
@@ -79,15 +78,21 @@
         
         <!-- Actions -->
         <section class="useraction">
+          <c:if test="${sessionScope.user eq null}">
           <ul class="actions vertical">
-            <li><a href="#" class="button big fit">Log In</a></li>
+            <li><a href="/EditShopWeb/views/login.jsp" class="button big fit">Log In</a></li>
+            <li><a href="/EditShopWeb/views/signup.jsp" class="button big fit">Sign Up</a></li>
+          </ul>
+        </c:if>
+        <c:if test="${sessionScope.user ne null }">
+        ${user.id }님!
+          <ul class="actions vertical">
+            <li><a href="/EditShopWeb/logout.do" class="button big fit">Log Out</a></li>
           </ul>
           <ul class="actions vertical">
-            <li><a href="#" class="button big fit">Log Out</a></li>
+            <li><a href="/EditShopWeb/views/mypage.jsp" class="button big fit">My Info</a></li>
           </ul>
-          <ul class="actions vertical">
-            <li><a href="#" class="button big fit">My Info</a></li>
-          </ul>
+        </c:if>
         </section>
         
       </section>
@@ -101,27 +106,30 @@
             
           </header>
           <h1>Product Detail</h1>
+          
           <table>
             <tr>
-              <td><img src="http://placehold.it/300x300"></td>
+              <td><img src="${product.productSimple.thumbnail }"></td>
               <td>
+              <form action="/EditShopWeb/buyProduct.do" method="post">
                 <table>
                   <tr>
                     <td>productname</td>
-                    <td>productName</td>
+                    <td>${product.languageList.kor.name }</td>
                   </tr>
                   <tr>
                     <td>productType</td>
-                    <td>productType</td>
+                    <td>${product.productSimple.type }</td>
                   </tr>
                   <tr>
                     <td>Product Cost</td>
-                    <td>100000</td>
+                    <td>${product.productSimple.price }</td>
                   </tr>
                   <tr>
                     <td>Product Option</td>
                     <td>
                       <select>
+                      	<option>--select--</option>
                         <option>blue</option>
                         <option>red</option>
                         <option>green</option>
@@ -131,9 +139,20 @@
                   </tr>
                   <tr>
                     <td>Product Seller</td>
-                    <td>seller id</td>
+                    <td>${product.sellerId }</td>
+                  </tr>
+                  <tr>
+                    <td>Buy Count</td>
+                    <td><input type="number" value="0" max="10" id="buyCount" maxlength="10"></td>
+                  </tr>
+                  <tr>
+                  	<td colspan="2">
+                  		<input type="button" value="장바구니 담기" onclick="addBucket(${product.productId})">
+                  		<input type="submit" value="구매하기">
+                  	</td>
                   </tr>
                 </table>
+                </form>
               </td>
             </tr>
             <tr>
@@ -143,18 +162,17 @@
               <td colspan="2">
                 <table>
                   <tr>
-                    <td><img src="http://placehold.it/250x250"></td>
+                    <td><img src="http://placehold.it/250x250" class="infoimg"></td>
                     <td>infomation text</td>
                   </tr>
                   <tr>
                     <td>infomation text</td>
-                    <td><img src="http://placehold.it/250x250"></td>
+                    <td><img src="http://placehold.it/250x250" class="infoimg"></td>
                   </tr>
                 </table>
               </td>
               <tr>
               <td colspan="2">Review</td>
-            </tr>
             </tr>
           </table>
         </article>
@@ -175,13 +193,43 @@
     </div>
     
     <!-- Scripts -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/skel.min.js"></script>
-    <script src="assets/js/util.js"></script>
-    <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/another.js"></script>
+    <script src="${cpath }assets/js/jquery.min.js"></script>
+    <script src="${cpath }assets/js/skel.min.js"></script>
+    <script src="${cpath }assets/js/util.js"></script>
+    <script src="${cpath }assets/js/main.js"></script>
+    <script src="${cpath }assets/js/another.js"></script>
     <script type="text/javascript">
+    var imgpaths = '${product.imagepath}';
+    var imgsplit = imgpaths.split(',');
+    console.log(imgsplit);
+    var tagImg = document.getElementsByClassName('infoimg');
+    var i = 0
+    for(i; i<tagImg.length;i++){
+    	tagImg[i].src = imgsplit[i];
+    	
+    }
+    var addBucket = function(item){
+    	var isUser =  '${sessionScope.user}';
+    	var buyCount = document.getElementById("buyCount").value;
+      console.log(isUser);
+    	if(isUser != ''){
+					$.ajax({
+							url : "/EditShopWeb/addBucket.do"
+					   ,type : "get"
+					   ,data : {
+						   productId : item
+						   ,buycount : buyCount
+					   }
+					   ,success : console.log("ssss") 
+					   ,error : function(){
+				    			alert("test")
+					   }					
+					});
+        }
+    	else{
+        alert("로그인을 해주세요.");
+    	}
+    }
     
     </script>
   </body>

@@ -2,7 +2,9 @@ package shop.cls.product.service;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -244,21 +246,69 @@ public class ProductService implements ProductServiceInter {
 	}
 
 	@Override
-	public List<ProductSimple> findNewArrivalMain() {
+	public List<Product> findNewArrivalMain() {
 		// TODO Auto-generated method stub
-		return productEntity.getNewArrivalMain();
+		List<ProductSimple> productSimple = productEntity.getNewArrivalMain();
+		
+		
+		List<Product> products = new ArrayList<Product>();
+		
+		for(ProductSimple simple : productSimple){
+			// simple
+			Product product = productEntity.getProductByProductId(simple.getProductid());
+			product.setProductSimple(simple);
+			
+			product.setLanguageList(getLangList(simple.getProductid()));
+			
+			products.add(product);
+		}
+		
+		return products;
+	}
+	
+	private Map<String, ProductLang> getLangList(String productId){
+		Map<String, ProductLang> langs = new HashMap<String, ProductLang>();
+		
+		ProductLang krLang = productEntity.getProductLangKrByProductId(productId);
+		ProductLang cnLang = productEntity.getProductLangCnByProductId(productId);
+		ProductLang enLang = productEntity.getProductLangEnByProductId(productId);
+		ProductLang jpLang = productEntity.getProductLangJpByProductId(productId);
+		
+		langs.put("kor", krLang);
+		langs.put("chn", cnLang);
+		langs.put("jpn", jpLang);
+		langs.put("eng", enLang);
+		
+		return langs;
 	}
 
 	@Override
-	public List<ProductSimple> findProductByType(int type) {
+	public List<Product> findProductByType(int type) {
 		// TODO Auto-generated method stub
-		return productEntity.getProductSimpleByType(type);
+		
+		List<Product> products = new ArrayList<Product>();
+		List<ProductSimple> simples = productEntity.getProductSimpleByType(type);	
+		
+		for(ProductSimple simple : simples){
+			Product product = productEntity.getProductByProductId(simple.getProductid());
+			product.setLanguageList(getLangList(simple.getProductid()));
+			product.setProductSimple(simple);
+			
+			products.add(product);
+		}
+		
+		return products;
 	}
 
 	@Override
 	public Product findProductByProductId(String productId) {
 		// TODO Auto-generated method stub
-		return productEntity.getProductByProductId(productId);
+		Product product = productEntity.getProductByProductId(productId);
+		
+		product.setLanguageList(getLangList(productId));
+		product.setProductSimple(productEntity.getProductSimpleByProductId(productId));
+		
+		return product;
 	}
 
 	@Override

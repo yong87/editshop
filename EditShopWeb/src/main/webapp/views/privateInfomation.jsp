@@ -103,19 +103,19 @@
             
           </header>
           <!-- new Arrival-->
-          <form>
+          <form action="/EditShopWeb/modifyUser.do" method="post">
           <table>
             <tr>
               <td>ID : </td>
-              <td>${detail.id }</td>
+              <td><input type="text" value="${detail.id }" name="id" readonly="readonly"></td>
             </tr>
             <tr>
               <td>NickName</td>
-              <td><input type="text" class="small" value="${detail.nickname }"></td>
+              <td><input type="text" class="small" value="${detail.nickname }" name="nickname"></td>
             </tr>
             <tr>
               <td>PW : </td>
-              <td><input type="password" class="small" placeholder="password"></td>
+              <td><input type="password" class="small" name="password" placeholder="password"></td>
             </tr>
             <tr>
               <td></td>
@@ -123,7 +123,7 @@
             </tr>
             <tr>
               <td>Address</td>
-              <td><input type="text" class="long" value="${detail.address }"></td>
+              <td><input type="text" class="long" value="${detail.address }" name="address"></td>
             </tr>
             <tr>
               <td></td>
@@ -131,17 +131,17 @@
             </tr>
             <tr>
               <td>Phone</td>
-              <td><input type="text" class="small" placeholder="phone" value="${detail.phone }"></td>
+              <td><input type="text" class="small" placeholder="phone" value="${detail.phone }" name="phone"></td>
             </tr>
             <tr>
               <td>Favorite Language</td>
               <td>
-                <select class="small">
-                	<option>--SELECT--</option>
-                  <option>한국어</option>
-                  <option>English</option>
-                  <option>日本語</option>
-                  <option>中國語</option>
+                <select class="small" name="language">
+                	<option value="null">--SELECT--</option>
+                  <option value="kor">한국어</option>
+                  <option value="eng">English</option>
+                  <option value="jpn">日本語</option>
+                  <option value="chn">中國語</option>
                 </select>
               </td>
             </tr>

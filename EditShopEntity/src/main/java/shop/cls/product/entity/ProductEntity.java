@@ -760,7 +760,27 @@ public class ProductEntity implements ProductEntityInter {
 		
 		return product;
 	}
-
+	
+	@Override
+	public ProductSimple getProductSimpleByProductId(String productId) {
+		// TODO Auto-generated method stub
+		SqlSession session = ShopSqlSessionFactory.getInstance().getSqlSession();
+		ProductSimple product = null;
+		
+		try{
+			ProductMapper mapper = session.getMapper(ProductMapper.class);
+			product = mapper.getProductSimpleByProductId(productId);
+			
+			session.commit();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return product;
+	}
+	
 	@Override
 	public ProductLang getProductLangKrByProductId(String productId) {
 		// TODO Auto-generated method stub

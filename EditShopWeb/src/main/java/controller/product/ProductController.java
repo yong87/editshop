@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import shop.cls.product.service.ProductService;
-import vo.ProductSimple;
+import vo.Bucket;
+import vo.Product;
 import vo.User;
 
 @Controller
@@ -28,7 +29,7 @@ public class ProductController {
 	@RequestMapping(value="main.do")
 	public ModelAndView mainPage(){
 		
-		List<ProductSimple> product = productService.findNewArrivalMain();
+		List<Product> product = productService.findNewArrivalMain();
 		
 		ModelAndView mnv = new ModelAndView();
 
@@ -39,26 +40,28 @@ public class ProductController {
 		return mnv;
 	}
 
-	/*@RequestMapping(value="productDetail.do")
+	@RequestMapping(value="productDetail.do")
 	public ModelAndView productDetail(@RequestParam String productId){
 		
+		ModelAndView mnv = new ModelAndView();
 		
+		Product product = productService.findProductByProductId(productId);
+		mnv.addObject("product", product);
+		mnv.setViewName("productdetail");
 		
-	}*/
+		return mnv;
+	}
 	
 	@RequestMapping(value="addBucket.do")
 	@ResponseBody
-	public boolean addBucket(@RequestParam String productId, @RequestParam String productCnt, HttpSession session){
-
+	public boolean addBucket(Product product,@RequestParam int buycount, HttpSession session){
 		
-		System.out.println(productId);
-		/*물품의 담는 카운트를 인트로*/
-		int ss = Integer.parseInt(productCnt);
-		System.out.println(ss);
+		User user = (User)session.getAttribute("user");
 		
-		User user = (User) session.getAttribute("user");
-		System.out.println(user.getId());
-		
+		Bucket bucket = new Bucket();
+		bucket.setUserId(user.getId());
+		bucket.setProductId(product.getProductId());
+		bucket.setBuyCount(buycount);
 		
 		return true;
 	}
@@ -68,7 +71,19 @@ public class ProductController {
 		
 		ModelAndView mnv = new ModelAndView();
 		
+		return mnv;
+	}
+	
+	@RequestMapping(value="findType.do")
+	public ModelAndView findCategory(@RequestParam int type){
+		
+		ModelAndView mnv = new ModelAndView();
+		
+		List<Product> products = productService.findProductByType(type);
+		mnv.setViewName("product");
+		mnv.addObject(products);
 		
 		return mnv;
 	}
+	
 }

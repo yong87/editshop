@@ -61,7 +61,7 @@ public class ProductServiceTest {
 	
 	@Test
 	public void findNewArrivalMainTest(){
-		for(ProductSimple product : ps.findNewArrivalMain()){
+		for(Product product : ps.findNewArrivalMain()){
 			System.out.println(product.toString());
 		}
 	}

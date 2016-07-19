@@ -23,7 +23,7 @@ public class Product {
 	private String imagepath;
 	private int status;
 	private Map<String, ProductLang> languageList;
-
+	private ProductSimple productSimple;
 	private String name;
 	private String content;
 	
@@ -87,6 +87,18 @@ public class Product {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	public Map<String, ProductLang> getLanguageList() {
+		return languageList;
+	}
+	public void setLanguageList(Map<String, ProductLang> languageList) {
+		this.languageList = languageList;
+	}
+	public ProductSimple getProductSimple() {
+		return productSimple;
+	}
+	public void setProductSimple(ProductSimple productSimple) {
+		this.productSimple = productSimple;
+	}
 	public String getName() {
 		return name;
 	}
@@ -99,12 +111,7 @@ public class Product {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Map<String, ProductLang> getLanguageList() {
-		return languageList;
-	}
-	public void setLanguageList(Map<String, ProductLang> languageList) {
-		this.languageList = languageList;
-	}
+	
 	@Override
 	public String toString() {
 		return "Product [productId=" + productId + ", sellerId=" + sellerId
@@ -112,13 +119,9 @@ public class Product {
 				+ ", limitTime=" + limitTime + ", registTime=" + registTime
 				+ ", option=" + option + ", commission=" + commission
 				+ ", imagepath=" + imagepath + ", status=" + status
-				+ ", languageList=" + languageList + ", name=" + name
-				+ ", content=" + content + "]";
+				+ ", languageList=" + languageList + ", productSimple="
+				+ productSimple + ", name=" + name + ", content=" + content
+				+ "]";
 	}
-	
-	
-	
 
-	
-	
 }

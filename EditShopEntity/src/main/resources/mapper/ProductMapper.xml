@@ -326,6 +326,13 @@ FROM product_tb
 WHERE pt_productid=#{productid};
 </select>
 
+<select id="getProductSimpleByProductId" parameterType="String" resultType="productSimple" resultMap="productSimpleMap">
+select ps_productid as productId, ps_thumbnail, ps_price, ps_type, ps_status
+FROM product_simple_tb
+where ps_productid = #{productid};
+
+</select>
+
 <select id="getProductLangKrByProductId" parameterType="String" resultType="productLang" resultMap="productLangMap">
 SELECT pt_productid as productId, pt_content, pt_name
 FROM product_kr_tb

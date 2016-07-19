@@ -5,6 +5,7 @@ import java.util.List;
 import org.junit.Test;
 
 import shop.cls.user.entity.UserAdminEntity;
+import vo.User;
 import vo.UserDetail;
 
 public class userAd {
@@ -23,5 +24,15 @@ public class userAd {
 		for(UserDetail user : users){
 			System.out.println(user.toString());
 		}
+	}
+	
+	@Test
+	public void changePwdTest(){
+		User user = new User();
+		
+		user.setId("addtest2");
+		user.setPassword("ddd");
+		
+		System.out.println(uae.modifyUserPwd(user));
 	}
 }

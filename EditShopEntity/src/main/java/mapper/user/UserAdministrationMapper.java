@@ -3,6 +3,7 @@ package mapper.user;
 import java.util.List;
 import java.util.Map;
 
+import vo.User;
 import vo.UserDetail;
 import vo.UserInfo;
 
@@ -24,4 +25,7 @@ public interface UserAdministrationMapper {
 	
 	public List<UserDetail> getUserDetailByEmail(String id);
 	public List<UserDetail> getUserDetailByStatus(Map<String, Integer> param);
+	
+	public boolean modifyUserPwd(User user);
+	public boolean modifyUserDetail(UserDetail detail);
 }

@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.Map;
 
 import vo.User;
+import vo.UserDetail;
 
 public interface UserAdminServiceInter {
 
@@ -17,5 +18,6 @@ public interface UserAdminServiceInter {
 	public boolean existUser(String id);
 	public boolean findUser(Map<String, Object> find);
 	public User getUserInfo(String userId);
-	
+	public boolean changePwd(User user);
+	public boolean modifyUserDetail(UserDetail detail);
 }

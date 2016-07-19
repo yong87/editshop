@@ -12,15 +12,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import shop.encryption.Crypter;
 import shop.intfc.user.service.UserAdminServiceInter;
 import vo.User;
+import vo.UserDetail;
 
 @Controller
 public class UserInfoController {
 
 	@Autowired
 	private UserAdminServiceInter service;
-	
+	@Autowired
+	private Crypter cryter;
 	/**
 	 * findId
 	 * 서비스 불러서 서비스에서 email전송? 아니면 Id몇글자만 보여줌?
@@ -41,7 +44,7 @@ public class UserInfoController {
 			return "afterjoin";
 		}
 		
-		return "afterjoin";
+		return "checkemail";
 	}
 	
 	
@@ -69,7 +72,7 @@ public class UserInfoController {
 			return "afterjoin";
 		}
 		
-		return "afterjoin";
+		return "checkemail";
 	}
 	
 	/**
@@ -90,21 +93,6 @@ public class UserInfoController {
 		return mnv;
 	}
 	
-	/**
-	 * 비밀번호 변경
-	 * @param response
-	 * @param session
-	 * @param pwd
-	 */
-	@RequestMapping(value="changePwd.do")
-	public String changeUserPwd(HttpSession session, @RequestParam String pwd){
-		
-		User user = (User)session.getAttribute("user");
-		System.out.println(user.getId());
-		
-		//main화면으로 이동
-		return "redirect:/main.do";
-	}
 	
 	@RequestMapping(value="privateInfomation.do")
 	public ModelAndView privateInfo(HttpSession session){
@@ -120,4 +108,28 @@ public class UserInfoController {
 		
 		return mnv;
 	}
+
+	@RequestMapping(value="modifyUser.do", method=RequestMethod.POST)
+	public String modifyUserInfo(User user, UserDetail detail){
+		
+		
+		//pwd변경
+		if(user.getPassword() != null){
+			String changePwd = null;
+			
+			try{
+				changePwd = cryter.encrypt(user.getPassword());
+				user.setPassword(changePwd);
+				service.changePwd(user);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+		service.modifyUserDetail(detail);
+		
+		
+		return "login";
+	}
+	
+	
 }

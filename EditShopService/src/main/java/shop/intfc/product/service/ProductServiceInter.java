@@ -63,14 +63,14 @@ public interface ProductServiceInter {
 	 * 매인 관련
 	 * @return
 	 */
-	public List<ProductSimple> findNewArrivalMain();
+	public List<Product> findNewArrivalMain();
 	
 	/**
 	 * 사용자 상품 관련
 	 * @param type
 	 * @return
 	 */
-	public List<ProductSimple> findProductByType(int type);
+	public List<Product> findProductByType(int type);
 	public Product findProductByProductId(String productId);
 	public List<ProductSimple> findNewArrvival();
 	public List<ProductSimple> findProductSellerId(String sellerId);

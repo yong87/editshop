@@ -98,7 +98,7 @@ public class EmailFormService {
 				+ "</tbody>"
 				+ "</table>"
 				// button link
-				+ "<a href='' style='font-family:Roboto-Regular,Helvetica,Arial,sans-serif;display:inline-block;text-align:center;text-decoration:none;min-height:36px;line-height:36px;padding-left:8px;padding-right:8px;min-width:88px;font-size:14px;font-weight:400;color:#ffffff;background-color:#4184f3;border-radius:2px;border-width:0px' target='_blank'>홈페이지로</a>"
+				+ "<a href='http://localhost:8080/EditShopWeb/' style='font-family:Roboto-Regular,Helvetica,Arial,sans-serif;display:inline-block;text-align:center;text-decoration:none;min-height:36px;line-height:36px;padding-left:8px;padding-right:8px;min-width:88px;font-size:14px;font-weight:400;color:#ffffff;background-color:#4184f3;border-radius:2px;border-width:0px' target='_blank'>홈페이지로</a>"
 				+ "</td>"
 				+ "</tr>"
 				+ "<tr height='32px'>"
@@ -151,7 +151,7 @@ public class EmailFormService {
 		return message;
 	}
 	
-public String findPwdForm(UserDetail userdetail){
+public String findPwdForm(UserDetail userdetail, String temporarilyPwd){
 		
 		String message = "<html>"
 				+ "<body>"
@@ -229,7 +229,11 @@ public String findPwdForm(UserDetail userdetail){
 				+ "</table>"
 				// homepage link
 				+ "<a href='####' style='text-decoration:none;color:#4285f4' target='_blank' data-saferedirecturl='https://www.google.com/url?hl=ko&amp;q=https://support.google.com/accounts/answer/6010255&amp;source=gmail&amp;ust=1464846646501000&amp;usg=AFQjCNFNJSyXvhHDCWoOVRZoTJUm4YhoQQ'>8ROUND</a>에 회원님이 비밀번호를 요청하셔서"
-				+ "<table style='font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:10px;color:#666666;line-height:18px;padding-bottom:10px'><br><tbody><tr><td>아래의 버튼을 누르시면 비밀번호 변경 페이지로 들어갑니다. 비밀번호를 잊어버리지 않도록 유의해 주시고 만일 비밀번호를 변경하고 싶으시면 홈페이지>로그인>마이페이지 에서 다시 비밀번호를 설정하실수 있습니다.<br>"
+				+ "<table style='font-family:Roboto-Regular,Helvetica,Arial,sans-serif;font-size:10px;color:#666666;line-height:18px;padding-bottom:10px'><br>"
+				+ "<tbody>"
+				+ "<tr>"
+				+ "<td>임시로 발급된 비밀번호는  "+temporarilyPwd+"입니다. 비밀번호 변경시 까지 임시 비밀번호는 유효합니다."
+				+ "비밀번호를 잊어버리지 않도록 유의해 주시고 만일 비밀번호를 변경하고 싶으시면 홈페이지>로그인>마이페이지 에서 다시 비밀번호를 설정하실수 있습니다.<br>"
 				+ "</td>"
 				+ "</tr>"
 				+ "<tr>"
@@ -241,7 +245,7 @@ public String findPwdForm(UserDetail userdetail){
 				+ "</tbody>"
 				+ "</table>"
 				// button link
-				+ "<a href='http://localhost:8080/EditShopWeb/views/changepw.jsp?userId="+userdetail.getId()+"&email="+userdetail.getEmail()+"' style='font-family:Roboto-Regular,Helvetica,Arial,sans-serif;display:inline-block;text-align:center;text-decoration:none;min-height:36px;line-height:36px;padding-left:8px;padding-right:8px;min-width:88px;font-size:14px;font-weight:400;color:#ffffff;background-color:#4184f3;border-radius:2px;border-width:0px' target='_blank'>홈페이지로</a>"
+				+ "<a href='http://localhost:8080/EditShopWeb/views/login.jsp' style='font-family:Roboto-Regular,Helvetica,Arial,sans-serif;display:inline-block;text-align:center;text-decoration:none;min-height:36px;line-height:36px;padding-left:8px;padding-right:8px;min-width:88px;font-size:14px;font-weight:400;color:#ffffff;background-color:#4184f3;border-radius:2px;border-width:0px' target='_blank'>홈페이지로</a>"
 				+ "</td>"
 				+ "</tr>"
 				+ "<tr height='32px'>"

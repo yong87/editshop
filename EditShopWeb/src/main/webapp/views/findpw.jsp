@@ -109,7 +109,7 @@
             
           </header>
           <!-- find PW-->
-          <form action="/EditShopWeb/findpw.do" method="POST">
+          <form action="/EditShopWeb/findPwd.do" method="POST">
           <h1>find Password</h1>
           <table>
             <tr>

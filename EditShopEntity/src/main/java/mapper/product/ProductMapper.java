@@ -86,6 +86,7 @@ public interface ProductMapper {
 	public List<ProductSimple> getProductSimpleByType(int type);
 	public List<ProductSimple> getProductSimpleBySellerId(String sellerId);
 	public Product getProductByProductId(String productId);
+	public ProductSimple getProductSimpleByProductId(String productId);
 	public ProductLang getProductLangKrByProductId(String productId);
 	public ProductLang getProductLangEnByProductId(String productId);
 	public ProductLang getProductLangCnByProductId(String productId);

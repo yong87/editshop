@@ -5,7 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Service;
 import shop.centification.Centification;
 import shop.emailing.EmailFormService;
 import shop.emailing.EmailService;
+import shop.encryption.Crypter;
 import shop.intfc.certification.entity.CertificationEntityInter;
 import shop.intfc.user.entity.UserAddEntityInter;
 import shop.intfc.user.entity.UserAdminEntityInter;
@@ -241,7 +241,31 @@ public class UserAdminService implements UserAdminServiceInter {
 			//메일전송
 			List<UserDetail> users = userAd.getUserDetailByEmail(email);
 			//UserDetail user = userAd.getUserDetailByEmail(email);
-			mailing.emailSend(email, form.findPwdForm(users.get(0)));
+			
+			//임시 비밀번호 생성
+			String temporarilyKey = new Centification().GenerateCentificationKey();
+			User user = new User();
+			String userId = (String) find.get("userId");
+			
+			System.out.println(userId);
+			System.out.println(temporarilyKey);
+			//임시 비밀번호 생성후 매일전송
+			mailing.emailSend(email, form.findPwdForm(users.get(0), temporarilyKey));
+			
+			//임시비밀번호 암호화
+			Crypter crypter = new Crypter();
+			try{
+				temporarilyKey = crypter.encrypt(temporarilyKey);				
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			user.setId(userId);
+			user.setPassword(temporarilyKey);
+			
+			// 임시비밀번호 저장
+			userAd.modifyUserPwd(user);
 			
 			return true;
 		}
@@ -262,6 +286,23 @@ public class UserAdminService implements UserAdminServiceInter {
 		return user;
 	}
 
+	@Override
+	public boolean changePwd(User user) {
+		return userAd.modifyUserPwd(user);
+	}
+
+	public boolean modifyUserDetail(UserDetail detail){
+		
+		// language 설정이 없을경우
+		if(detail.getLanguage() == null){
+			UserDetail inDetail = userAd.getUserDetailById(detail.getId());
+			detail.setLanguage(inDetail.getLanguage());	
+		}
+		
+		boolean isUpdate = userAd.modifyUserDetail(detail);
+				
+		return isUpdate;
+	}
 	
 	
 	
