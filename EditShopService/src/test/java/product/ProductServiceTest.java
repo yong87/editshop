@@ -75,9 +75,9 @@ public class ProductServiceTest {
 	
 	@Test
 	public void findProductByTypeTest(){
-		for(ProductSimple product : ps.findProductByType(2)){
+		/*for(ProductSimple product : ps.findProductByType(2)){
 			System.out.println(product.toString());
-		}
+		}*/
 	}
 	
 	@Test

@@ -114,42 +114,53 @@
               <form action="/EditShopWeb/buyProduct.do" method="post">
                 <table>
                   <tr>
-                    <td>productname</td>
+                    <td>
+                    	<input type="hidden" name="productId" value="${product.productId }">
+                    	제품 이름
+                    </td>
                     <td>${product.languageList.kor.name }</td>
                   </tr>
                   <tr>
                     <td>productType</td>
                     <td>${product.productSimple.type }</td>
                   </tr>
-                  <tr>
+                  <tr>/
                     <td>Product Cost</td>
-                    <td>${product.productSimple.price }</td>
+                    <td>
+                    	<input type="text" value="${product.productSimple.price }" name="price" readonly>
+                    </td>
                   </tr>
                   <tr>
                     <td>Product Option</td>
                     <td>
-                      <select>
-                      	<option>--select--</option>
-                        <option>blue</option>
-                        <option>red</option>
-                        <option>green</option>
-                        <option>pink</option>
+                      <select name="option" id="optiontag">
+                      	<option value="select" selected>--select--</option>
                       </select>
                     </td>
                   </tr>
                   <tr>
-                    <td>Product Seller</td>
-                    <td>${product.sellerId }</td>
+                    <td>
+                    	Product Seller
+                    	
+                    </td>
+                    <td><input type="text" name="sellerId" value="${product.sellerId }" readonly></td>
                   </tr>
                   <tr>
                     <td>Buy Count</td>
-                    <td><input type="number" value="0" max="10" id="buyCount" maxlength="10"></td>
+                    <td><input type="number" value="0" max="10" id="buyCount" maxlength="10" name="sellcnt"></td>
                   </tr>
                   <tr>
+                  <c:if test="${sessionScope.user eq null}">
+                  	<td colspan="2">
+                  		로그인을 하시면 구매하실수 있습니다.
+                  	</td>
+                  </c:if>
+                  <c:if test="${sessionScope.user ne null}">
                   	<td colspan="2">
                   		<input type="button" value="장바구니 담기" onclick="addBucket(${product.productId})">
                   		<input type="submit" value="구매하기">
                   	</td>
+                  </c:if>
                   </tr>
                 </table>
                 </form>
@@ -198,16 +209,33 @@
     <script src="${cpath }assets/js/util.js"></script>
     <script src="${cpath }assets/js/main.js"></script>
     <script src="${cpath }assets/js/another.js"></script>
+    
     <script type="text/javascript">
+    
     var imgpaths = '${product.imagepath}';
     var imgsplit = imgpaths.split(',');
-    console.log(imgsplit);
+    
     var tagImg = document.getElementsByClassName('infoimg');
-    var i = 0
+    var i = 0;
     for(i; i<tagImg.length;i++){
     	tagImg[i].src = imgsplit[i];
-    	
+    	if(imgsplit[i] == ''){
+    		tagImg[i].src = 'http://placehold.it/30x30';
+    	}
     }
+
+    var optionvalue = '${product.option}';
+    var optionsplit = optionvalue.split(',');
+    var optiontag = document.getElementById('optiontag');
+		var i = 0;
+		for(i;i<optionsplit.length;i++){
+			var option = document.createElement('option');
+			
+			option.text = optionsplit[i].trim();
+			option.value = optionsplit[i].trim();
+			optiontag.add(option, optiontag[1]);
+		}
+    
     var addBucket = function(item){
     	var isUser =  '${sessionScope.user}';
     	var buyCount = document.getElementById("buyCount").value;

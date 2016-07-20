@@ -105,79 +105,20 @@
           <!-- new Arrival-->
           <div class="title">
             <h1><a href="#">Category Name</a></h1>
-            <section class="tiles">
-              
+            <section class="tiles">  
+            <c:forEach var="product" items="${products }" varStatus="status" begin="0" end="3">
               <article class="style1">
                 <span class="image">
-                  <img src="http://placehold.it/150x150" alt="" />
+                  <img src="${product.productSimple.thumbnail }" alt="" />
                 </span>
-                <a href="generic.html">
-                  <h2>ProductName</h2>
+                <a href="/EditShopWeb/productDetail.do?productId=${product.productId }">
+                  <h2>${product.languageList.kor.name }</h2>
                   <div class="contents">
-                    <p>ProductInfo</p>
+                    <p>${status.count }</p>
                   </div>
                 </a>
               </article>
-              <article class="style2">
-                <span class="image">
-                  <img src="http://placehold.it/150x150" alt="" />
-                </span>
-                <a href="generic.html">
-                  <h2>ProductName</h2>
-                  <div class="contents">
-                    <p>ProductInfo</p>
-                  </div>
-                </a>
-              </article>
-              <article class="style2">
-                <span class="image">
-                  <img src="http://placehold.it/150x150" alt="" />
-                </span>
-                <a href="generic.html">
-                  <h2>ProductName</h2>
-                  <div class="contents">
-                    <p>ProductInfo</p>
-                  </div>
-                </a>
-              </article>
-            </section>
-          </div>
-          <div class="title">
-            <section class="tiles">
-              
-              <article class="style1">
-                <span class="image">
-                  <img src="http://placehold.it/150x150" alt="" />
-                </span>
-                <a href="generic.html">
-                  <h2>ProductName</h2>
-                  <div class="contents">
-                    <p>ProductInfo</p>
-                  </div>
-                </a>
-              </article>
-              <article class="style2">
-                <span class="image">
-                  <img src="http://placehold.it/150x150" alt="" />
-                </span>
-                <a href="generic.html">
-                  <h2>ProductName</h2>
-                  <div class="contents">
-                    <p>ProductInfo</p>
-                  </div>
-                </a>
-              </article>
-              <article class="style2">
-                <span class="image">
-                  <img src="http://placehold.it/150x150" alt="" />
-                </span>
-                <a href="generic.html">
-                  <h2>ProductName</h2>
-                  <div class="contents">
-                    <p>ProductInfo</p>
-                  </div>
-                </a>
-              </article>
+            </c:forEach>
             </section>
           </div>
           <div>paging 1.2.3.4.5</div>

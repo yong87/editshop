@@ -31,10 +31,10 @@
         </nav>
         <nav class="links subcategory">
           <ul>
-            <li>sss</li>
-            <li>sss</li>
-            <li>sss</li>
-            <li>sss</li>
+            <li><a href="/EditShopWeb/category.do?type=1">sss</a></li>
+            <li><a href="/EditShopWeb/category.do?type=2">sss</a></li>
+            <li><a href="/EditShopWeb/category.do?type=3">sss</a></li>
+            <li><a href="/EditShopWeb/category.do?type=4">sss</a></li>
           </ul>
         </nav>
         <nav class="links subcategory">

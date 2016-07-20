@@ -74,16 +74,17 @@ public class ProductController {
 		return mnv;
 	}
 	
-	@RequestMapping(value="findType.do")
+	@RequestMapping(value="category.do")
 	public ModelAndView findCategory(@RequestParam int type){
 		
 		ModelAndView mnv = new ModelAndView();
 		
 		List<Product> products = productService.findProductByType(type);
 		mnv.setViewName("product");
-		mnv.addObject(products);
+		mnv.addObject("products", products);
 		
 		return mnv;
 	}
+	
 	
 }
