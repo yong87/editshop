@@ -118,13 +118,15 @@
                     	<input type="hidden" name="productId" value="${product.productId }">
                     	제품 이름
                     </td>
-                    <td>${product.languageList.kor.name }</td>
+                    <td>
+                    	<input type="text" value="${product.languageList.kor.name }" name="name" readonly> 
+                    </td>
                   </tr>
                   <tr>
                     <td>productType</td>
                     <td>${product.productSimple.type }</td>
                   </tr>
-                  <tr>/
+                  <tr>
                     <td>Product Cost</td>
                     <td>
                     	<input type="text" value="${product.productSimple.price }" name="price" readonly>

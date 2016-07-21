@@ -74,6 +74,7 @@ public class UserController {
 				return "redirect:/seller.do";
 			}
 		}else{
+			user.setPassword("");
 			session.setAttribute("user", user);
 			return "redirect:/main.do";
 		}
